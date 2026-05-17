@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Kinesis & Praxis: Via Francigena</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.css' rel='stylesheet' />
+    <script src="https://unpkg.com/scrollama"></script>
+    <style>
+        body { margin:0; padding:0; font-family: 'Georgia', serif; background-color: #111; color: #f4f4f4; }
+        #map { position: fixed; top:0; bottom:0; width:100%; z-index: -1; }
+        #features { padding-top: 10vh; padding-bottom: 10vh; width: 40%; margin-left: 5%; }
+        .step { padding-bottom: 70vh; opacity: 0.2; transition: opacity 0.5s ease; }
+        .step.active { opacity: 1; }
+        .chapter-card { background: rgba(15, 15, 15, 0.9); padding: 35px; border-radius: 8px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .chapter-card img { width: 100%; margin-bottom: 20px; border-radius: 4px; border: 1px solid #333; }
+        h3 { font-size: 20px; font-weight: normal; margin-top: 0; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #444; padding-bottom: 12px; color: #fff; }
+        p { line-height: 1.8; font-size: 17px; color: #ccc; }
+        .gps-tag { font-family: 'Courier New', monospace; font-size: 12px; color: #888; margin-top: 20px; display: block; }
+        @media (max-width: 750px) { #features { width: 90%; margin: 0 auto; } }
+    </style>
+</head>
+<body>
+    <div id='map'></div>
+    <div id='features'></div>
+    <script src="config.js"></script>
+    <script>
+        var map = new maplibregl.Map({
+            container: 'map',
+            style: config.style,
+            center: config.chapters[0].location.center,
+            zoom: config.chapters[0].location.zoom,
+            pitch: config.chapters[0].location.pitch,
+            bearing: config.chapters[0].location.bearing,
+            scrollZoom: false 
+        });
+
+        var features = document.getElementById('features');
+        config.chapters.forEach((record, idx) => {
+            var container = document.createElement('div');
+            container.classList.add('step');
+            container.setAttribute('id', record.id);
+            if(idx === 0) container.classList.add('active');
+
+            var card = document.createElement('div');
+            card.classList.add('chapter-card');
+            
+            if(record.image) {
+                var img = document.createElement('img');
+                img.src = record.image;
+                card.appendChild(img);
+            }
+            
+            var title = document.createElement('h3');
+            title.innerText = "Fragment " + (idx + 1) + ": " + record.title;
+            card.appendChild(title);
+            
+            var text = document.createElement('p');
+            text.innerHTML = record.description;
+            card.appendChild(text);
+
+            var gps = document.createElement('span');
+            gps.classList.add('gps-tag');
+            gps.innerText = "LAT: " + record.location.center[1].toFixed(5) + " | LON: " + record.location.center[0].toFixed(5);
+            card.appendChild(gps);
+
+            container.appendChild(card);
+            features.appendChild(container);
+        });
+
+        var scroller = scrollama();
+        
+        map.on('load', function() {
+            // LOAD THE PROPERLY NAMED GEOJSON FILE
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': 'geojson/route_2017-08-07.geojson'
+            });
+
+            map.addLayer({
+                'id': 'route-line',
+                'type': 'line',
+                'source': 'route',
+                'layout': { 'line-join': 'round', 'line-cap': 'round' },
+                'paint': { 'line-color': '#ff5500', 'line-width': 4, 'line-opacity': 0.8 }
+            });
+
+            scroller.setup({ step: '.step', offset: 0.5, progress: true })
+            .onStepEnter(response => {
+                var chapter = config.chapters.find(chap => chap.id === response.element.id);
+                map.flyTo({
+                    center: chapter.location.center,
+                    zoom: chapter.location.zoom,
+                    pitch: chapter.location.pitch,
+                    bearing: chapter.location.bearing,
+                    essential: true,
+                    duration: 3000
+                });
+                document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+                response.element.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
