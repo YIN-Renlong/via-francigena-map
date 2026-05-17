@@ -1,84 +1,84 @@
 var config = {
-    style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+    style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
     chapters: [
         {
             id: 'chapter-0',
-            title: '_MG_0002-2.jpg',
+            title: 'Via Trionfale, Della Vittoria',
             image: 'images/2017-08-07/_MG_0002-2.jpg',
-            description: `I began beneath a hard Roman blue, my bicycle half in shadow, the guardrail cold against my route out of town. Across the valley, domes sat above umbrella pines like an old permission I did not yet possess. Dry leaves scraped underfoot, small frictions rehearsing larger ones: language, property, hospitality. The road opened, but my body already knew travel would be a negotiation with social distance and withheld welcome ahead.`,
+            description: `Leaving Rome began not with grandeur but with dry leaves, a green-brown hill, and my handlebar intruding like a hesitant signature at the edge of the frame. The small computer promised measurement, distance, proof. I had graduated from the Gregorian, yet on Via Trionfale I felt less scholar than petitioner, asking the road to admit me. The city still clung behind me, skeptical, sun-warmed, and difficult to love that day.`,
             location: {
                 center: [12.45014, 41.91879],
-                zoom: 15, pitch: 45, bearing: 0
+                zoom: 15, pitch: 50, bearing: 0
             }
         },
         {
             id: 'chapter-1',
-            title: '_MG_0018-3.jpg',
+            title: 'Via Cassia, Giustiniana',
             image: 'images/2017-08-07/_MG_0018-3.jpg',
-            description: `With my hands on the taped bars, I watched the blue sign divide the road: Bracciano bending left, Cassia and Viterbo slipping right. The sun hardened every edge, even my rented confidence. Cars passed in a language I still translated with my shoulders. I was leaving Rome, yet already learning the social weight of where a bicycle may lean, how foreignness can begin in the body, slowly under my skin.`,
+            description: `By Giustiniana the shoulder turned into pale rectangular blocks beside grass burned yellow by August, and the white tape on my bars looked almost ceremonial. I kept checking the little device, as if numbers could translate uncertainty into competence. Italian still moved too quickly around me, all elbows and vowels. I rode north anyway, carrying documents, faith, and the uneasy privilege of being recognizable to some hosts but not welcomed.`,
             location: {
                 center: [12.39312, 41.99375],
-                zoom: 15, pitch: 45, bearing: 0
+                zoom: 15, pitch: 50, bearing: 0
             }
         },
         {
             id: 'chapter-2',
-            title: '_MG_0029.jpg',
+            title: 'Via Formellese, Municipio Roma XV',
             image: 'images/2017-08-07/_MG_0029.jpg',
-            description: `I left Rome under a hard August light, following the orange arrow into a corridor of trees. The road narrowed, dust whitening my tires, shade breaking over my arms like argument. Even before the woman's anger, I felt watched: signs, fences, gates, the small sociology of permission. My body kept moving, but each bend asked whether I belonged here, or was only tolerated while passing through alone in Italy uninvited.`,
+            description: `On Via Formellese the road widened into a pale, cracked surface edged with leaves, and for a moment the bicycle disappeared from the image, as if the journey could erase its own instrument. I remember the day as smooth, almost kind, until memory attaches burrs to it. The sun made everything factual: dust, asphalt, margins, my body pedaling through a country that had not yet decided how to see me.`,
             location: {
                 center: [12.38763, 42.02909],
-                zoom: 15, pitch: 45, bearing: 0
+                zoom: 15, pitch: 50, bearing: 0
             }
         },
         {
             id: 'chapter-3',
-            title: '_MG_0032-3.jpg',
+            title: 'Vicolo Formellese, Municipio Roma XV',
             image: 'images/2017-08-07/_MG_0032-3.jpg',
-            description: `I entered the shaded track as if stepping into another country inside Italy, my loaded bicycle trembling against the bank. The Via Francigena sign pointed right, polite and official, yet the woods narrowed around me like a social corridor. Dust pressed my calves; language pressed my throat. Every resting place felt borrowed, conditional. Before the rebuke, my body understood the rule: do not touch, do not lean, do not belong.`,
+            description: `The vicolo was dusty and strewn with stones, the loaded bicycle finally visible in its ungainly honesty. Bags hung from it like arguments I had not yet learned to make fluently. A white cylinder rode on the back, ridiculous and necessary. Every object declared duration: I was not commuting, not sightseeing, but relocating myself by increments. The countryside received this announcement without comment, offering only heat, leaves, and a passage.`,
             location: {
                 center: [12.38770, 42.02914],
-                zoom: 15, pitch: 45, bearing: 0
+                zoom: 15, pitch: 50, bearing: 0
             }
         },
         {
             id: 'chapter-4',
-            title: '_MG_0038-3.jpg',
+            title: 'Vicolo Formellese, Municipio Roma XV',
             image: 'images/2017-08-07/_MG_0038-3.jpg',
-            description: `I stood where the white road narrowed into a green throat, my bicycle loaded beside a fence marked private. Sweat dried on my shoulders; dust entered my socks. The first day had not yet wounded me, but Italy already felt like a surface that rejected pressure. Every gesture mattered: where I leaned, how I spoke, what name unlocked a bed. Ahead, the tunnel of trees promised only passage, not welcome.`,
+            description: `Seven minutes later the gravel path roughened, lightly rutted and mottled with fallen leaves. The panniers and rear roll made the bicycle look braver than I felt, a small beast trained for departure. I had imagined freedom as a clean line leaving Rome; instead it arrived as vibration through wrists, dust in teeth, and the humiliating awareness that even solitude depends on strangers, on gates, rooms, permissions, softened glances too.`,
             location: {
                 center: [12.38763, 42.02916],
-                zoom: 15, pitch: 45, bearing: 0
+                zoom: 15, pitch: 50, bearing: 0
             }
         },
         {
             id: 'chapter-5',
-            title: '_MG_0042-3.jpg',
+            title: 'Via Formellese, Municipio Roma XV',
             image: 'images/2017-08-07/_MG_0042-3.jpg',
-            description: `I pedaled out of Rome beneath a hard blue sky, the road narrowing between hedges like a corridor of judgment. My hands rested on rubber and metal, already learning the abrasions of travel: heat, language, property, suspicion. Every shoulder seemed public until it wasn't. Ahead, the asphalt dipped toward Nepi; behind me, a city and a book grew heavier, like an untranslated apology, inside my pannier all day long, alone.`,
+            description: `Back on Via Formellese, the computer sat low in the frame while the shoulder thinned against dry yellow grass. I watched the digits with a pilgrim's superstition, bargaining with kilometers. The road north of Rome felt neither hostile nor generous, only indifferent, which may be the purest test of travel. If anyone asked who I was, I had ready answers: Gregorian, student, cyclist, harmless foreigner passing through for one night.`,
             location: {
                 center: [12.39150, 42.03706],
-                zoom: 15, pitch: 45, bearing: 0
+                zoom: 15, pitch: 50, bearing: 0
             }
         },
         {
             id: 'chapter-6',
-            title: '_MG_0056-3.jpg',
+            title: 'Viale Regina Elena, Formello',
             image: 'images/2017-08-07/_MG_0056-3.jpg',
-            description: `On my first day out, my calves still held Rome's heat as I stood between a painted wall and the black car my bicycle touched. The street narrowed around me: stone, satellite dish, shuttered windows, the hard geometry of parking. Even before words arrived, my body understood the accusation. I was a foreign weight in a private space, balancing anger, shame, and the ridiculous dignity of the road, still alone.`,
+            description: `In Formello the pavement was bright, shadow cut sharply across the parking place, and my overburdened bicycle leaned, disastrously, against a woman's car. Her anger came fast: so much space, why choose mine? My Italian failed me; resentment did not. I burned with embarrassment, with the old suspicion that foreigners were tolerated only when legible. Leaving, I made the pinched Italian hand, half curse, half theatrical self-defense gesture backward, uselessly.`,
             location: {
                 center: [12.40154, 42.07965],
-                zoom: 15, pitch: 45, bearing: 0
+                zoom: 15, pitch: 50, bearing: 0
             }
         },
         {
             id: 'chapter-7',
-            title: '_MG_0145-4.jpg',
+            title: 'Strada Monte Bianchetto, Nepi',
             image: 'images/2017-08-07/_MG_0145-4.jpg',
-            description: `From the saddle, I entered a tunnel of trees, my hands numb on the bars, the road narrowing into evening light. Every fence post and parked car seemed to measure where my foreign body was allowed to rest. The wheels carried me smoothly toward Nepi, yet inside I kept rubbing against Italy’s invisible surfaces: hospitality offered conditionally, space defended sharply, anger folded into a small pinched gesture behind me there.`,
+            description: `Near Nepi, evening softened the tree-lined road; the bicycle blurred in front, as though the day itself were exhaling. Adriana would take me in because my Gregorian story met her LUMSA memory, a fragile credential of trust. In her house I left a heavy Italian road atlas, promising to reclaim it after returning to Rome. Eight years later, it remains there in my mind, weighty, unopened, still waiting for me.`,
             location: {
                 center: [12.32125, 42.22058],
-                zoom: 15, pitch: 45, bearing: 0
+                zoom: 15, pitch: 50, bearing: 0
             }
         },
     ]

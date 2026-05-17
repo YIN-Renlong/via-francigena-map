@@ -1,10 +1,9 @@
 {
-    "dc_description": "A color photograph taken from a cyclist’s point of view on a narrow paved rural road. Out-of-focus bicycle handlebars and a mounted device occupy the lower foreground. The road recedes through a corridor of mature trees casting long shadows. Dense vegetation lines the left side, while a fence and open field are visible on the right. Low, warm sunlight filters through the branches.",
-    "novel_visual_observations": [
-        "The image is framed from the saddle, with the bicycle controls blurred in the foreground, emphasizing solitary self-propelled travel rather than supported transport.",
-        "The road appears narrow and without a shoulder, bordered closely by trees and fencing, which visually reinforces the bodily vulnerability described in the diary."
-    ],
-    "storytelling_narrative": "From the saddle, I entered a tunnel of trees, my hands numb on the bars, the road narrowing into evening light. Every fence post and parked car seemed to measure where my foreign body was allowed to rest. The wheels carried me smoothly toward Nepi, yet inside I kept rubbing against Italy’s invisible surfaces: hospitality offered conditionally, space defended sharply, anger folded into a small pinched gesture behind me there.",
+    "dc_description": "A forward-facing view from a bicycle on a narrow paved rural road. The lower foreground contains out-of-focus bicycle handlebars, a small central device or mount, and a black cylindrical handlebar accessory with a green circular end. The road curves gently and recedes into a tunnel-like corridor of tall trees on both sides. Dense green foliage and dark tree trunks frame the scene, with a fence line and open field visible on the right. Warm low-angle sunlight filters through the trees from the right, producing bright highlights and long shadows across the road.",
+    "novel_visual_observations": "The pavement is lightly scattered with dry leaves and small debris near the road edges. The weather appears clear, and the bicycle foreground is blurred while the tree-lined road is the main visual focus.",
+    "filename": "_MG_0145-4.jpg",
+    "time": "19:47",
     "gps_coordinates": "[12.32125, 42.22058]",
-    "filename": "_MG_0145-4.jpg"
+    "location_name": "Strada Monte Bianchetto, Nepi",
+    "rich_context": "Strada Monte Bianchetto, Colle Farnese, Nepi, Viterbo, Lazio, 01036, Italia"
 }

@@ -1,10 +1,9 @@
 {
-    "dc_description": "A paved rural road curves through dense woodland in bright daylight. At the right edge, a metal post supports an orange directional sign reading “Via Francigena sentiero alternativo,” with a pilgrim icon and arrow pointing left. Dry grasses, ivy, shrubs, and trees line both sides of the road. On the left, a small sign indicates a video-surveilled area. The scene is unpopulated.",
-    "novel_visual_observations": [
-        "The route is explicitly marked as an alternative path of the Via Francigena, suggesting a secondary or less direct itinerary rather than the principal way.",
-        "A surveillance notice appears on the left side of the road, adding a visible marker of private control or monitored territory within an otherwise rural setting."
-    ],
-    "storytelling_narrative": "I left Rome under a hard August light, following the orange arrow into a corridor of trees. The road narrowed, dust whitening my tires, shade breaking over my arms like argument. Even before the woman's anger, I felt watched: signs, fences, gates, the small sociology of permission. My body kept moving, but each bend asked whether I belonged here, or was only tolerated while passing through alone in Italy uninvited.",
+    "dc_description": "A narrow paved road curves through a wooded area with dense green foliage on both sides. Sunlight filters through the trees, creating patchy shadows across the road surface. On the right, a metal pole holds an orange directional sign reading “via Francigena sentiero alternativo,” with an arrow pointing left and a small pilgrim icon. On the left side, smaller signs are mounted near dry grass and brush along the roadside.",
+    "novel_visual_observations": "The road surface appears pale and slightly cracked, with dry leaves and debris along the edges. The weather appears sunny and dry; no bicycle is visible in the image.",
+    "filename": "_MG_0029.jpg",
+    "time": "13:56",
     "gps_coordinates": "[12.38763, 42.02909]",
-    "filename": "_MG_0029.jpg"
+    "location_name": "Via Formellese, Municipio Roma XV",
+    "rich_context": "Via Formellese, Municipio Roma XV, Olgiata, Roma, Roma Capitale, Lazio, Italia"
 }

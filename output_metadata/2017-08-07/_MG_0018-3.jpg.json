@@ -1,10 +1,9 @@
 {
-    "dc_description": "Color landscape photograph taken from a cyclist’s perspective on a paved roadside. The lower foreground is occupied by an out-of-focus bicycle handlebar, brake hood, and small digital device. At right, a blue road sign on two metal posts indicates directions to Bracciano via SS493 Braccianese Claudia, and to Cassia/SS2 and Viterbo. A roadway with several cars extends into the background, bordered by trees, dry grass, sidewalk paving, and a clear blue sky.",
-    "novel_visual_observations": [
-        "The sign places the cyclist at a northern route decision point outside Rome, with Bracciano to the left and Cassia/Viterbo to the right.",
-        "The bicycle cockpit and absence of a visible bike lane emphasize self-navigation beside ordinary motor traffic rather than protected cycling infrastructure."
-    ],
-    "storytelling_narrative": "With my hands on the taped bars, I watched the blue sign divide the road: Bracciano bending left, Cassia and Viterbo slipping right. The sun hardened every edge, even my rented confidence. Cars passed in a language I still translated with my shoulders. I was leaving Rome, yet already learning the social weight of where a bicycle may lean, how foreignness can begin in the body, slowly under my skin.",
+    "dc_description": "A road scene photographed from a cyclist's perspective, with the bicycle handlebar and stem dominating the lower foreground in soft focus. A blue directional road sign on the right side of the frame indicates routes toward Bracciano, Braccianese Claudia, Cassia, and Viterbo, with white arrows. The paved road curves or extends into the distance on the left, with several cars visible. Dense green trees and dry roadside grass line the right side, and the sky is clear and bright blue under strong daylight.",
+    "novel_visual_observations": "The roadside shoulder is paved with light rectangular blocks beside dry yellow grass. The bicycle has white handlebar tape, a black stem area, and a small digital device mounted near the center.",
+    "filename": "_MG_0018-3.jpg",
+    "time": "13:28",
     "gps_coordinates": "[12.39312, 41.99375]",
-    "filename": "_MG_0018-3.jpg"
+    "location_name": "Via Cassia, Giustiniana",
+    "rich_context": "Via Cassia, Giustiniana, Municipio Roma XV, Roma, Roma Capitale, Lazio, Italia"
 }
