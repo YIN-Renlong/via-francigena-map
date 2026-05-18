@@ -1,5 +1,5 @@
 var config = {
-    style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+    style: 'https://basemapstyles-api.arcgis.com/arcgis/rest/services/styles/v2/styles/arcgis/modern-antique?token=AAPTaa1kA0ARrHMCH2C6tcgEMRQ..IkmF6XP3uFeBYXC6loyslnoHUlE7TqPqnZ3qu_yIc37szmRzVjSwm1m6BJZ2H73ZMWY-QUKN2DKkj5scdyv7PT3qBbiJgYtyh0ugvE51XwGLWdi6bVIHUQzh3pYFkaFbklDnnX2eUn6vte0mPLBHJ6FGYH4hNpNeVCvS_PuJN8BrTrFmmTu3-BjlxItryiyzPv8ftQQF68Ebh0iznCdg4midvtYi_lWsItIF28xOuPi38Wl2ygduAT1_1mGBC5SI',
     chapters: [
         {
             id: 'chapter-0',

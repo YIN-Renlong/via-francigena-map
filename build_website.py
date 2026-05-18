@@ -170,7 +170,8 @@ def build():
     print("🏗️ Building ArcGIS-Style Mixed Media Website...")
     days = sorted([d for d in os.listdir(OUTPUT_DIR) if os.path.isdir(os.path.join(OUTPUT_DIR, d))])
     
-    config_js = "var config = {\n    style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',\n    chapters: [\n"
+    # Injecting the ArcGIS "Modern Antique" style with the secured API Key
+    config_js = "var config = {\n    style: 'https://basemapstyles-api.arcgis.com/arcgis/rest/services/styles/v2/styles/arcgis/modern-antique?token=AAPTaa1kA0ARrHMCH2C6tcgEMRQ..IkmF6XP3uFeBYXC6loyslnoHUlE7TqPqnZ3qu_yIc37szmRzVjSwm1m6BJZ2H73ZMWY-QUKN2DKkj5scdyv7PT3qBbiJgYtyh0ugvE51XwGLWdi6bVIHUQzh3pYFkaFbklDnnX2eUn6vte0mPLBHJ6FGYH4hNpNeVCvS_PuJN8BrTrFmmTu3-BjlxItryiyzPv8ftQQF68Ebh0iznCdg4midvtYi_lWsItIF28xOuPi38Wl2ygduAT1_1mGBC5SI',\n    chapters: [\n"
     
     random.seed("kinesis-praxis-final")
     global_idx = 0
