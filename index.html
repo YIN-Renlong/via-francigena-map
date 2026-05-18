@@ -380,7 +380,13 @@
                 }
 
                 // Handle fade in/out of layout components
-                document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.step').forEach(el => {
+                    // Only fade out the small map cards. 
+                    // Once a Prose or Cover page fades in, let it stay solid!
+                    if (!el.classList.contains('layout-prose') && !el.classList.contains('layout-cover')) {
+                        el.classList.remove('active');
+                    }
+                });
                 response.element.classList.add('active');
 
                 // --- NEW: SMART DASHBOARD AUTO-HIDE LOGIC ---
@@ -426,7 +432,7 @@
             let touchEndY = e.touches[0].clientY;
             handleBoundaryScroll(touchStartY < touchEndY, touchStartY > touchEndY);
         }, {passive: true});
-        
+
     </script>
 </body>
 </html>
