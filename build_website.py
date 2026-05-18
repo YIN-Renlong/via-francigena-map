@@ -7,7 +7,7 @@ OUTPUT_DIR = "output_metadata"
 CONFIG_FILE = "config.js"
 journal_headers = {
     "2017-08-07": {
-        "date_display": "DAY 1 OF 16 • 07 AUGUST, 2017 • YIN Renlong",
+        "date_display": "DAY 1 OF 16 • 07 AUGUST, 2017 • YIN Renlong (2026)",
         "title": "The Weight of Beginnings: Atlases, Strangers, and the Road out of Rome",
         "subtitle": "Departure from Rome, Lazio to Nepi, Lazio"
     },

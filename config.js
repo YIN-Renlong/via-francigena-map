@@ -5,7 +5,7 @@ var config = {
             id: 'chapter-0',
             date: '2017-08-07',
             title: `The Weight of Beginnings: Atlases, Strangers, and the Road out of Rome`,
-            kicker: `DAY 1 OF 16 • 07 AUGUST, 2017 • YIN Renlong`,
+            kicker: `DAY 1 OF 16 • 07 AUGUST, 2017 • YIN Renlong (2026)`,
             image: 'images/2017-08-07/cover.jpg',
             layout: 'cover',
             description: `<p class="cover-subtitle">Departure from Rome, Lazio to Nepi, Lazio</p>`,
