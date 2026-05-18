@@ -1,0 +1,12 @@
+{
+    "dc_description": "A forward-facing view from a bicycle on a rural paved road. The bicycle handlebars and stem are blurred in the foreground, with a curving two-lane road leading through dry yellow grass and low shrubs. Utility poles and overhead wires run along the roadside and across the sky. A few houses sit on a hill in the mid-distance, backed by a line of trees. The sky is mostly blue with a large white cloud formation to the left.",
+    "novel_visual_observations": [
+        "The road curves gently left and appears to slope slightly upward toward the distant houses.",
+        "The foreground handlebars occupy the bottom portion of the frame and are out of focus, indicating the camera is mounted close to or held just behind the bike cockpit."
+    ],
+    "filename": "_MG_0284.jpg",
+    "time": "15:42",
+    "gps_coordinates": "[11.77347, 42.89356]",
+    "location_name": "Strada Provinciale di Radicofani, Radicofani, Siena",
+    "rich_context": "Strada Provinciale di Radicofani, Radicofani, Unione dei Comuni Amiata Val d'Orcia, Siena, Toscana, Italia"
+}

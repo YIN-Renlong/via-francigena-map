@@ -265,6 +265,7 @@ def build():
                 global_idx += 1
                 prev_layout = "prose"
 
+            # --- B. INJECT 1 TO 3 MAP/PHOTO CARDS ---
             if photo_jsons:
                 num_photos_to_show = random.randint(1, 3) 
                 if not prose_chunks:
@@ -280,7 +281,9 @@ def build():
                     filename = r["filename"]
                     desc = narratives.get(filename, "Narrative missing.").replace("`", "\\`")
                     current_gps = r.get("gps_coordinates", current_gps)
-                    title = r.get("location_name", filename)
+                    
+                    # THE FIX 1: Sanitize the title to prevent any backtick crashes
+                    title = r.get("location_name", filename).replace("`", "\\`")
                     
                     valid_choices = ["floating-card"] * 4 + ["media-card"] * 4 + ["split"] * 2
                     if prev_layout in ["split", "prose", "cover"]:
@@ -289,10 +292,11 @@ def build():
                     layout_type = random.choice(valid_choices)
                     prev_layout = layout_type
                     
+                    # THE FIX 2: Use backticks (`) around {title} instead of single quotes (')
                     config_js += f"""        {{
             id: 'chapter-{global_idx}',
             date: '{day}',
-            title: '{title}',
+            title: `{title}`,
             image: '{img_dir}/{filename}',
             layout: '{layout_type}',
             description: `<p>{desc}</p>`,

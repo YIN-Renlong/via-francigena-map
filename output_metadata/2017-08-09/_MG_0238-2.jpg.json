@@ -1,0 +1,12 @@
+{
+    "dc_description": "A roadside scene photographed from a bicycle or handlebar-level perspective. The foreground is out of focus, showing part of a bicycle handlebar/brake hood and wrapped bar tape. In the middle ground there is cracked asphalt, a metal guardrail, and dry grass. Behind the guardrail are dense green trees and shrubs. A small brown directional sign with a left-pointing arrow reads \u201cvia Francigena.\u201d The sky is pale and hazy, and the image has a grainy texture.",
+    "novel_visual_observations": [
+        "The bicycle components dominate the lower-right foreground but are heavily blurred, while the distant sign is comparatively more legible.",
+        "The road surface shows multiple dark crack lines, and the vegetation behind the guardrail appears dry near the ground but green higher up."
+    ],
+    "filename": "_MG_0238-2.jpg",
+    "time": "13:29",
+    "gps_coordinates": "[11.85257, 42.77159]",
+    "location_name": "Strada Provinciale Trevinanese, Acquapendente",
+    "rich_context": "Strada Provinciale Trevinanese, Acquapendente, Viterbo, Lazio, 01021, Italia"
+}

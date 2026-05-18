@@ -1,0 +1,12 @@
+{
+    "dc_description": "A forward-facing view from a bicycle on a quiet paved rural road. The bicycle handlebar and a small central device are blurred in the foreground, while the road extends into the distance with white lane markings. Tall dry grass, roadside reflector posts, fencing, and dense trees line both sides, with pine trees prominent on the right. The sky is mostly clear blue with light cloud cover, and the lighting suggests low-angle sunlight.",
+    "novel_visual_observations": [
+        "The road appears empty with no visible vehicles or pedestrians.",
+        "A white roadside marker with a red reflector stands close to the right edge of the pavement."
+    ],
+    "filename": "_MG_0309.jpg",
+    "time": "17:35",
+    "gps_coordinates": "[11.76438, 42.90563]",
+    "location_name": "Strada Provinciale di Sarteano, Radicofani, Siena",
+    "rich_context": "Strada Provinciale di Sarteano, Radicofani, Unione dei Comuni Amiata Val d'Orcia, Siena, Toscana, Italia"
+}

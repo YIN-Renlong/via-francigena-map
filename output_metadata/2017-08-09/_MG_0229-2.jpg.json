@@ -1,0 +1,12 @@
+{
+    "dc_description": "A cluttered indoor room or workshop with a person seated on the left, their face obscured. The room contains multiple bicycles or bicycle parts in the foreground, including handlebars and a saddle bag. A workbench or table in the background is covered with equipment, bags, boxes, and small appliances or tools. A wall map hangs above the table, and a metal shelving unit with assorted bottles and containers is visible on the far left. Natural light enters from a window on the right.",
+    "novel_visual_observations": [
+        "A large black-and-orange duffel bag and a rolled cylindrical item sit on the right side of the workbench.",
+        "Several bicycle-related items dominate the lower half of the image, including drop handlebars, a bike saddle, and attached storage bags."
+    ],
+    "filename": "_MG_0229-2.jpg",
+    "time": "09:28",
+    "gps_coordinates": "[12.4922, 41.8902]",
+    "location_name": "Piazza del Colosseo, Municipio Roma I, Roma",
+    "rich_context": "Piazza del Colosseo, Celio, Municipio Roma I, Roma, Roma Capitale, Lazio, 00184, Italia"
+}
