@@ -1,0 +1,433 @@
+/* ==========================================================================
+   STORY LAYOUTS CSS (ArcGIS-Style)
+   Typography: Karla (Sans-Serif)
+   ========================================================================== */
+
+/* Typography Base overrides */
+.step h1, .step h2, .step h3 {
+    font-family: 'Georgia', serif; /* Classic, elegant serif for headers */
+    margin: 0;
+}
+.step p {
+    font-family: 'Open Sans', sans-serif; /* Clean, modern sans-serif for reading */
+    margin: 0;
+}
+
+/* 1. Cover Title (Cinematic Day Transition) */
+.layout-cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    position: relative;
+    /* Dark gradient overlay ensures white text is always readable */
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5); 
+    color: white;
+    padding: 0 5vw;
+}
+
+/* The New "Kicker" (e.g., DAY 1 OF 16) */
+.cover-kicker {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e0ddd1; /* Subtle, elegant off-white/gold */
+    margin-bottom: 25px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+/* The Main Title */
+.layout-cover h1 {
+    font-family: 'Georgia', serif;
+    font-size: 4rem; /* Massive, cinematic size */
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+/* The Subtitle */
+.layout-cover .cover-subtitle {
+    font-family: 'Georgia', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #f9f6ed;
+    max-width: 600px;
+    letter-spacing: 0.5px;
+    margin-top: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+/* Mobile adjustments for the massive title */
+@media (max-width: 800px) {
+    .layout-cover h1 { font-size: 2.5rem; }
+    .layout-cover .cover-subtitle { font-size: 1.2rem; }
+}
+
+
+.layout-cover h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    max-width: 800px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.layout-cover p {
+    font-size: 1.5rem;
+    font-weight: 300;
+    max-width: 600px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* 2. Solid Article */
+.layout-article-solid {
+    background-color: #f9f6ed; 
+    display: flex;
+    justify-content: center;
+    padding: 15vh 20px;
+    border-top: 1px solid #e0ddd1;
+    border-bottom: 1px solid #e0ddd1;
+    box-shadow: 0 -10px 20px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
+}
+.article-container {
+    max-width: 700px;
+    width: 100%;
+}
+.article-container h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+}
+.article-container p {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* 3. Floating Map Card */
+.layout-floating-card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 5vw;
+    pointer-events: none; 
+}
+.floating-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    width: 35vw;
+    min-width: 300px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    pointer-events: auto; 
+}
+.floating-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #4a5d85;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+.floating-card p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #1a1a1a;
+}
+
+/* 4. Media Card */
+.layout-media-card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 5vw;
+    pointer-events: none;
+}
+.media-card {
+    background-color: #f9f6ed; 
+    width: 38vw;
+    min-width: 350px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    pointer-events: auto;
+    border-left: 4px solid #1e3a2a; 
+}
+.media-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+.media-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+.media-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* 5. Split Photo/Text */
+.layout-split {
+    background-color: #f9f6ed;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    min-height: 80vh;
+}
+.split-text {
+    padding: 10vh 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.split-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.split-text p {
+    font-size: 1.1rem;
+    line-height: 1.65;
+}
+.split-photo {
+    background-size: cover;
+    background-position: center;
+}
+
+/* 6. PROSE LAYOUT (Full-Screen Background, Centered Text) */
+.layout-prose {
+    background-color: #f9f6ed; /* The solid color now stretches across the whole screen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 15vh 20px 25vh 20px; 
+    position: relative;
+    z-index: 10;
+    pointer-events: auto; /* Standard interaction */
+    
+    /* Optional: A subtle shadow at the top/bottom where the yellow background meets the map */
+    box-shadow: 0 -10px 20px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05); 
+}
+
+.prose-container {
+    max-width: 850px; /* Keeps the text perfectly narrow and readable in the center! */
+    width: 100%;
+    position: relative;
+}
+
+/* (Make sure you delete the old .prose-container::before block with the #3b2c2f background, 
+   as we are no longer using the hovering dossier frame) */
+
+
+/* --- ADVANCED EDITORIAL LAYOUTS --- */
+
+/* 1. The Diptych (Side-by-Side Photos) */
+.prose-diptych {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px;
+    margin: 3rem 0;
+}
+.prose-diptych img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Intelligently crops landscape photos to match heights */
+    border-radius: 4px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* 2. The Full Bleed (Cinematic Wide Break) */
+.prose-full-bleed {
+    /* This brilliant CSS trick forces the image to break out of the 800px text container and span the entire screen */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    max-width: 100vw;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+.prose-full-bleed img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh; /* Prevents vertical images from being too tall */
+    object-fit: cover;
+    border-radius: 0; /* Full screen means no rounded corners */
+}
+
+
+/* 3. The Magazine Right (Text wraps around perfectly, auto-cropped to portrait) */
+.prose-sticky-right {
+    float: right;
+    width: 45%; 
+    margin: 10px 0 20px 40px; /* Pushes text away so it never overlaps */
+}
+.prose-sticky-right img {
+    width: 100%;
+    aspect-ratio: 4 / 5; /* FORCES the landscape photo to crop into a beautiful vertical portrait */
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* 4. Elegant Technical Captions */
+.prose-caption {
+    font-family: 'Karla', sans-serif;
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.prose-inline-container { margin: 2rem 0; text-align: center; }
+figure { margin: 0; padding: 0; }
+
+/* Sticky Navigation Bar */
+#top-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    border-bottom: 1px solid #e0ddd1;
+    padding: 15px 5vw;
+    display: flex;
+    gap: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.nav-item { color: #888; cursor: pointer; transition: color 0.3s ease; }
+.nav-item:hover, .nav-item.active { color: #1e3a2a; }
+
+/* Mobile Overrides */
+@media (max-width: 800px) {
+    /* 1. Advanced Layout Overrides */
+    .prose-diptych { grid-template-columns: 1fr; }
+    .prose-sticky-right {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .prose-sticky-right img { aspect-ratio: auto; /* Go back to original shape on mobile */ }
+    
+    /* 2. Map Card Overrides */
+    .layout-floating-card, .layout-media-card { justify-content: center; padding: 0 20px; }
+    .floating-card, .media-card { width: 100%; margin-top: auto; margin-bottom: 5vh; }
+    .layout-split { grid-template-columns: 1fr; }
+    .split-photo { min-height: 40vh; }
+    
+    /* 3. Navigation Override */
+    #top-nav { overflow-x: auto; white-space: nowrap; padding: 15px; gap: 15px; }
+
+    /* 4. NEW: 3-Layer Frame Overrides */
+    .prose-container {
+        padding: 40px 25px; /* Less inner padding on small screens */
+    }
+    .prose-container::before {
+        /* Make the frame symmetrical and thinner on phones so it doesn't crush the text */
+        top: -8px; bottom: -8px; left: -8px; right: -8px; 
+    }
+    .prose-full-bleed {
+        /* Recalculate full bleed to match the new 25px padding */
+        width: calc(100% + 50px);
+        margin-left: -25px;
+        margin-right: -25px;
+    }
+}
+
+
+.prose-container h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #1e3a2a;
+    padding-bottom: 1rem;
+}
+.prose-container h3 {
+    font-family: 'Merriweather', serif;
+    font-size: 1.8rem;
+    color: #1e3a2a;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+.prose-container p {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+.prose-inline-img {
+    width: 100%;
+    height: auto;
+    margin: 2rem 0;
+    border-radius: 4px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Elegant shadow for inline images */
+}
+
+/* Sticky Navigation Bar */
+#top-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    border-bottom: 1px solid #e0ddd1;
+    padding: 15px 5vw;
+    display: flex;
+    gap: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.nav-item { color: #888; cursor: pointer; transition: color 0.3s ease; }
+.nav-item:hover, .nav-item.active { color: #1e3a2a; }
+
+/* Mobile Overrides */
+@media (max-width: 800px) {
+    .layout-floating-card, .layout-media-card { justify-content: center; padding: 0 20px; }
+    .floating-card, .media-card { width: 100%; margin-top: auto; margin-bottom: 5vh; }
+    .layout-split { grid-template-columns: 1fr; }
+    .split-photo { min-height: 40vh; }
+    #top-nav { overflow-x: auto; white-space: nowrap; padding: 15px; gap: 15px; }
+}
+
+
+/* Elegant ArcGIS-Style GPS Tag */
+.gps-tag {
+    border-top: 1px solid rgb(224, 221, 209);
+    color: rgb(136, 136, 136);
+    display: block;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    margin-top: 25px;
+    padding-top: 10px;
+    text-transform: uppercase;
+}

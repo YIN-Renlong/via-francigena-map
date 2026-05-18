@@ -1,0 +1,12 @@
+{
+    "dc_description": "A rural roadside scene under a clear blue sky. In the foreground is a cracked asphalt road, with tall dry grasses and weeds along the roadside. A bicycle with bags or gear attached is parked partly in shadow against the grass. Beyond it is a wide golden harvested field, with tree lines on the horizon, electrical transmission pylons and power lines in the distance, and a small shed-like structure toward the right side of the field.",
+    "novel_visual_observations": [
+        "The bicycle appears to be set up for touring or transport, with visible rear luggage and an item mounted near the front frame.",
+        "The low-angle sunlight creates long shadows across the road and a warm, late-day color cast over the field."
+    ],
+    "filename": "_MG_0086-3.jpg",
+    "time": "18:38",
+    "gps_coordinates": "[12.35907, 42.17552]",
+    "location_name": "SP16b, Nepi, Viterbo",
+    "rich_context": "SP16b, Grezzano-Pian delle Rose, Nepi, Viterbo, Lazio, 00063, Italia"
+}

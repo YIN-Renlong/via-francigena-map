@@ -1,9 +1,9 @@
 {
-    "dc_description": "A forward-facing view from a bicycle on a narrow paved rural road. The lower foreground contains out-of-focus bicycle handlebars, a small central device or mount, and a black cylindrical handlebar accessory with a green circular end. The road curves gently and recedes into a tunnel-like corridor of tall trees on both sides. Dense green foliage and dark tree trunks frame the scene, with a fence line and open field visible on the right. Warm low-angle sunlight filters through the trees from the right, producing bright highlights and long shadows across the road.",
-    "novel_visual_observations": "The pavement is lightly scattered with dry leaves and small debris near the road edges. The weather appears clear, and the bicycle foreground is blurred while the tree-lined road is the main visual focus.",
+    "dc_description": "A cyclist\u2019s viewpoint on a narrow paved country road running through a dense corridor of tall trees. The bicycle handlebars and a small handlebar-mounted device are visible out of focus in the foreground. Warm low-angle sunlight filters through the foliage from the right, casting long shadows across the road. The roadside has dry leaves, brush, fence posts, and a wire fence along the right side, with open fields partially visible beyond the trees.",
+    "novel_visual_observations": "The foreground handlebar area is deliberately blurred while the road and tree tunnel are more legible, creating a depth-of-field effect. The sunlit right side of the scene contrasts strongly with the darker, shaded canopy on the left.",
     "filename": "_MG_0145-4.jpg",
     "time": "19:47",
     "gps_coordinates": "[12.32125, 42.22058]",
-    "location_name": "Strada Monte Bianchetto, Nepi",
+    "location_name": "Strada Monte Bianchetto, Nepi, Viterbo",
     "rich_context": "Strada Monte Bianchetto, Colle Farnese, Nepi, Viterbo, Lazio, 01036, Italia"
 }

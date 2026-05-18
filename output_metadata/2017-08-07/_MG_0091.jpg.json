@@ -1,0 +1,12 @@
+{
+    "dc_description": "A narrow paved rural road runs through a wooded area, bordered by dry grass, bushes, wire fencing, and dense trees forming a partial canopy. The view appears to be from a bicycle or motorcycle, with handlebars and a mirror visible at the bottom edge. A triangular road sign stands on the left side of the road, and a small herd of light-colored animals is visible in the distance on or near the roadway.",
+    "novel_visual_observations": [
+        "The road surface shows several darker patched or worn areas near the center and right lane.",
+        "The distant animals appear clustered across the road, partially blocking the lane ahead."
+    ],
+    "filename": "_MG_0091.jpg",
+    "time": "18:54",
+    "gps_coordinates": "[12.36827, 42.19572]",
+    "location_name": "Via Ronci, Nepi, Viterbo",
+    "rich_context": "Via Ronci, Nepi, Viterbo, Lazio, 01036, Italia"
+}

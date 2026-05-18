@@ -5,6 +5,7 @@ import asyncio
 import httpx
 import exifread
 import xml.etree.ElementTree as ET
+import random
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
@@ -149,8 +150,15 @@ Return a JSON object with EXACTLY these two keys:
         print(f"❌ Error on {filename}: {e}")
         return None
 
-# --- PASS 2: THE GLOBAL STORYTELLER ---
+# --- PASS 2: THE GLOBAL STORYTELLER (NOW WITH CACHING!) ---
 async def generate_global_narrative(client, all_photo_data):
+    # Check if we already wrote the story!
+    cache_path = os.path.join(JSON_DIR, "global_narratives.json")
+    if os.path.exists(cache_path):
+        print("⏭️  Skipped AI: Global story already written. Loading from cache...")
+        with open(cache_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
     print("\n🖋️ Pass 2: AI is writing the cohesive global narrative...")
     
     # Compile the timeline for the AI
@@ -189,49 +197,77 @@ Return a JSON object where the keys are the filenames, and the values are the pa
         headers = { "api-key": API_KEY, "Content-Type": "application/json" }
         response = await client.post(ENDPOINT, headers=headers, json=payload, timeout=90.0)
         response.raise_for_status()
-        return json.loads(response.json()["choices"][0]["message"]["content"])
+        
+        narratives = json.loads(response.json()["choices"][0]["message"]["content"])
+        
+        # SAVE IT SO WE NEVER HAVE TO WRITE IT AGAIN!
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump(narratives, f, indent=4, ensure_ascii=False)
+            
+        return narratives
     except Exception as e:
         print(f"❌ Storyteller Error: {e}")
         return {}
 
+
 async def main():
-    print("🚀 Starting Kinesis & Praxis (Two-Pass Synthesis)...")
+    print("🚀 Starting Kinesis & Praxis AI Co-Researcher...")
     kml_points = get_kml_gps_track(KML_FILE)
     images = sorted([f for f in os.listdir(IMAGE_DIR) if f.lower().endswith(('.jpg', '.jpeg'))])
     
     async with httpx.AsyncClient() as client:
-        # PASS 1
         results = []
         for img in images:
             res = await process_image_visuals(client, img, kml_points)
             if res: results.append(res)
             
-        # PASS 2
         narratives = await generate_global_narrative(client, results)
                 
-    print(f"\n📝 Compiling final config.js...")
+    # --- THIS SECTION IS NOW CORRECTLY INDENTED ---
+    print(f"\n📝 Compiling final config.js with ArcGIS sidecar layouts...")
     config_js = "var config = {\n    style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',\n    chapters: [\n"
+    
+    # We now only use two elegant layouts matching ArcGIS StoryMaps
+    available_layouts = ["sidecar-map", "sidecar-photo"]
+    prev_layout = ""
     
     for idx, r in enumerate(results):
         filename = r["filename"]
-        # Grab the beautifully synthesized narrative
         desc = narratives.get(filename, "Narrative missing.").replace("`", "\\`")
+        gps = r.get("gps_coordinates", "[12.4922, 41.8902]")
+        title = r.get("location_name", filename)
+        
+        # --- ARCGIS PROCEDURAL PACING ---
+        if idx == 0:
+            layout_type = "sidecar-photo" # Open with a beautiful full-screen photo!
+        else:
+            # We want mostly Maps, with beautiful full-screen photos sprinkled in occasionally
+            valid_choices = ["sidecar-map"] * 3 + ["sidecar-photo"] 
+            
+            # Never put two full-screen photos back-to-back
+            if prev_layout == "sidecar-photo":
+                valid_choices = ["sidecar-map"]
+                
+            layout_type = random.choice(valid_choices)
+            
+        prev_layout = layout_type 
         
         config_js += f"""        {{
             id: 'chapter-{idx}',
-            title: '{r["location_name"]}',
+            title: '{title}',
             image: '{IMAGE_DIR}/{filename}',
+            layout: '{layout_type}',
             description: `{desc}`,
             location: {{
-                center: {r["gps_coordinates"]},
-                zoom: 15, pitch: 50, bearing: 0
+                center: {gps},
+                zoom: 14, pitch: 60, bearing: 0
             }}
         }},
 """
     config_js += "    ]\n};\n"
     with open("config.js", "w", encoding="utf-8") as f:
         f.write(config_js)
-    print("🎉 Done! Open index.html to see the seamless narrative and telemetry dashboard.")
+    print("🎉 Done! Open index.html to see the ArcGIS aesthetic.")
 
 if __name__ == "__main__":
     asyncio.run(main())

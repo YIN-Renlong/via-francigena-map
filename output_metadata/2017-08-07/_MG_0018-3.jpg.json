@@ -1,9 +1,9 @@
 {
-    "dc_description": "A road scene photographed from a cyclist's perspective, with the bicycle handlebar and stem dominating the lower foreground in soft focus. A blue directional road sign on the right side of the frame indicates routes toward Bracciano, Braccianese Claudia, Cassia, and Viterbo, with white arrows. The paved road curves or extends into the distance on the left, with several cars visible. Dense green trees and dry roadside grass line the right side, and the sky is clear and bright blue under strong daylight.",
-    "novel_visual_observations": "The roadside shoulder is paved with light rectangular blocks beside dry yellow grass. The bicycle has white handlebar tape, a black stem area, and a small digital device mounted near the center.",
+    "dc_description": "A forward-facing view from a bicycle on the side of a paved road in bright daylight. The blurred foreground shows a bicycle handlebar, brake/shift cable, and a small mounted cycling computer. To the right, a large blue road sign on two posts indicates directions toward Bracciano, Braccianese Claudia, Cassia, and Viterbo, with white arrows splitting left and right. The road curves gently left, with several cars visible in the distance, trees and dry grass lining both sides, and a clear blue sky overhead.",
+    "novel_visual_observations": "The road sign includes route labels SS493 and SS2. The image has visible film-like grain and small dark specks, especially in the sky area.",
     "filename": "_MG_0018-3.jpg",
     "time": "13:28",
     "gps_coordinates": "[12.39312, 41.99375]",
-    "location_name": "Via Cassia, Giustiniana",
+    "location_name": "Via Cassia, Municipio Roma XV, Roma",
     "rich_context": "Via Cassia, Giustiniana, Municipio Roma XV, Roma, Roma Capitale, Lazio, Italia"
 }

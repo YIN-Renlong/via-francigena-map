@@ -1,0 +1,12 @@
+{
+    "dc_description": "A road scene viewed from a rider's perspective, with blurred bicycle or scooter handlebars in the foreground. The paved road curves through a tree-lined area under a clear blue sky. Tall pine trees stand along the roadside, and a brown directional sign attached to a tree points left toward \"anfiteatro.\" In the distance, a hillside town with stone buildings and a prominent tower is visible. A crosswalk, streetlights, cars, hedges, and a wooden fence line the road.",
+    "novel_visual_observations": [
+        "The \"anfiteatro\" sign is mounted directly on the trunk of a large pine tree rather than on a separate post.",
+        "The foreground vehicle handlebars are heavily out of focus, emphasizing the road and sign beyond them."
+    ],
+    "filename": "_MG_0148-3.jpg",
+    "time": "09:30",
+    "gps_coordinates": "[12.22993, 42.23942]",
+    "location_name": "Via Cassia, Fontevivola",
+    "rich_context": "Anfiteatro romano, 49, Via Cassia, Fontevivola, Sutri, Viterbo, Lazio, 01015, Italia"
+}

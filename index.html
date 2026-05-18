@@ -4,453 +4,397 @@
     <meta charset='utf-8' />
     <title>Kinesis & Praxis: Via Francigena</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    
+    <!-- Scripts -->
     <script src='https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.js'></script>
     <link href='https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.css' rel='stylesheet' />
     <script src="https://unpkg.com/scrollama"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- NEW: ArcGIS Style Layouts -->
+    <link rel="stylesheet" href="layouts/story-layouts.css">
+    <script src="layouts/story-layouts.js"></script>
     
     <style>
-        /* BASE ELEGANT STYLES */
-        body { margin:0; padding:0; font-family: 'Karla', sans-serif; background-color: #faf6ed; color: #1a1a1a; }
+        /* Base Structure & Dashboard CSS */
+        body { margin:0; padding:0; font-family: 'Karla', sans-serif; background-color: #f9f6ed; color: #1a1a1a; overflow-x: hidden; }
         
-        #map { position: fixed; top:0; right:0; bottom: 20vh; width: 50%; z-index: -1; border-left: 1px solid #e0ddd1; background-color: #faf6ed; }
+        #map-section-container { position: relative; width: 100vw; z-index: 1; }
+        #map { position: fixed; top:0; left:0; width: 100vw; height: 100vh; z-index: -1; background-color: #f9f6ed; }
+        #features { position: relative; z-index: 5; width: 100vw; }
         
-        #features { width: 50%; padding-top: 10vh; padding-bottom: 30vh; box-sizing: border-box; }
-        .step { padding-bottom: 30vh; opacity: 0.25; transition: opacity 0.5s ease; padding-left: 8%; padding-right: 8%; }
+        #minimap-container {
+            position: fixed; bottom: 22vh; right: 2vw; width: 150px; height: 150px; 
+            border-radius: 50%; border: 3px solid #f9f6ed; overflow: hidden; z-index: 20; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: opacity 0.5s ease;
+        }
+        #minimap { width: 100%; height: 100%; }
+
+        /* Step Fade logic required by Scrollama */
+        .step { width: 100vw; opacity: 0.1; transition: opacity 0.6s ease; margin-bottom: 15vh; }
         .step.active { opacity: 1; }
-        
-        .chapter-card { background: transparent; padding: 0; }
-        .chapter-card img { width: 100%; height: auto; margin-bottom: 25px; border-radius: 2px; }
-        h3 { font-size: 24px; font-weight: 600; margin-top: 0; letter-spacing: 0.5px; color: #000; margin-bottom: 15px; }
-        p { line-height: 1.8; font-size: 18px; color: #333; font-weight: 400; }
-        .gps-tag { font-size: 12px; color: #888; margin-top: 25px; display: block; border-top: 1px solid #e0ddd1; padding-top: 10px; letter-spacing: 0.5px;}
-        
-        /* EDITORIAL DASHBOARD */
-        #dashboard { 
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 20vh; 
-            background-color: #faf6ed; color: #1a1a1a; z-index: 10; 
-            display: flex; border-top: 1px solid #e0ddd1; box-sizing: border-box; 
+
+        /* =========================================
+           NEW: PROGRESS BAR & TOGGLE STYLES
+           ========================================= */
+        #progress-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 4px; 
+            background-color: transparent; z-index: 9999; 
         }
-        
-        /* 1. Global Summary Panel (Left) - Expanded Data Sheet */
-        #dash-global { 
-            width: 40%; padding: 15px 30px; 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            grid-gap: 8px 20px;
-            border-right: 1px solid #e0ddd1; 
-            overflow-y: auto;
+        #progress-bar {
+            height: 100%; width: 0%; 
+            background-color: #dba01a; 
+            transition: width 0.1s ease-out;
+        }
+        #dash-toggle {
+            position: absolute; top: -28px; right: 20px; 
+            background-color: #f9f6ed; color: #1a1a1a; 
+            padding: 4px 12px; font-size: 11px; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 1px; 
+            border: 1px solid #e0ddd1; border-bottom: none; 
+            border-radius: 4px 4px 0 0; cursor: pointer; 
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05); z-index: 31;
         }
 
-        /* Elegant scrollbar for the data sheet */
+        /* DASHBOARD */
+        #dashboard { position: fixed; bottom: 0; left: 0; width: 100%; height: 20vh; background-color: #f9f6ed; color: #1a1a1a; z-index: 30; display: flex; border-top: 1px solid #e0ddd1; box-sizing: border-box; transition: transform 0.5s ease; }
+        .dash-hidden { transform: translateY(100%); } 
+
+        #dash-global { width: 40%; padding: 8px 30px; display: grid; grid-template-columns: 1fr 1fr; grid-gap: 8px 20px; border-right: 1px solid #e0ddd1; overflow-y: auto; }
         #dash-global::-webkit-scrollbar { width: 4px; }
-        #dash-global::-webkit-scrollbar-track { background: transparent; }
         #dash-global::-webkit-scrollbar-thumb { background: #dcd8c8; border-radius: 4px; }
-        
-        .section-title {
-            grid-column: span 2;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #1a1a1a;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            border-bottom: 1px solid #1a1a1a;
-            padding-bottom: 3px;
-        }
+        .section-title { grid-column: span 2; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 15px; border-bottom: 1px solid #1a1a1a; padding-bottom: 3px; }
         .section-title:first-child { margin-top: 0; }
-
         .stat-group { display: flex; flex-direction: column; justify-content: flex-end; margin-bottom: 5px;}
         .stat-lbl { font-size: 10px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1px; }
-        .stat-val { font-size: 15px; color: #1a1a1a; font-weight: 600; }
+        .stat-val { font-size: 15px; font-weight: 600; }
         .stat-span { grid-column: span 2; }
-        .accent { color: #d35400; } 
-
-        /* 2. Chart Panel (Middle) */
+        .accent { color: #1e3a2a; } 
         #chart-container { width: 40%; height: 100%; position: relative; padding: 15px 15px 10px 15px; box-sizing: border-box;}
-        
-        /* 3. Local Dynamic Stats (Right) */
-        #stats-container { 
-            width: 20%; display: flex; flex-direction: column; justify-content: center; 
-            align-items: flex-end; padding-right: 35px; border-left: 1px solid #e0ddd1;
-        }
+        #stats-container { width: 20%; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; padding-right: 35px; border-left: 1px solid #e0ddd1;}
         .local-row { text-align: right; margin-bottom: 8px; }
         .local-val { font-size: 32px; font-weight: 600; color: #1a1a1a; line-height: 1; margin-bottom: 2px;}
         .local-lbl { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
-        @media (max-width: 750px) { 
-            #map { width: 100%; height: 40vh; position: sticky; top: 0; border-left: none; border-bottom: 1px solid #e0ddd1; z-index: 1;} 
-            #features { width: 100%; padding-bottom: 25vh;} 
+        @media (max-width: 800px) { 
             #dashboard { height: auto; flex-direction: column; max-height: 45vh;}
             #dash-global { width: 100%; border-right: none; border-bottom: 1px solid #e0ddd1; padding: 15px;}
             #chart-container { width: 100%; height: 150px; }
             #stats-container { width: 100%; flex-direction: row; justify-content: space-around; align-items: center; border-left: none; border-top: 1px solid #e0ddd1; padding: 15px 0;}
             .local-row { text-align: center; margin-bottom: 0; }
             .local-val { font-size: 22px; margin-bottom: 2px;}
+            #minimap-container { bottom: 48vh; width: 100px; height: 100px; }
         }
+
+        /* LIGHTBOX STYLES */
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(10, 10, 10, 0.95); z-index: 99999;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 1; transition: opacity 0.3s ease;
+        }
+        #lightbox.lightbox-hidden { opacity: 0; pointer-events: none; }
+        #lightbox img {
+            max-width: 90vw; max-height: 90vh; border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+        #lightbox-close {
+            position: absolute; top: 30px; right: 40px;
+            color: white; font-size: 50px; cursor: pointer;
+            font-family: 'Open Sans', sans-serif; font-weight: 300;
+        }
+        /* Cursor hints for clickable images */
+        .lightbox-trigger { cursor: zoom-in; }
+        .prose-full-bleed img { cursor: default; } /* Prevent zooming on full bleeds */
     </style>
 </head>
 <body>
-    <div id='map'></div>
-    <div id='features'></div>
+    <!-- Lightbox Overlay -->
+    <div id="lightbox" class="lightbox-hidden">
+        <span id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+
+    <!-- Sleek Reading Progress Bar -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- Global Minimap -->
+    <div id="minimap-container"><div id="minimap"></div></div>
+
+    <!-- Main Map and Content -->
+    <div id="map-section-container">
+        <div id='map'></div>
+        <div id='features'></div>
+    </div>
     
+    <!-- Dashboard Bottom Bar -->
     <div id='dashboard'>
-        <!-- EXPANDED GLOBAL DATA SHEET -->
+        <div id="dash-toggle">▼ Hide</div> <!-- TOGGLE BUTTON -->
         <div id="dash-global">
-            
-            <div class="section-title">Timing</div>
-            <div class="stat-group stat-span">
-                <span class="stat-lbl">Recording Timestamp</span>
-                <span class="stat-val" id="g-clock">--:--</span>
-            </div>
-            <div class="stat-group">
-                <span class="stat-lbl">Moving Time</span>
-                <span class="stat-val" id="g-mov-time">--</span>
-            </div>
-            <div class="stat-group">
-                <span class="stat-lbl">Stopped Time</span>
-                <span class="stat-val" id="g-stop-time">--</span>
-            </div>
+            <div class="section-title">Timing (<span id="g-date-title">Day 1</span>)</div>
+            <div class="stat-group stat-span"><span class="stat-lbl">Recording Timestamp</span><span class="stat-val" id="g-clock">--:--</span></div>
+            <div class="stat-group"><span class="stat-lbl">Moving Time</span><span class="stat-val" id="g-mov-time">--</span></div>
+            <div class="stat-group"><span class="stat-lbl">Stopped Time</span><span class="stat-val" id="g-stop-time">--</span></div>
 
             <div class="section-title">Dynamics & Elevation</div>
-            <div class="stat-group">
-                <span class="stat-lbl">Avg Speed</span>
-                <span class="stat-val"><span id="g-avg-spd">0</span> km/h</span>
-            </div>
-            <div class="stat-group">
-                <span class="stat-lbl">Max Speed</span>
-                <span class="stat-val"><span id="g-max-spd">0</span> km/h</span>
-            </div>
-            <div class="stat-group stat-span">
-                <span class="stat-lbl">Elevation</span>
-                <span class="stat-val"><span id="g-asc">0</span>m ↑ / <span id="g-desc">0</span>m ↓</span>
-            </div>
+            <div class="stat-group"><span class="stat-lbl">Avg Speed</span><span class="stat-val"><span id="g-avg-spd">0</span> km/h</span></div>
+            <div class="stat-group"><span class="stat-lbl">Max Speed</span><span class="stat-val"><span id="g-max-spd">0</span> km/h</span></div>
+            <div class="stat-group stat-span"><span class="stat-lbl">Elevation</span><span class="stat-val"><span id="g-asc">0</span>m ↑ / <span id="g-desc">0</span>m ↓</span></div>
 
             <div class="section-title">Environment</div>
-            <div class="stat-group stat-span">
-                <span class="stat-lbl">Weather & Sensors (<span id="g-loc">Loc</span>)</span>
-                <span class="stat-val"><span id="g-cond" class="accent">Clear</span> • <span id="g-temp-min">0</span>° - <span id="g-temp-max">0</span>°C (Avg <span id="g-temp-avg">0</span>°C)</span>
-            </div>
-            <div class="stat-group">
-                <span class="stat-lbl">Wind / Humidity</span>
-                <span class="stat-val"><span id="g-wind">0</span> km/h <span id="g-wind-dir"></span> / <span id="g-hum">0</span>%</span>
-            </div>
-            <div class="stat-group">
-                <span class="stat-lbl">Sunrise / Sunset</span>
-                <span class="stat-val" id="g-sun">--:-- / --:--</span>
-            </div>
+            <div class="stat-group stat-span"><span class="stat-lbl">Weather & Sensors (<span id="g-loc">Loc</span>)</span><span class="stat-val"><span id="g-cond" class="accent">Clear</span> • <span id="g-temp-min">0</span>° - <span id="g-temp-max">0</span>°C (Avg <span id="g-temp-avg">0</span>°C)</span></div>
+            <div class="stat-group"><span class="stat-lbl">Wind / Humidity</span><span class="stat-val"><span id="g-wind">0</span> km/h <span id="g-wind-dir"></span> / <span id="g-hum">0</span>%</span></div>
+            <div class="stat-group"><span class="stat-lbl">Sunrise / Sunset</span><span class="stat-val" id="g-sun">--:-- / --:--</span></div>
 
             <div class="section-title">Equipment & Telemetry</div>
-            <div class="stat-group">
-                <span class="stat-lbl">Energy Expended</span>
-                <span class="stat-val accent"><span id="g-kj">0</span> kJ</span>
-            </div>
-            <div class="stat-group">
-                <span class="stat-lbl">Equipment</span>
-                <span class="stat-val" id="g-bike">Unknown</span>
-            </div>
-            <div class="stat-group stat-span" style="margin-bottom: 15px;">
-                <span class="stat-lbl">Recording Device</span>
-                <span class="stat-val" id="g-app" style="font-size: 13px; color: #555;">Unknown</span>
-            </div>
-
+            <div class="stat-group"><span class="stat-lbl">Energy Expended</span><span class="stat-val accent"><span id="g-kj">0</span> kJ</span></div>
+            <div class="stat-group"><span class="stat-lbl">Equipment</span><span class="stat-val" id="g-bike">Unknown</span></div>
+            <div class="stat-group stat-span" style="margin-bottom: 15px;"><span class="stat-lbl">Recording Device</span><span class="stat-val" id="g-app" style="font-size: 13px; color: #555;">Unknown</span></div>
         </div>
         
-        <!-- ELEVATION GRAPH -->
-        <div id="chart-container">
-            <canvas id="elevationChart"></canvas>
-        </div>
+        <div id="chart-container"><canvas id="elevationChart"></canvas></div>
         
-        <!-- DYNAMIC LOCAL STATS -->
         <div id="stats-container">
-            <div class="local-row">
-                <div class="local-val accent" id="g-dist">0.0</div>
-                <div class="local-lbl">Total KM</div>
-            </div>
-            <div class="local-row">
-                <div class="local-val" id="val-alt">0</div>
-                <div class="local-lbl">Altitude (m)</div>
-            </div>
-            <div class="local-row">
-                <div class="local-val" id="val-spd">0.0</div>
-                <div class="local-lbl">Speed (km/h)</div>
-            </div>
+            <div class="local-row"><div class="local-val accent" id="g-dist">0.0</div><div class="local-lbl">Total KM</div></div>
+            <div class="local-row"><div class="local-val" id="val-alt">0</div><div class="local-lbl">Altitude (m)</div></div>
+            <div class="local-row"><div class="local-val" id="val-spd">0.0</div><div class="local-lbl">Speed (km/h)</div></div>
         </div>
     </div>
 
+    <!-- Data config -->
     <script src="config.js"></script>
     <script>
-        function formatDuration(seconds) {
-            var h = Math.floor(seconds / 3600);
-            var m = Math.floor((seconds % 3600) / 60);
-            return h + "h " + m + "m";
-        }
-        function formatClock(dateObj) {
-            return dateObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        }
+        function formatDuration(s) { var h=Math.floor(s/3600); var m=Math.floor((s%3600)/60); return h+"h "+m+"m"; }
+        function formatClock(d) { return d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); }
+
+        // --- STATE MANAGEMENT VARIABLES ---
+        window.activeDate = null;
+        window.activeRouteData = null;
+        window.activeSpeeds = [];
 
         var map = new maplibregl.Map({
-            container: 'map',
-            style: config.style,
-            center: config.chapters[0].location.center,
-            zoom: config.chapters[0].location.zoom,
-            pitch: 75, 
-            maxPitch: 85, 
-            bearing: config.chapters[0].location.bearing,
-            scrollZoom: false 
+            container: 'map', style: config.style, center: config.chapters[0].location.center, zoom: config.chapters[0].location.zoom, pitch: 65, bearing: config.chapters[0].location.bearing, scrollZoom: false 
         });
 
+        // Global Minimap View
+        var minimap = new maplibregl.Map({
+            container: 'minimap', 
+            style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json', 
+            center: [12.5, 42.0], 
+            zoom: 5, // Zoomed out
+            projection: { type: 'globe' }, // Experimental Globe projection
+            interactive: false, 
+            attributionControl: false
+        });
+        var miniMarker = new maplibregl.Marker({ color: "#d35400", scale: 0.7 }).setLngLat([12.5, 42.0]).addTo(minimap);
+
+        // --- GENERATE LAYOUTS USING story-layouts.js ---
         var features = document.getElementById('features');
-        config.chapters.forEach((record, idx) => {
-            var container = document.createElement('div');
-            container.classList.add('step');
-            container.setAttribute('id', record.id);
-            if(idx === 0) container.classList.add('active');
-
-            var card = document.createElement('div');
-            card.classList.add('chapter-card');
-            if(record.image) {
-                var img = document.createElement('img');
-                img.src = record.image;
-                card.appendChild(img);
+        
+        config.chapters.forEach((chapter, idx) => {
+            // Generate the HTML string using the external layout renderer
+            const htmlString = renderChapter(chapter);
+            
+            // Insert it into the DOM
+            features.insertAdjacentHTML('beforeend', htmlString);
+            
+            // Make the first one active to prevent visual flashing on load
+            if(idx === 0) {
+                document.getElementById(chapter.id).classList.add('active');
             }
-            var title = document.createElement('h3');
-            title.innerText = record.title;
-            card.appendChild(title);
-            var text = document.createElement('p');
-            text.innerHTML = record.description;
-            card.appendChild(text);
-            var gps = document.createElement('span');
-            gps.classList.add('gps-tag');
-            gps.innerText = record.location.center[1].toFixed(5) + " N, " + record.location.center[0].toFixed(5) + " E";
-            card.appendChild(gps);
-            container.appendChild(card);
-            features.appendChild(container);
         });
 
-        var marker = new maplibregl.Marker({ color: "#1a1a1a" }).setLngLat(config.chapters[0].location.center).addTo(map);
+        var marker = new maplibregl.Marker({ color: "#1e3a2a" }).setLngLat(config.chapters[0].location.center).addTo(map);
         var scroller = scrollama();
-        var elevationChart;
+        
+        // Setup Chart.js
+        var ctx = document.getElementById('elevationChart').getContext('2d');
+        var elevationChart = new Chart(ctx, { 
+            type: 'line', 
+            data: { labels: [], datasets: [{ data: [], fill: true, backgroundColor: 'rgba(26, 26, 26, 0.05)', borderWidth: 2, pointRadius: 0, segment: { borderColor: ctx => { if(!window.activeSpeeds) return '#1a1a1a'; let spd = window.activeSpeeds[ctx.p0DataIndex] * 3.6; if (spd < 12) return '#3498db'; if (spd < 22) return '#f1c40f'; if (spd < 32) return '#e67e22'; return '#c0392b'; } } }] }, 
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false }, verticalLine: { x: undefined } }, scales: { x: { display: false }, y: { display: true, position: 'right', grid: { color: '#e0ddd1' }, ticks: { color: '#888' } } }, animation: { duration: 0 } }, 
+            plugins: [{ id: 'verticalLine', afterDraw: chart => { if (chart.config.options.plugins.verticalLine && chart.config.options.plugins.verticalLine.x !== undefined) { const x = chart.config.options.plugins.verticalLine.x; const c = chart.ctx; const yA = chart.scales.y; c.save(); c.beginPath(); c.moveTo(x, yA.top); c.lineTo(x, yA.bottom); c.lineWidth = 1; c.strokeStyle = '#1a1a1a'; c.stroke(); c.restore(); } } }] 
+        });
 
-        const verticalLinePlugin = {
-            id: 'verticalLine',
-            afterDraw: chart => {
-                if (chart.config.options.plugins.verticalLine && chart.config.options.plugins.verticalLine.x !== undefined) {
-                    const x = chart.config.options.plugins.verticalLine.x;
-                    const ctx = chart.ctx;
-                    const yAxis = chart.scales.y;
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.moveTo(x, yAxis.top);
-                    ctx.lineTo(x, yAxis.bottom);
-                    ctx.lineWidth = 1;
-                    ctx.strokeStyle = '#1a1a1a';
-                    ctx.stroke();
-                    ctx.restore();
-                }
+        // --- NEW: PROGRESS BAR LOGIC ---
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercentage + '%';
+        });
+
+        // --- NEW: DASHBOARD MANUAL TOGGLE LOGIC ---
+        document.getElementById('dash-toggle').addEventListener('click', function() {
+            const dash = document.getElementById('dashboard');
+            dash.classList.toggle('dash-hidden');
+            if (dash.classList.contains('dash-hidden')) {
+                this.innerHTML = '▲ Data'; 
+            } else {
+                this.innerHTML = '▼ Hide'; 
             }
-        };
+        });
 
-        map.on('load', function() {
-            // 3D TERRAIN
-            map.addSource('terrain-source', {
-                'type': 'raster-dem',
-                'tiles': ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],
-                'encoding': 'terrarium',
-                'tileSize': 256,
-                'maxzoom': 14 
-            });
-            map.setTerrain({ 'source': 'terrain-source', 'exaggeration': 1.5 });
+        // --- LIGHTBOX INTERACTION LOGIC ---
+        document.addEventListener('click', function(e) {
+            // Open Lightbox
+            if(e.target && e.target.classList.contains('lightbox-trigger')) {
+                document.getElementById('lightbox-img').src = e.target.src;
+                document.getElementById('lightbox').classList.remove('lightbox-hidden');
+            }
+            // Close Lightbox
+            if(e.target && (e.target.id === 'lightbox' || e.target.id === 'lightbox-close')) {
+                document.getElementById('lightbox').classList.add('lightbox-hidden');
+            }
+        });
+
+        // --- THE DYNAMIC DATA LOADER ---
+        async function loadDayData(dateStr) {
+            if (window.activeDate === dateStr) return; // Already loaded
             
-            // HILLSHADE
-            map.addLayer({
-                'id': 'hillshade-layer',
-                'type': 'hillshade',
-                'source': 'terrain-source',
-                'paint': {
-                    'hillshade-shadow-color': '#1a1a1a',
-                    'hillshade-exaggeration': 0.6
-                }
-            });
+            try {
+                const response = await fetch('geojson/route_' + dateStr + '.geojson');
+                const data = await response.json();
+                
+                window.activeDate = dateStr;
+                window.activeRouteData = data;
+                
+                var props = data.features[0].properties;
+                var sum = props.summary;
+                window.activeSpeeds = props.speeds;
 
-            // SKY
-            map.addLayer({
-                'id': 'sky',
-                'type': 'sky',
-                'paint': {
-                    'sky-type': 'atmosphere',
-                    'sky-atmosphere-sun': [0.0, 0.0],
-                    'sky-atmosphere-sun-intensity': 15
-                }
-            });
-
-            fetch('geojson/route_2017-08-07.geojson')
-                .then(response => response.json())
-                .then(data => {
-                    
+                // 1. Swap Map Data
+                if (map.getSource('route')) {
+                    map.getSource('route').setData(data);
+                } else {
                     map.addSource('route', { 'type': 'geojson', 'data': data });
-                    
-                    map.addLayer({
-                        'id': 'route-lines',
-                        'type': 'line',
-                        'source': 'route',
-                        'filter': ['has', 'type'], 
-                        'layout': { 'line-join': 'round', 'line-cap': 'round' },
-                        'paint': { 
-                            'line-width': 4,
-                            'line-color': [
-                                'match',
-                                ['get', 'type'],
-                                'speed_slow', '#3498db',    
-                                'speed_medium', '#f1c40f',  
-                                'speed_fast', '#e67e22',    
-                                'speed_sprint', '#c0392b',  
-                                '#1a1a1a' 
-                            ]
-                        }
-                    });
+                    map.addLayer({ 'id': 'route-lines', 'type': 'line', 'source': 'route', 'filter': ['has', 'type'], 'layout': { 'line-join': 'round', 'line-cap': 'round' }, 'paint': { 'line-width': 4, 'line-color': [ 'match', ['get', 'type'], 'speed_slow', '#3498db', 'speed_medium', '#f1c40f', 'speed_fast', '#e67e22', 'speed_sprint', '#c0392b', '#1e3a2a' ] } });
+                }
 
-                    var props = data.features[0].properties;
-                    var labels = props.distances.map(d => (d/1000).toFixed(1)); 
-                    var altitudes = props.altitudes;
-                    var speeds = props.speeds;
-                    var sum = props.summary;
+                // 2. Update Global Dashboard
+                document.getElementById('g-date-title').innerText = dateStr;
+                let dStart = new Date(sum.start_iso);
+                let dEnd = new Date(dStart.getTime() + (sum.total_time * 1000));
+                document.getElementById('g-clock').innerText = formatClock(dStart) + " — " + formatClock(dEnd) + " (" + formatDuration(sum.total_time) + ")";
+                document.getElementById('g-mov-time').innerText = formatDuration(sum.moving_time);
+                document.getElementById('g-stop-time').innerText = formatDuration(sum.stopped_time);
+                document.getElementById('g-avg-spd').innerText = sum.avg_speed_kph.toFixed(1);
+                document.getElementById('g-max-spd').innerText = sum.max_speed_kph.toFixed(1);
+                document.getElementById('g-asc').innerText = sum.ascent_m.toFixed(0);
+                document.getElementById('g-desc').innerText = sum.descent_m.toFixed(0);
+                document.getElementById('g-kj').innerText = sum.energy_kj.toFixed(0);
+                document.getElementById('g-cond').innerText = sum.condition;
+                document.getElementById('g-loc').innerText = sum.locality;
+                document.getElementById('g-temp-min').innerText = sum.temp_min.toFixed(1);
+                document.getElementById('g-temp-avg').innerText = sum.temp_avg.toFixed(1);
+                document.getElementById('g-temp-max').innerText = sum.temp_max.toFixed(1);
+                document.getElementById('g-wind').innerText = sum.wind_kph.toFixed(0);
+                document.getElementById('g-hum').innerText = sum.humidity;
+                document.getElementById('g-sun').innerText = sum.sunrise + " / " + sum.sunset;
+                document.getElementById('g-bike').innerText = sum.bike_name;
+                document.getElementById('g-app').innerText = sum.app_info;
 
-                    // POPULATE EXPANDED DASHBOARD
-                    let dStart = new Date(sum.start_iso);
-                    let dEnd = new Date(dStart.getTime() + (sum.total_time * 1000));
-                    
-                    document.getElementById('g-clock').innerText = formatClock(dStart) + " — " + formatClock(dEnd) + " (Total: " + formatDuration(sum.total_time) + ")";
-                    document.getElementById('g-mov-time').innerText = formatDuration(sum.moving_time);
-                    document.getElementById('g-stop-time').innerText = formatDuration(sum.stopped_time);
-                    
-                    document.getElementById('g-avg-spd').innerText = sum.avg_speed_kph.toFixed(1);
-                    document.getElementById('g-max-spd').innerText = sum.max_speed_kph.toFixed(1);
+                // 3. Update Chart
+                elevationChart.data.labels = props.distances.map(d => (d/1000).toFixed(1));
+                elevationChart.data.datasets[0].data = props.altitudes;
+                elevationChart.update();
 
-                    document.getElementById('g-asc').innerText = sum.ascent_m.toFixed(0);
-                    document.getElementById('g-desc').innerText = sum.descent_m.toFixed(0);
-                    document.getElementById('g-kj').innerText = sum.energy_kj.toFixed(0);
+            } catch (err) {
+                console.error("Could not load data for " + dateStr, err);
+            }
+        }
 
-                    document.getElementById('g-cond').innerText = sum.condition;
-                    document.getElementById('g-loc').innerText = sum.locality;
-                    document.getElementById('g-temp-min').innerText = sum.temp_min.toFixed(1);
-                    document.getElementById('g-temp-avg').innerText = sum.temp_avg.toFixed(1);
-                    document.getElementById('g-temp-max').innerText = sum.temp_max.toFixed(1);
-                    
-                    document.getElementById('g-wind').innerText = sum.wind_kph.toFixed(0);
-                    document.getElementById('g-wind-dir').innerText = sum.wind_dir !== "--" ? `(${sum.wind_dir})` : "";
-                    document.getElementById('g-hum').innerText = sum.humidity;
-                    document.getElementById('g-sun').innerText = sum.sunrise + " / " + sum.sunset;
+        map.on('load', async function() {
+            // Setup 3D Terrain
+            map.addSource('terrain-source', { 'type': 'raster-dem', 'tiles': ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'], 'encoding': 'terrarium', 'tileSize': 256, 'maxzoom': 14 });
+            map.setTerrain({ 'source': 'terrain-source', 'exaggeration': 1.5 });
+            map.addLayer({ 'id': 'hillshade-layer', 'type': 'hillshade', 'source': 'terrain-source', 'paint': { 'hillshade-shadow-color': '#1a1a1a', 'hillshade-exaggeration': 0.3 }});
 
-                    document.getElementById('g-bike').innerText = sum.bike_name;
-                    document.getElementById('g-app').innerText = sum.app_info;
+            // Load Day 1 immediately
+            await loadDayData(config.chapters[0].date);
 
-                    document.getElementById('g-dist').innerText = sum.distance_km.toFixed(1);
+            scroller.setup({ step: '.step', offset: 0.5, progress: true })
+            .onStepEnter(async response => {
+                var chapter = config.chapters.find(chap => chap.id === response.element.id);
+                
+                // If user scrolls into a new day, swap the data instantly
+                await loadDayData(chapter.date);
+                
+                // Adjust map centering dynamically based on the layout type
+                let padding = {top: 0, bottom: 0, left: 0, right: 0};
+                if (window.innerWidth > 800) {
+                    if (chapter.layout === 'floating-card' || chapter.layout === 'media-card') {
+                        padding.left = window.innerWidth * 0.40; // Push map center right to make room for card
+                    } else if (chapter.layout === 'split') {
+                        padding.left = window.innerWidth * 0.50; // Push map center to photo area
+                    } 
+                    // Note: 'prose', 'cover', and 'article' use 0 padding so the map stays dead center!
+                }
 
-                    // INITIALIZE CHART
-                    Chart.defaults.font.family = "'Karla', sans-serif";
-                    var ctx = document.getElementById('elevationChart').getContext('2d');
-                    elevationChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Altitude',
-                                data: altitudes,
-                                fill: true,
-                                backgroundColor: 'rgba(26, 26, 26, 0.03)',
-                                borderWidth: 2,
-                                pointRadius: 0,
-                                segment: {
-                                    borderColor: ctx => {
-                                        let spd = speeds[ctx.p0DataIndex] * 3.6;
-                                        if (spd < 12) return '#3498db';
-                                        if (spd < 22) return '#f1c40f';
-                                        if (spd < 32) return '#e67e22';
-                                        return '#c0392b'; 
-                                    }
-                                }
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: { 
-                                legend: { display: false }, 
-                                tooltip: { enabled: false },
-                                verticalLine: { x: undefined } 
-                            },
-                            scales: {
-                                x: { display: false }, 
-                                y: { 
-                                    display: true, 
-                                    position: 'right',
-                                    grid: { color: '#e0ddd1' },
-                                    ticks: { color: '#888' }
-                                }
-                            },
-                            animation: { duration: 300 } 
-                        },
-                        plugins: [verticalLinePlugin]
-                    });
-
-                    // SCROLLAMA SETUP
-                    scroller.setup({ step: '.step', offset: 0.5, progress: true })
-                    .onStepEnter(response => {
-                        var chapter = config.chapters.find(chap => chap.id === response.element.id);
-                        
-                        map.flyTo({
-                            center: chapter.location.center,
-                            zoom: chapter.location.zoom,
-                            pitch: 75, 
-                            bearing: chapter.location.bearing,
-                            essential: true,
-                            duration: 2000 
-                        });
-                        marker.setLngLat(chapter.location.center);
-
-                        var targetLat = chapter.location.center[1];
-                        var targetLon = chapter.location.center[0];
-                        var coords = data.features[0].geometry.coordinates;
-                        var minDiff = 9999;
-                        var bestIdx = 0;
-                        for(var i=0; i<coords.length; i++) {
-                            var diff = Math.abs(coords[i][0] - targetLon) + Math.abs(coords[i][1] - targetLat);
-                            if(diff < minDiff) { minDiff = diff; bestIdx = i; }
-                        }
-
-                        document.getElementById('val-alt').innerText = altitudes[bestIdx].toFixed(0);
-
-                        let speedSum = 0;
-                        let count = 0;
-                        for(let j = Math.max(0, bestIdx - 45); j < Math.min(speeds.length, bestIdx + 45); j++) {
-                            if(speeds[j] > 1.0) {
-                                speedSum += speeds[j];
-                                count++;
-                            }
-                        }
-                        let zoneAvgSpeed = count > 0 ? (speedSum / count) * 3.6 : 0;
-                        
-                        let spdEl = document.getElementById('val-spd');
-                        spdEl.innerText = zoneAvgSpeed.toFixed(1);
-                        
-                        spdEl.style.color = zoneAvgSpeed < 12 ? '#3498db' : (zoneAvgSpeed < 22 ? '#f1c40f' : (zoneAvgSpeed < 32 ? '#e67e22' : '#c0392b'));
-
-                        var meta = elevationChart.getDatasetMeta(0);
-                        if (meta.data[bestIdx]) {
-                            elevationChart.options.plugins.verticalLine.x = meta.data[bestIdx].x;
-                            elevationChart.update();
-                        }
-
-                        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-                        response.element.classList.add('active');
-                    });
+                // Animate to new location (ArcGIS "Flight Mode" effect)
+                map.flyTo({ 
+                    center: chapter.location.center, 
+                    zoom: chapter.location.zoom, 
+                    pitch: chapter.location.pitch || 60, 
+                    bearing: chapter.location.bearing || 0, 
+                    padding: padding, 
+                    essential: true, 
+                    duration: 3000 // Smooth slow flight
                 });
+                
+                marker.setLngLat(chapter.location.center);
+                miniMarker.setLngLat(chapter.location.center);
+
+                // Update chart scrubber & bottom stats
+                if (window.activeRouteData && window.activeRouteData.features[0]) {
+                    var tLat = chapter.location.center[1]; var tLon = chapter.location.center[0];
+                    var coords = window.activeRouteData.features[0].geometry.coordinates; 
+                    var minDiff = 9999; var bestIdx = 0;
+                    for(var i=0; i<coords.length; i++) { 
+                        var diff = Math.abs(coords[i][0] - tLon) + Math.abs(coords[i][1] - tLat); 
+                        if(diff < minDiff) { minDiff = diff; bestIdx = i; } 
+                    }
+
+                    document.getElementById('g-dist').innerText = (window.activeRouteData.features[0].properties.distances[bestIdx] / 1000).toFixed(1);
+                    document.getElementById('val-alt').innerText = window.activeRouteData.features[0].properties.altitudes[bestIdx].toFixed(0);
+                    
+                    let sSum = 0; let count = 0;
+                    let speeds = window.activeSpeeds;
+                    for(let j = Math.max(0, bestIdx - 45); j < Math.min(speeds.length, bestIdx + 45); j++) { if(speeds[j] > 1.0) { sSum += speeds[j]; count++; } }
+                    let zAvg = count > 0 ? (sSum / count) * 3.6 : 0;
+                    
+                    let spdEl = document.getElementById('val-spd');
+                    spdEl.innerText = zAvg.toFixed(1);
+                    spdEl.style.color = zAvg < 12 ? '#3498db' : (zAvg < 22 ? '#f1c40f' : (zAvg < 32 ? '#e67e22' : '#c0392b'));
+
+                    var meta = elevationChart.getDatasetMeta(0);
+                    if (meta.data[bestIdx]) { elevationChart.options.plugins.verticalLine.x = meta.data[bestIdx].x; elevationChart.update(); }
+                }
+
+                // Handle fade in/out of layout components
+                document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+                response.element.classList.add('active');
+
+                // --- NEW: SMART DASHBOARD AUTO-HIDE LOGIC ---
+                const dashboard = document.getElementById('dashboard');
+                const dashToggle = document.getElementById('dash-toggle');
+                
+                if (chapter.layout === 'prose' || chapter.layout === 'cover' || chapter.layout === 'article-solid') {
+                    dashboard.classList.add('dash-hidden');
+                    dashToggle.innerHTML = '▲ Data';
+                } else {
+                    dashboard.classList.remove('dash-hidden');
+                    dashToggle.innerHTML = '▼ Hide';
+                }
+            });
         });
     </script>
 </body>
