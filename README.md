@@ -71,4 +71,75 @@ In the final iterations, we ruthlessly eliminated UI friction to center the cult
 3.  **Elegant Metadata:** We abandoned playful, "pill-shaped" tags for severe, minimalist CSS top-borders for GPS coordinates, honoring the serious, documentary tone of the project.
 
 ---
+## 🖥️ Operational Guide: Compiling a New Day
+
+This engine is designed to be fully automated once the raw data is provided. To process and publish a new day of the expedition (for example, August 9th, 2017), follow this exact workflow.
+
+### The Standard Compilation Pipeline
+
+**1. Prepare the Raw Data**
+* Create a new folder for the day: `images/2017-08-09/`
+* Drop all of the day's high-resolution `.jpg` photographs into this folder.
+* Create a `memory.md` file inside the folder and write the private, unedited diary entry for that day.
+* Ensure the corresponding GPS tracking file (e.g., `Cyclemeter-Cycle-20170809.kml`) is located in the `kml_raw/` folder.
+
+**2. Extract Telemetry & Visual Metadata (Database Generation)**
+Run the initial processing script in your terminal:
+
+```bash
+python3 process_day.py 2017-08-09
+```
+
+*What this does:* It parses the KML for GPS coordinates, elevation, and weather. It then uses Azure OpenAI Vision to scan every photo, generating `[filename].json` metadata and short 30-word map captions (`global_narratives.json`).
+
+**3. Synthesize the Ethnographic Essay (Art Direction)**
+Run the prose generator:
+
+```bash
+python3 process_daily_prose.py 2017-08-09
+```
+
+*What this does:* The AI acts as the Ethnographer and Art Director. It reads the private `memory.md`, views the available photo metadata, and writes a public-facing essay (`output_metadata/2017-08-09/generated_prose.md`). It automatically decides which photos to embed using specific layout grammar.
+
+**4. Compile the Web Engine (The Typesetter)**
+Run the final build script:
+
+```bash
+python3 build_website.py
+```
+
+*What this does:* It translates the Markdown layout tags into advanced CSS Grid/Flexbox HTML, filters out duplicate photos from the map slider queue, and stitches all data into the static `config.js` file.
+
+**5. View the Output**
+Open `index.html` in any modern web browser to view the finalized, interactive documentary.
+
+---
+
+### 🎨 System Overrides & Editorial Tips
+
+The engine is built to allow the human Architect to override AI decisions when strict editorial control is required.
+
+**The Cover Image Override (`cover.jpg`)**
+By default, the compiler uses the chronologically first photograph of the day as the cinematic Full-Screen Cover. If you want a different photograph to act as the cover:
+1. Duplicate your preferred photo inside the `images/YYYY-MM-DD/` folder.
+2. Rename it exactly to `cover.jpg`.
+3. Re-run `python3 build_website.py`. The compiler will automatically detect `cover.jpg` and use it for the day's transition screen.
+
+**Updating the Timeline Titles**
+To change the cinematic titles displayed over the cover images (e.g., "Day 3 OF 16" and "Bureaucracy and Grace"), open `build_website.py`. At the top of the file, locate the `journal_headers` dictionary and add/edit the specific date's metadata.
+
+**Adding Photos to an Already Processed Day**
+If you decide to add more `.jpg` files to a day that has already been compiled:
+1. Put the new photos into the day's `images/` folder.
+2. Go to `output_metadata/YYYY-MM-DD/` and **delete** `global_narratives.json`.
+3. Re-run steps 2, 3, and 4. (Deleting the old narrative forces the AI to acknowledge the new photos and rewrite the map captions).
+
+**Manual Markdown Layout Tags**
+If you wish to manually edit the AI's essay (`output_metadata/YYYY-MM-DD/generated_prose.md`), you can force advanced CSS layouts by typing these specific tags:
+* `![FULL_BLEED](_MG_1234.jpg)` : Breaks the reading container for a 100vw cinematic image.
+* `![DIPTYCH](_MG_1234.jpg | _MG_5678.jpg)` : Places two photos in a perfect 50/50 CSS Grid.
+* `![STICKY_RIGHT](_MG_1234.jpg)` : Auto-crops a landscape photo to a 4:5 vertical portrait and floats it on the right side of the text.
+
+---
+
 *Kinesis & Praxis. Built for the future. Designed for the archive. KU Leuven, 2026.*
