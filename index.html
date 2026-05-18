@@ -396,6 +396,37 @@
                 }
             });
         });
+
+        // --- SEAMLESS IFRAME SCROLL HANDOFF LOGIC ---
+        // This detects if the user is trying to scroll past the top or bottom boundaries
+        
+        function handleBoundaryScroll(isScrollingUp, isScrollingDown) {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+            // If at the very top, and user tries to scroll UP -> Send signal to WP
+            if (scrollTop <= 0 && isScrollingUp) {
+                window.parent.postMessage("scroll_up_out", "*");
+            } 
+            // If at the very bottom, and user tries to scroll DOWN -> Send signal to WP
+            else if (scrollTop >= scrollHeight - 5 && isScrollingDown) {
+                window.parent.postMessage("scroll_down_out", "*");
+            }
+        }
+
+        // Detect PC Mouse Wheel
+        window.addEventListener('wheel', (e) => {
+            handleBoundaryScroll(e.deltaY < 0, e.deltaY > 0);
+        });
+
+        // Detect Mobile Touch Swipes
+        let touchStartY = 0;
+        window.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive: true});
+        window.addEventListener('touchmove', e => {
+            let touchEndY = e.touches[0].clientY;
+            handleBoundaryScroll(touchStartY < touchEndY, touchStartY > touchEndY);
+        }, {passive: true});
+        
     </script>
 </body>
 </html>
