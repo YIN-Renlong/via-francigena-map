@@ -29,6 +29,8 @@
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5); 
     color: white;
     padding: 0 5vw;
+
+    opacity: 1 !important; /* Bypasses the Wordpress' iframe throttling bug */
 }
 
 /* The New "Kicker" (e.g., DAY 1 OF 16) */
@@ -222,8 +224,9 @@
     z-index: 10;
     pointer-events: auto; /* Standard interaction */
     
+    opacity: 1 !important; /* Guarantees the yellow is always solid, try to resolve the same Wordpress' iframe bug */
     /* Optional: A subtle shadow at the top/bottom where the yellow background meets the map */
-    box-shadow: 0 -10px 20px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05); 
+    /* box-shadow: 0 -10px 20px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05); */
 }
 
 .prose-container {
