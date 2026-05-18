@@ -273,10 +273,38 @@
 
                 // 1. Swap Map Data
                 if (map.getSource('route')) {
+                    // This updates BOTH the route and the shadow instantly!
                     map.getSource('route').setData(data);
                 } else {
                     map.addSource('route', { 'type': 'geojson', 'data': data });
-                    map.addLayer({ 'id': 'route-lines', 'type': 'line', 'source': 'route', 'filter': ['has', 'type'], 'layout': { 'line-join': 'round', 'line-cap': 'round' }, 'paint': { 'line-width': 4, 'line-color': [ 'match', ['get', 'type'], 'speed_slow', '#3498db', 'speed_medium', '#f1c40f', 'speed_fast', '#e67e22', 'speed_sprint', '#c0392b', '#1e3a2a' ] } });
+                    
+                    // Add Shadow FIRST so it renders on the bottom
+                    map.addLayer({ 
+                        'id': 'route-lines-shadow', 
+                        'type': 'line', 
+                        'source': 'route', 
+                        'filter': ['has', 'type'], 
+                        'layout': { 'line-join': 'round', 'line-cap': 'round' }, 
+                        'paint': { 
+                            'line-width': 10, /* Thick enough to peek out the sides */
+                            'line-color': '#000000', 
+                            'line-blur': 8, /* Soft cinematic blur */
+                            'line-opacity': 0.4 
+                        } 
+                    });
+
+                    // Add Colored Route SECOND so it renders on top
+                    map.addLayer({ 
+                        'id': 'route-lines', 
+                        'type': 'line', 
+                        'source': 'route', 
+                        'filter': ['has', 'type'], 
+                        'layout': { 'line-join': 'round', 'line-cap': 'round' }, 
+                        'paint': { 
+                            'line-width': 4, 
+                            'line-color': [ 'match', ['get', 'type'], 'speed_slow', '#3498db', 'speed_medium', '#f1c40f', 'speed_fast', '#e67e22', 'speed_sprint', '#c0392b', '#1e3a2a' ] 
+                        } 
+                    });
                 }
 
                 // 2. Update Global Dashboard
