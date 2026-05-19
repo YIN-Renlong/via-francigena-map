@@ -2,7 +2,7 @@
 
 ## Leaving the Lake, Leaving a Household
 
-![DIPTYCH](_MG_0203-2.jpg | _MG_0212.jpg)
+![OUTSET_DIPTYCH](_MG_0203-2.jpg | _MG_0212.jpg)
 
 The day began not with departure, but with delay — the good kind, the kind that makes a journey less efficient and more human. Before I left Montefiascone, Marco and Paola took me toward the lake. There were tents among trees, boats resting near the shore, and that peculiar morning softness of central Italy in August: everything already warm, but not yet severe.
 
@@ -16,7 +16,7 @@ I left later than a disciplined cyclist should have. By then the sun was no long
 
 ## Fellow Travelers and the Minor Sociology of the Road
 
-![](_MG_0231-4.jpg)
+![OUTSET](_MG_0231-4.jpg)
 
 On the road I met Giobatta and Siera Mae, another cycling pair moving through the same Italian summer with their own rhythm and destination. They were not simply “people I met.” They belonged to that loose, temporary republic of travelers who recognize each other by equipment, posture, sunburn, and the way one looks at a road sign.
 

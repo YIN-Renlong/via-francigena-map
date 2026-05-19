@@ -408,7 +408,7 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>Leaving the Lake, Leaving a Household</h2>
-<div class="prose-diptych">
+<div class="prose-outset-diptych">
                         <figure><img src="images/2017-08-09/_MG_0203-2.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 06:45</figcaption></figure>
                         <figure><img src="images/2017-08-09/_MG_0212.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 07:05</figcaption></figure>
                     </div>
@@ -436,7 +436,7 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>Fellow Travelers and the Minor Sociology of the Road</h2>
-<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0231-4.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 San Lorenzo Nuovo, Viterbo • 12:38</figcaption></figure>
+<figure class="prose-outset"><img src="images/2017-08-09/_MG_0231-4.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 San Lorenzo Nuovo, Viterbo • 12:38</figcaption></figure>
 <p>On the road I met Giobatta and Siera Mae, another cycling pair moving through the same Italian summer with their own rhythm and destination. They were not simply “people I met.” They belonged to that loose, temporary republic of travelers who recognize each other by equipment, posture, sunburn, and the way one looks at a road sign.</p>
 <p>Cyclists speak quickly, because everyone is always either arriving late or leaving soon. Yet these brief exchanges can become strangely durable. A photograph is taken. An email is exchanged. Someone says, <em>stai attento</em> — be careful — and the sentence stays with you longer than expected.</p>
 <figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0238-2.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Strada Provinciale Trevinanese, Acquapendente • 13:29</figcaption></figure>
