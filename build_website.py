@@ -99,6 +99,7 @@ manual_layouts = {
         "_MG_0155-3.jpg",   
         "_MG_0240-2.jpg",   
         "_MG_0104-4.jpg",
+        "_MG_0341-3.jpg",
         "_MG_0269.jpg"
     ],
     "split": [

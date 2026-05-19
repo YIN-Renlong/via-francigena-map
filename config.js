@@ -710,7 +710,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, Gallina, Siena`,
             image: 'images/2017-08-09/_MG_0341-3.jpg',
-            layout: 'floating-card',
+            layout: 'immersive-left',
             description: `<p>Near Gallina, the road narrowed past a stone building and a chevron sign, just before Andrea’s camera noticed me. I remember seeing the red car, the professional lens, and turning back to ask for the photograph. My Italian was imperfect but urgent. I wanted proof from outside my own camera that I had existed on that road, small against Tuscany, moving despite fatigue.</p>`,
             location: { center: [11.67879, 43.00301], zoom: 14, pitch: 60, bearing: 0 }
         },
