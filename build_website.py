@@ -142,6 +142,11 @@ def parse_prose_md_into_chunks(filepath, day_folder, used_images_list):
             p = p.strip()
             if not p: continue
             
+            # --- THE WAVE BREAK ---
+            if p == '---' or p == '***':
+                html += '<hr class="wavy-divider">\n'
+                continue
+            
             # --- THE REGEX TYPESETTER ---
             img_match = re.match(r'^!\[(.*?)\]\((.*?)\)$', p)
             
@@ -149,15 +154,16 @@ def parse_prose_md_into_chunks(filepath, day_folder, used_images_list):
                 layout_tag = img_match.group(1).strip()
                 filenames_raw = img_match.group(2).strip()
                 
-                # Handle Diptychs (Clickable)
+                # Handle Diptychs (Inline or Outset)
                 if " | " in filenames_raw:
                     file1, file2 = [f.strip() for f in filenames_raw.split('|')]
                     used_images_list.extend([file1, file2])
                     web_path1, web_path2 = f"images/{day_folder}/{file1}", f"images/{day_folder}/{file2}"
                     cap1, cap2 = get_photo_caption(day_folder, file1), get_photo_caption(day_folder, file2)
                     
-                    # NEW: Added loading="lazy" to both diptych images
-                    html += f'''<div class="prose-diptych">
+                    wrapper_class = "prose-outset-diptych" if layout_tag == "OUTSET_DIPTYCH" else "prose-diptych"
+                    
+                    html += f'''<div class="{wrapper_class}">
                         <figure><img src="{web_path1}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {cap1}</figcaption></figure>
                         <figure><img src="{web_path2}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {cap2}</figcaption></figure>
                     </div>\n'''
@@ -170,17 +176,21 @@ def parse_prose_md_into_chunks(filepath, day_folder, used_images_list):
                     caption = get_photo_caption(day_folder, filename)
                     
                     if layout_tag == "FULL_BLEED":
-                        # NEW: Added loading="lazy"
-            # Full bleed is NOT clickable
                         html += f'<figure class="prose-full-bleed"><img src="{web_path}" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
-                    elif layout_tag == "STICKY_RIGHT":
-                        # NEW: Added loading="lazy"
-                        html += f'<figure class="prose-sticky-right"><img src="{web_path}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
+                    elif layout_tag == "OUTSET":
+                        html += f'<figure class="prose-outset"><img src="{web_path}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
+                    elif layout_tag == "HANGING_LEFT":
+                        html += f'<figure class="prose-hanging-left"><img src="{web_path}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
+                    elif layout_tag == "HANGING_RIGHT":
+                        html += f'<figure class="prose-hanging-right"><img src="{web_path}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
+                    elif layout_tag == "HANGING_LEFT_PORTRAIT":
+                        html += f'<figure class="prose-hanging-left portrait-crop"><img src="{web_path}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
+                    elif layout_tag == "HANGING_RIGHT_PORTRAIT":
+                        html += f'<figure class="prose-hanging-right portrait-crop"><img src="{web_path}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
                     else:
-                        # NEW: Added loading="lazy"
                         html += f'<figure class="prose-inline-container"><img src="{web_path}" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
             
-            # Flawless Header parsing (removes the ## completely)
+            # Flawless Header parsing
             elif p.startswith('## '): 
                 clean_header = p.replace('## ', '', 1).strip()
                 html += f'<h2>{clean_header}</h2>\n'

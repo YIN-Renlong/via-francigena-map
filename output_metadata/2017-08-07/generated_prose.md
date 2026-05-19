@@ -14,7 +14,7 @@ That is one of the quiet truths of cycling: the world is not simply seen. It is 
 
 ## The Pilgrim Road and the Alternative Path
 
-![STICKY_RIGHT](_MG_0032-3.jpg)
+![OUTSET](_MG_0032-3.jpg)
 
 Soon the route began to fold into older itineraries. The Via Francigena appeared not as a grand historical abstraction but as a practical signpost nailed beside vegetation: *sentiero alternativo*. An alternative path. A left arrow. A minor instruction, but also a philosophy.
 
@@ -60,7 +60,7 @@ There is a moment on the first day of a long ride when distance becomes believab
 
 The bicycle in these images looks almost ceremonial: panniers, straps, handlebar bag, improvised attachments, the whole fragile architecture of self-sufficiency. But the ceremony is constantly threatened by the mundane. A loose cable, an uncertain road, a disappearing shoulder, a sudden animal crossing, the need to find food before shops close.
 
-![](_MG_0091.jpg)
+![OUTSET](_MG_0091.jpg)
 
 On narrow country roads, the scale of attention changes. A triangular warning sign matters. A herd ahead matters. Shade matters. A patch of bad asphalt matters. The cyclist’s world is intensely democratic in this sense: everything can become significant. A stone, a dog, a friendly nod, a hostile horn, a church gate, a fountain, a tree.
 
@@ -68,15 +68,15 @@ The grand narrative of a 1,000-kilometer journey is assembled from these small n
 
 ## Arrival in Nepi, and the Kindness of a Room
 
-![STICKY_RIGHT](_MG_0117-2.jpg)
+![HANGING_RIGHT_PORTRAIT](_MG_0117-2.jpg)
 
 By late afternoon, the light softened. The roads entered wooded corridors where shrines and gates appeared at the margins, as though the landscape were quietly storing older forms of passage. A bicycle leaned against a chapel gate becomes, almost accidentally, an image of petition. Not religious petition exactly, but bodily petition: let the road be safe, let the legs continue, let there be a room tonight.
-
-![DIPTYCH](_MG_0134-3.jpg | _MG_0145-4.jpg)
 
 Nepi arrived not as a triumphant destination but as shelter. I remember the practical relief more than any scenic climax. I found a room through Airbnb, hosted by a woman from Latin America living in Italy. We had just enough shared institutional and linguistic references to make trust possible. That, too, is part of travel: not only hospitality, but the fragile mechanisms by which hospitality becomes thinkable.
 
 Nepi itself carried a strange familiarity. I knew the name from bottled water served in Rome, the kind that appeared routinely on restaurant tables near the university where I had studied. To arrive at the place behind the label was to reverse a small commodity chain, to move from object back to geography. Water, in the city, had been branded and ordinary. Here, after a day of heat, it became local, material, almost intimate.
+
+![DIPTYCH](_MG_0134-3.jpg | _MG_0145-4.jpg)
 
 That night, I had a bed. I had crossed the first threshold. I also left behind a heavy Italian road atlas at the host’s home, intending to retrieve it when I returned to Rome. Years passed. The book remained there, or perhaps did not. Objects left behind acquire a peculiar afterlife: they become proofs that a journey once had weight, paper, inconvenience.
 

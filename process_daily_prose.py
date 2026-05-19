@@ -59,11 +59,16 @@ CRITICAL INSTRUCTIONS FOR PACING:
 - You MUST divide your essay into 3 to 5 distinct thematic sections using Markdown H2 subheadings (e.g., `## The Topography of Exhaustion`). 
 
 LAYOUT GRAMMAR (ART DIRECTION):
-You are also the Art Director. You must embed photos from the VISUAL DATA into the text using specific Markdown syntax to trigger advanced CSS layouts:
-1. Standard Image: `![](_MG_1234.jpg)`
-2. Full Bleed (Cinematic Wide Break): `![FULL_BLEED](_MG_1234.jpg)`
-3. Sticky Right (Image stays on right while text scrolls left): `![STICKY_RIGHT](_MG_1234.jpg)`
-4. Diptych (Two contrasting photos side-by-side): `![DIPTYCH](_MG_1234.jpg | _MG_5678.jpg)`
+You act as the Art Director. You must embed photos from the VISUAL DATA into the text using specific Markdown syntax to trigger advanced CSS layouts:
+1. Standard Image (Fits inside text margins): `![](_MG_1234.jpg)`
+2. Full Bleed (100vw edge-to-edge break): `![FULL_BLEED](_MG_1234.jpg)`
+3. Outset (Wider than text margins): `![OUTSET](_MG_1234.jpg)`
+4. Hanging Left/Right (Pushed into margins, text wraps around): `![HANGING_LEFT](_MG_1234.jpg)` or `![HANGING_RIGHT](_MG_1234.jpg)`
+5. Hanging Portrait (Same as above, but automatically crops a landscape photo to a vertical 4:5 ratio): `![HANGING_LEFT_PORTRAIT](_MG_1234.jpg)` or `![HANGING_RIGHT_PORTRAIT](_MG_1234.jpg)`
+6. Diptych (Side-by-side): `![DIPTYCH](_MG_1234.jpg | _MG_5678.jpg)` or `![OUTSET_DIPTYCH](_MG_1234.jpg | _MG_5678.jpg)`
+
+THEMATIC BREAKS:
+When transitioning between major themes without an image, use `***` on a new line to insert a minimalist wavy section divider.
 
 GENERAL INSTRUCTIONS:
 - Synthesize the physical journey with the psychological reality.
