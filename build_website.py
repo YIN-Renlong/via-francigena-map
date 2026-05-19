@@ -88,15 +88,28 @@ journal_headers = {
     }
 }
 
-# MANUAL LAYOUT OVERRIDES
-# If a photo filename is listed here, it ignores the randomizer and forces this layout.
+# MANUAL LAYOUT OVERRIDES (Grouped by Layout Type)
+# This is ONLY for interactive map sliders. 
+# (To put photos in the 'prose' section, use the tags inside generated_prose.md instead!)
+
 manual_layouts = {
-    "_MG_0082-3.jpg": "immersive-left",   # Example: cover, article, floating-card, media-card, split, immersive-left, prose
-    "_MG_0119-2.jpg": "immersive-left",   # Example for Day 3
-    "_MG_0155-3.jpg": "immersive-left",   
-    "_MG_0240-2.jpg": "immersive-left",   
-    "_MG_0269.jpg": "immersive-left",   
-    # You can add as many as you want here!
+    "immersive-left": [
+        "_MG_0082-3.jpg",   # National Geographic cinematic parallax
+        "_MG_0119-2.jpg",   
+        "_MG_0155-3.jpg",   
+        "_MG_0240-2.jpg",   
+        "_MG_0104-4.jpg",
+        "_MG_0269.jpg"
+    ],
+    "split": [
+        # Text on left, 50% Photo on right
+    ],
+    "floating-card": [
+        # Pure white box, text on top, 1:1 Square photo on bottom
+    ],
+    "media-card": [
+        # Off-white box, 16:10 Photo on top, text on bottom
+    ]
 }
 
 def get_photo_caption(day_folder, filename):
@@ -191,6 +204,12 @@ def build():
     random.seed("kinesis-praxis-final")
     global_idx = 0
     prev_layout = ""
+
+    # --- NEW: Translates your grouped lists into a fast lookup map ---
+    override_map = {}
+    for layout_name, photo_list in manual_layouts.items():
+        for photo in photo_list:
+            override_map[photo] = layout_name
     
     for day_index, day in enumerate(days):
         day_dir = os.path.join(OUTPUT_DIR, day)
@@ -280,7 +299,7 @@ def build():
                 global_idx += 1
                 prev_layout = "prose"
 
-            # --- B. INJECT 1 TO 3 MAP/PHOTO CARDS ---
+# --- B. INJECT 1 TO 3 MAP/PHOTO CARDS ---
             if photo_jsons:
                 num_photos_to_show = random.randint(1, 3) 
                 if not prose_chunks:
@@ -297,23 +316,24 @@ def build():
                     desc = narratives.get(filename, "Narrative missing.").replace("`", "\\`")
                     current_gps = r.get("gps_coordinates", current_gps)
                     
-                    # THE FIX 1: Sanitize the title to prevent any backtick crashes
+                    # THE FIX 1: Sanitize the title
                     title = r.get("location_name", filename).replace("`", "\\`")
                     
-                    # MANUAL OVERRIDE CHECK
-                    if filename in manual_layouts:
-                        layout_type = manual_layouts[filename]
+                    # --- NEW: MANUAL OVERRIDE CHECK ---
+                    # We check the new override_map we built at the top!
+                    if filename in override_map:
+                        layout_type = override_map[filename]
                         prev_layout = layout_type
                     else:
-                        # If not in the manual list, let the frozen random seed decide!
-                        valid_choices = ["floating-card"] * 3 + ["media-card"] * 3 + ["split"] * 2 + ["immersive-left"] * 2
+                        # If not overridden, let the frozen random seed decide
+                        valid_choices = ["floating-card"] * 4 + ["media-card"] * 4 + ["split"] * 2 + ["immersive-left"] * 2
                         if prev_layout in ["split", "prose", "cover", "immersive-left"]:
                             valid_choices = ["floating-card", "media-card"]
                             
                         layout_type = random.choice(valid_choices)
                         prev_layout = layout_type
-                    
-                    # THE FIX 2: Use backticks (`) around {title} instead of single quotes (')
+                        
+            # THE FIX 2: Use backticks (`) around {title} instead of single quotes (')
                     config_js += f"""        {{
             id: 'chapter-{global_idx}',
             date: '{day}',
