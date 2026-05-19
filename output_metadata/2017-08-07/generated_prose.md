@@ -12,6 +12,8 @@ The photographs from that morning already show the double vision of departure. I
 
 That is one of the quiet truths of cycling: the world is not simply seen. It is absorbed through wrists, knees, shoulders, thirst, hesitation. A road sign is not information alone; it is also relief, doubt, and sometimes accusation. Did I choose the correct direction? Have I already lost too much time? How far is “not far” when the sun is high and every kilogram is attached to the frame?
 
+
+
 ## The Pilgrim Road and the Alternative Path
 
 ![OUTSET](_MG_0032-3.jpg)
@@ -41,6 +43,10 @@ In one of the towns along the way, the road rose through old stone buildings, pa
 It was also where the day produced its first small conflict. I had leaned my bicycle, heavily loaded and awkward, against or too near a parked car. The owner objected sharply. She was not wrong. A bicycle traveler’s fatigue does not grant permission to occupy other people’s property. Still, in the moment, tired and linguistically imperfect, I felt the sting disproportionately.
 
 Travel writing often edits out these minor humiliations. It prefers vistas, revelations, meals, encounters with kindness. But the everyday politics of movement are made of smaller, rougher exchanges. Where may a stranger put his bicycle? Who is assumed to be careless? Who is treated as temporary, tolerated, suspicious, inconvenient?
+
+
+
+***
 
 The loaded bicycle makes you visible in a peculiar way. You are not quite tourist, not quite migrant, not quite athlete, not quite pilgrim. You carry signs of vulnerability and privilege at once: the leisure to undertake a long journey, the exposure of being without shelter, the dependence on water taps, shopkeepers, hosts, weather, and the patience of strangers.
 

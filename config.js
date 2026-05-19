@@ -117,6 +117,7 @@ var config = {
                     </div>
 <p>It was also where the day produced its first small conflict. I had leaned my bicycle, heavily loaded and awkward, against or too near a parked car. The owner objected sharply. She was not wrong. A bicycle traveler’s fatigue does not grant permission to occupy other people’s property. Still, in the moment, tired and linguistically imperfect, I felt the sting disproportionately.</p>
 <p>Travel writing often edits out these minor humiliations. It prefers vistas, revelations, meals, encounters with kindness. But the everyday politics of movement are made of smaller, rougher exchanges. Where may a stranger put his bicycle? Who is assumed to be careless? Who is treated as temporary, tolerated, suspicious, inconvenient?</p>
+<hr class="wavy-divider">
 <p>The loaded bicycle makes you visible in a peculiar way. You are not quite tourist, not quite migrant, not quite athlete, not quite pilgrim. You carry signs of vulnerability and privilege at once: the leisure to undertake a long journey, the exposure of being without shelter, the dependence on water taps, shopkeepers, hosts, weather, and the patience of strangers.</p>
 <p>Looking back, I can see how much of that irritation belonged to me. The first day had not yet taught me humility. I still wanted the road to recognize the nobility of my project. The road, more honestly, recognized only where I placed my bike.</p>
 `,
