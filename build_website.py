@@ -197,7 +197,13 @@ def parse_prose_md_into_chunks(filepath, day_folder, used_images_list):
             elif p.startswith('# '): 
                 clean_header = p.replace('# ', '', 1).strip()
                 html += f'<h2>{clean_header}</h2>\n'
+            # Convert standard text (and parse italics/bold!)
             else: 
+                # 1. Convert **bold** to <strong>bold</strong>
+                p = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', p)
+                # 2. Convert *italics* to <em>italics</em>
+                p = re.sub(r'\*(.*?)\*', r'<em>\1</em>', p)
+                
                 html += f'<p>{p}</p>\n'
                 
         chunks.append(html.replace("`", "\\`")) 

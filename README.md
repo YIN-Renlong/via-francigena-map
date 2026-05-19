@@ -67,7 +67,16 @@ To achieve professional editorial layouts using only Markdown, the Azure OpenAI 
 *   `![DIPTYCH](img1.jpg | img2.jpg)` -> Translated into a `1fr 1fr` CSS Grid for side-by-side image comparison.
 *   `![STICKY_RIGHT](img.jpg)` -> Translated into a floating portrait crop, allowing text to wrap around the image.
 
+### Phase 2.5: Micro-Typography and "Breaking the Grid"
+To prevent visual fatigue during long-form reading segments, the engine was upgraded to support advanced spatial manipulations within the text itself. By establishing a constrained 850px reading column, the AI Art Director can selectively "break the grid" to create a dynamic, organic visual rhythm:
+*   `![OUTSET](img.jpg)` -> Expands the photograph 300px wider than the text margins, creating a commanding visual anchor without overwhelming the viewport.
+*   `![HANGING_LEFT](img.jpg)` -> Pushes the image into the negative space of the left margin, allowing the text to wrap elegantly around it (a classic magazine layout).
+*   `![HANGING_RIGHT_PORTRAIT](img.jpg)` -> Automatically crops a landscape photograph into a 4:5 vertical vignette and anchors it to the right margin.
+*   `***` -> Translated by the Python Regex parser into a custom SVG "Fleuron" (a wavy thematic section break), signaling a psychological pause in the narrative without relying on external image files.
+*   **Inline Regex Parsing:** The compiler natively interprets standard markdown emphasis (`*italics*`, `**bold**`) without relying on heavy external Python libraries, preserving the zero-dependency, archivable nature of the codebase.
+
 ### Phase 3: API Limitations and Reasoning Models
+
 During development, the pipeline encountered `JSONDecodeError` failures during narrative generation. Analysis revealed that newer Azure OpenAI reasoning models (`o1` series) had deprecated the `max_tokens` parameter in favor of `max_completion_tokens`. Furthermore, the model was exhausting token limits during its internal "thinking phase" when processing large batches of photo metadata. The payload requests were adjusted to support 15,000-token completion windows, resolving the bottleneck.
 
 ### Phase 4: UI Refinements
