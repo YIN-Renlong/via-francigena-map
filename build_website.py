@@ -143,9 +143,10 @@ def parse_prose_md_into_chunks(filepath, day_folder, used_images_list):
                     web_path1, web_path2 = f"images/{day_folder}/{file1}", f"images/{day_folder}/{file2}"
                     cap1, cap2 = get_photo_caption(day_folder, file1), get_photo_caption(day_folder, file2)
                     
+                    # NEW: Added loading="lazy" to both diptych images
                     html += f'''<div class="prose-diptych">
-                        <figure><img src="{web_path1}" class="lightbox-trigger"><figcaption class="prose-caption">📍 {cap1}</figcaption></figure>
-                        <figure><img src="{web_path2}" class="lightbox-trigger"><figcaption class="prose-caption">📍 {cap2}</figcaption></figure>
+                        <figure><img src="{web_path1}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {cap1}</figcaption></figure>
+                        <figure><img src="{web_path2}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {cap2}</figcaption></figure>
                     </div>\n'''
                 
                 # Handle Single Images
@@ -156,12 +157,15 @@ def parse_prose_md_into_chunks(filepath, day_folder, used_images_list):
                     caption = get_photo_caption(day_folder, filename)
                     
                     if layout_tag == "FULL_BLEED":
-                        # Full bleed is NOT clickable
-                        html += f'<figure class="prose-full-bleed"><img src="{web_path}"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
+                        # NEW: Added loading="lazy"
+            # Full bleed is NOT clickable
+                        html += f'<figure class="prose-full-bleed"><img src="{web_path}" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
                     elif layout_tag == "STICKY_RIGHT":
-                        html += f'<figure class="prose-sticky-right"><img src="{web_path}" class="lightbox-trigger"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
+                        # NEW: Added loading="lazy"
+                        html += f'<figure class="prose-sticky-right"><img src="{web_path}" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
                     else:
-                        html += f'<figure class="prose-inline-container"><img src="{web_path}" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
+                        # NEW: Added loading="lazy"
+                        html += f'<figure class="prose-inline-container"><img src="{web_path}" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 {caption}</figcaption></figure>\n'
             
             # Flawless Header parsing (removes the ## completely)
             elif p.startswith('## '): 

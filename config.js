@@ -18,10 +18,10 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>Leaving Rome by Its Edges</h2>
-<figure class="prose-full-bleed"><img src="images/2017-08-07/_MG_0018-3.jpg"><figcaption class="prose-caption">📍 Via Cassia, Municipio Roma XV, Roma • 13:28</figcaption></figure>
+<figure class="prose-full-bleed"><img src="images/2017-08-07/_MG_0018-3.jpg" loading="lazy"><figcaption class="prose-caption">📍 Via Cassia, Municipio Roma XV, Roma • 13:28</figcaption></figure>
 <p>The first day of a long bicycle journey is rarely heroic. It is administrative, bodily, awkward. You are still learning how the loaded bicycle behaves when it is no longer an object but a companion: how it leans, how it resists, how it amplifies every mistake in balance or judgment. Rome did not release me all at once. It thinned out by signs, hedges, guardrails, suburban roads, and the sudden appearance of names that were no longer neighborhoods but directions: Bracciano, Cassia, Viterbo.</p>
 <p>On the map, “Rome to Nepi” looked like a modest opening gesture. But on the ground, the first day carried a different weight. It was the moment when the imaginary journey—planned in rooms, traced on screens, narrated to friends—became an actual negotiation with asphalt, heat, traffic, dust, and uncertainty.</p>
-<figure class="prose-inline-container"><img src="images/2017-08-07/_MG_0002-2.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Via Trionfale, Della Vittoria • 12:29</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-07/_MG_0002-2.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Trionfale, Della Vittoria • 12:29</figcaption></figure>
 <p>The photographs from that morning already show the double vision of departure. In one frame, a wooded hill rises beyond a metal guardrail, crowned by pale buildings and umbrella pines. In another, the bicycle’s handlebar intrudes into the bottom of the image, slightly blurred, as if reminding the landscape that it is being entered not by a detached observer but by a body under strain.</p>
 <p>That is one of the quiet truths of cycling: the world is not simply seen. It is absorbed through wrists, knees, shoulders, thirst, hesitation. A road sign is not information alone; it is also relief, doubt, and sometimes accusation. Did I choose the correct direction? Have I already lost too much time? How far is “not far” when the sun is high and every kilogram is attached to the frame?</p>
 `,
@@ -61,13 +61,13 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>The Pilgrim Road and the Alternative Path</h2>
-<figure class="prose-sticky-right"><img src="images/2017-08-07/_MG_0032-3.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Vicolo Formellese, Municipio Roma XV, Roma • 14:10</figcaption></figure>
+<figure class="prose-sticky-right"><img src="images/2017-08-07/_MG_0032-3.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Vicolo Formellese, Municipio Roma XV, Roma • 14:10</figcaption></figure>
 <p>Soon the route began to fold into older itineraries. The Via Francigena appeared not as a grand historical abstraction but as a practical signpost nailed beside vegetation: *sentiero alternativo*. An alternative path. A left arrow. A minor instruction, but also a philosophy.</p>
 <p>The Via Francigena has always been a corridor of mixed motives. Medieval pilgrims walked toward Rome carrying vows, hunger, fear, bargaining hopes. Modern walkers and cyclists follow traces of that infrastructure with GPS devices, synthetic fabrics, credit cards, and anxieties of our own. We inherit the form without necessarily inheriting the certainty.</p>
 <p>The “alternative path” was more than a route marker. It named the condition of the whole expedition. I was not simply going somewhere; I was trying to discover whether a self could be rearranged by distance. The bicycle made this experiment brutally literal. It converted mood into cadence, fear into braking, optimism into poor pacing.</p>
 <div class="prose-diptych">
-                        <figure><img src="images/2017-08-07/_MG_0029.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Via Formellese, Olgiata, Roma • 13:56</figcaption></figure>
-                        <figure><img src="images/2017-08-07/_MG_0048-3.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Via degli Ulivi, Formello • 15:11</figcaption></figure>
+                        <figure><img src="images/2017-08-07/_MG_0029.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Formellese, Olgiata, Roma • 13:56</figcaption></figure>
+                        <figure><img src="images/2017-08-07/_MG_0048-3.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via degli Ulivi, Formello • 15:11</figcaption></figure>
                     </div>
 <p>The road narrowed into wooded passages where light came in fragments. Dirt, gravel, dry leaves, earthen banks, and trees formed a tunnel that was not dramatic but intimate. The city’s monumental time gave way to vegetal time: shade, roots, dust, insects, old fences, signs half-swallowed by growth.</p>
 <p>In a car, such places pass as scenery. On a bicycle, they become social worlds. You hear them. You smell the dry grass and warm soil. You feel the difference between tarmac and gravel not as texture but as risk. Every descent asks for trust; every climb reveals the moral fiction of preparedness.</p>
@@ -109,11 +109,11 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>Small Frictions, Public Space</h2>
-<figure class="prose-full-bleed"><img src="images/2017-08-07/_MG_0049-2.jpg"><figcaption class="prose-caption">📍 Viale Regina Elena, Formello • 15:21</figcaption></figure>
+<figure class="prose-full-bleed"><img src="images/2017-08-07/_MG_0049-2.jpg" loading="lazy"><figcaption class="prose-caption">📍 Viale Regina Elena, Formello • 15:21</figcaption></figure>
 <p>In one of the towns along the way, the road rose through old stone buildings, parked cars, murals, walls, and summer light. It was beautiful in the way Italian towns often are beautiful: not as a museum composition, but as an accumulation of practical arrangements—cars squeezed into impossible places, balconies, satellite dishes, street signs, plaster, stone, shade.</p>
 <div class="prose-diptych">
-                        <figure><img src="images/2017-08-07/_MG_0054-3.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Viale Regina Elena, Formello • 15:24</figcaption></figure>
-                        <figure><img src="images/2017-08-07/_MG_0056-3.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Viale Regina Elena, Formello • 15:27</figcaption></figure>
+                        <figure><img src="images/2017-08-07/_MG_0054-3.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Viale Regina Elena, Formello • 15:24</figcaption></figure>
+                        <figure><img src="images/2017-08-07/_MG_0056-3.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Viale Regina Elena, Formello • 15:27</figcaption></figure>
                     </div>
 <p>It was also where the day produced its first small conflict. I had leaned my bicycle, heavily loaded and awkward, against or too near a parked car. The owner objected sharply. She was not wrong. A bicycle traveler’s fatigue does not grant permission to occupy other people’s property. Still, in the moment, tired and linguistically imperfect, I felt the sting disproportionately.</p>
 <p>Travel writing often edits out these minor humiliations. It prefers vistas, revelations, meals, encounters with kindness. But the everyday politics of movement are made of smaller, rougher exchanges. Where may a stranger put his bicycle? Who is assumed to be careless? Who is treated as temporary, tolerated, suspicious, inconvenient?</p>
@@ -156,13 +156,13 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>Heat, Fields, and the Slow Expansion of Distance</h2>
-<figure class="prose-inline-container"><img src="images/2017-08-07/_MG_0069-3.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Ciclabile Campagnano-Nepi, Campagnano di Roma • 17:42</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-07/_MG_0069-3.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Ciclabile Campagnano-Nepi, Campagnano di Roma • 17:42</figcaption></figure>
 <p>Beyond the towns, the day opened into fields and long rural roads. The landscape north of Rome in August has a dry, bleached patience: grasses browned by heat, cracked asphalt, fences, hay bales, distant tree lines, utility poles, and the enormous indifference of blue sky.</p>
-<figure class="prose-full-bleed"><img src="images/2017-08-07/_MG_0080-3.jpg"><figcaption class="prose-caption">📍 Via del Pavone, Campagnano di Roma • 17:52</figcaption></figure>
+<figure class="prose-full-bleed"><img src="images/2017-08-07/_MG_0080-3.jpg" loading="lazy"><figcaption class="prose-caption">📍 Via del Pavone, Campagnano di Roma • 17:52</figcaption></figure>
 <p>There is a moment on the first day of a long ride when distance becomes believable. Not easy, not mastered—just believable. The city is no longer close enough to pull you back psychologically. The journey has begun to accumulate evidence: photographs, sweat, wrong turns, empty bottles, dust on the chain, the first ache that will still be there tomorrow.</p>
-<figure class="prose-inline-container"><img src="images/2017-08-07/_MG_0085-4.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Ciclabile Campagnano-Nepi, Campagnano di Roma • 17:59</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-07/_MG_0085-4.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Ciclabile Campagnano-Nepi, Campagnano di Roma • 17:59</figcaption></figure>
 <p>The bicycle in these images looks almost ceremonial: panniers, straps, handlebar bag, improvised attachments, the whole fragile architecture of self-sufficiency. But the ceremony is constantly threatened by the mundane. A loose cable, an uncertain road, a disappearing shoulder, a sudden animal crossing, the need to find food before shops close.</p>
-<figure class="prose-inline-container"><img src="images/2017-08-07/_MG_0091.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Via Ronci, Nepi, Viterbo • 18:54</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-07/_MG_0091.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Ronci, Nepi, Viterbo • 18:54</figcaption></figure>
 <p>On narrow country roads, the scale of attention changes. A triangular warning sign matters. A herd ahead matters. Shade matters. A patch of bad asphalt matters. The cyclist’s world is intensely democratic in this sense: everything can become significant. A stone, a dog, a friendly nod, a hostile horn, a church gate, a fountain, a tree.</p>
 <p>The grand narrative of a 1,000-kilometer journey is assembled from these small negotiations. Later, one may speak of regions crossed and cities reached. But the body remembers more local facts: this bend, that heat, this moment of doubt, that sudden corridor of trees.</p>
 `,
@@ -184,16 +184,16 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>Arrival in Nepi, and the Kindness of a Room</h2>
-<figure class="prose-sticky-right"><img src="images/2017-08-07/_MG_0117-2.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 SP38, Nepi, Viterbo • 19:30</figcaption></figure>
+<figure class="prose-sticky-right"><img src="images/2017-08-07/_MG_0117-2.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 SP38, Nepi, Viterbo • 19:30</figcaption></figure>
 <p>By late afternoon, the light softened. The roads entered wooded corridors where shrines and gates appeared at the margins, as though the landscape were quietly storing older forms of passage. A bicycle leaned against a chapel gate becomes, almost accidentally, an image of petition. Not religious petition exactly, but bodily petition: let the road be safe, let the legs continue, let there be a room tonight.</p>
 <div class="prose-diptych">
-                        <figure><img src="images/2017-08-07/_MG_0134-3.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Strada Monte Bianchetto, Nepi, Viterbo • 19:41</figcaption></figure>
-                        <figure><img src="images/2017-08-07/_MG_0145-4.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Strada Monte Bianchetto, Nepi, Viterbo • 19:47</figcaption></figure>
+                        <figure><img src="images/2017-08-07/_MG_0134-3.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Strada Monte Bianchetto, Nepi, Viterbo • 19:41</figcaption></figure>
+                        <figure><img src="images/2017-08-07/_MG_0145-4.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Strada Monte Bianchetto, Nepi, Viterbo • 19:47</figcaption></figure>
                     </div>
 <p>Nepi arrived not as a triumphant destination but as shelter. I remember the practical relief more than any scenic climax. I found a room through Airbnb, hosted by a woman from Latin America living in Italy. We had just enough shared institutional and linguistic references to make trust possible. That, too, is part of travel: not only hospitality, but the fragile mechanisms by which hospitality becomes thinkable.</p>
 <p>Nepi itself carried a strange familiarity. I knew the name from bottled water served in Rome, the kind that appeared routinely on restaurant tables near the university where I had studied. To arrive at the place behind the label was to reverse a small commodity chain, to move from object back to geography. Water, in the city, had been branded and ordinary. Here, after a day of heat, it became local, material, almost intimate.</p>
 <p>That night, I had a bed. I had crossed the first threshold. I also left behind a heavy Italian road atlas at the host’s home, intending to retrieve it when I returned to Rome. Years passed. The book remained there, or perhaps did not. Objects left behind acquire a peculiar afterlife: they become proofs that a journey once had weight, paper, inconvenience.</p>
-<figure class="prose-full-bleed"><img src="images/2017-08-07/_MG_0129.jpg"><figcaption class="prose-caption">📍 Strada Monte Bianchetto, Nepi, Viterbo • 19:35</figcaption></figure>
+<figure class="prose-full-bleed"><img src="images/2017-08-07/_MG_0129.jpg" loading="lazy"><figcaption class="prose-caption">📍 Strada Monte Bianchetto, Nepi, Viterbo • 19:35</figcaption></figure>
 <p>The first day did not answer the larger questions. It did not prove that I could complete the expedition. It did not transform me. But it did something more modest and more necessary: it moved the journey from intention into memory.</p>
 <p>Rome was behind me. Nepi was beneath me. The road had begun.</p>
 `,
@@ -390,12 +390,12 @@ var config = {
             layout: 'prose',
             description: `<h2>Leaving the Lake, Leaving a Household</h2>
 <div class="prose-diptych">
-                        <figure><img src="images/2017-08-09/_MG_0203-2.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 06:45</figcaption></figure>
-                        <figure><img src="images/2017-08-09/_MG_0212.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 07:05</figcaption></figure>
+                        <figure><img src="images/2017-08-09/_MG_0203-2.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 06:45</figcaption></figure>
+                        <figure><img src="images/2017-08-09/_MG_0212.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 07:05</figcaption></figure>
                     </div>
 <p>The day began not with departure, but with delay — the good kind, the kind that makes a journey less efficient and more human. Before I left Montefiascone, Marco and Paola took me toward the lake. There were tents among trees, boats resting near the shore, and that peculiar morning softness of central Italy in August: everything already warm, but not yet severe.</p>
 <p>A bicycle trip is often narrated as a line: from here to there, kilometer after kilometer, elevation after elevation. But in practice it is made of thresholds. A tent flap. A kitchen door. A lakeside path. A farewell said too casually because nobody wants to make it heavy.</p>
-<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0229-2.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 09:28</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0229-2.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 09:28</figcaption></figure>
 <p>Marco’s room, full of bicycles, bags, tools, and the accumulated improvisations of road life, felt like a small archive of motion. Not an archive in the official sense — no catalog, no institution, no polished display — but the kind that matters more to travelers: objects kept because they still have use, because they remember the hands that repaired them.</p>
 <p>I left later than a disciplined cyclist should have. By then the sun was no longer forgiving. But I also left carrying something that does not fit into panniers: the feeling that even temporary shelter changes the moral weight of a journey. To be hosted is to be reminded that endurance is never purely individual.</p>
 `,
@@ -435,10 +435,10 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>Fellow Travelers and the Minor Sociology of the Road</h2>
-<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0231-4.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 San Lorenzo Nuovo, Viterbo • 12:38</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0231-4.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 San Lorenzo Nuovo, Viterbo • 12:38</figcaption></figure>
 <p>On the road I met Giobatta and Siera Mae, another cycling pair moving through the same Italian summer with their own rhythm and destination. They were not simply “people I met.” They belonged to that loose, temporary republic of travelers who recognize each other by equipment, posture, sunburn, and the way one looks at a road sign.</p>
 <p>Cyclists speak quickly, because everyone is always either arriving late or leaving soon. Yet these brief exchanges can become strangely durable. A photograph is taken. An email is exchanged. Someone says, *stai attento* — be careful — and the sentence stays with you longer than expected.</p>
-<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0238-2.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Strada Provinciale Trevinanese, Acquapendente • 13:29</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0238-2.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Strada Provinciale Trevinanese, Acquapendente • 13:29</figcaption></figure>
 <p>The Via Francigena appeared not as a grand medieval abstraction but as a small brown sign beside asphalt, guardrail, cracked road surface, and summer vegetation. This is often how history enters ordinary life: not as spectacle, but as infrastructure. A route once walked by pilgrims and merchants now shares space with cars, cafés, GPS devices, touring bicycles, and people like me, learning the rules late and imperfectly.</p>
 <p>To ride the Via Francigena without fully understanding its protocols was to discover that a road is also a social system. It has symbols, documents, expectations, and gatekeepers. It welcomes, but not without form. It promises hospitality, but hospitality too has paperwork.</p>
 `,
@@ -469,14 +469,14 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>Radicofani: The Hill, the Credential, the Refusal</h2>
-<figure class="prose-full-bleed"><img src="images/2017-08-09/_MG_0271.jpg"><figcaption class="prose-caption">📍 Strada Provinciale di Radicofani, Radicofani, Siena • 15:36</figcaption></figure>
+<figure class="prose-full-bleed"><img src="images/2017-08-09/_MG_0271.jpg" loading="lazy"><figcaption class="prose-caption">📍 Strada Provinciale di Radicofani, Radicofani, Siena • 15:36</figcaption></figure>
 <p>Radicofani stood above the landscape like a test. The climb took a long time — longer than the map had suggested, longer than my legs wanted to admit. The fortress appeared, disappeared, and appeared again, each time looking close enough to be encouraging and far enough to be cruel.</p>
 <p>By the time I reached the pilgrim reception, I had already spent much of myself on the ascent. There were other walkers and cyclists there, people whose presence made the place feel legitimate, almost ceremonial. But I did not have the pilgrim credential. Until that moment, I had only vaguely understood that such a document existed.</p>
 <p>So I was refused.</p>
 <p>In memory, the refusal is inseparable from the heat and hunger. It was not only a practical setback; it felt like being told that my fatigue had failed to qualify. I had climbed the hill, followed the signs, carried the bicycle, carried myself — and still lacked the correct proof of belonging.</p>
 <div class="prose-diptych">
-                        <figure><img src="images/2017-08-09/_MG_0296-Pano.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Via Roma, Radicofani, Siena • 16:09</figcaption></figure>
-                        <figure><img src="images/2017-08-09/_MG_0306-2.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Piazza San Pietro, Radicofani, Siena • 16:29</figcaption></figure>
+                        <figure><img src="images/2017-08-09/_MG_0296-Pano.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Roma, Radicofani, Siena • 16:09</figcaption></figure>
+                        <figure><img src="images/2017-08-09/_MG_0306-2.jpg" class="lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Piazza San Pietro, Radicofani, Siena • 16:29</figcaption></figure>
                     </div>
 <p>Looking back, I understand the other side more clearly. Institutions of welcome need rules. Shared shelters depend on trust, and trust often becomes a stamp, a booklet, a credential. But on that afternoon, abstract reason was not available to me. I was tired, embarrassed, and angry in the way one becomes angry when a system reveals itself only at the moment it excludes you.</p>
 <p>I left Radicofani almost impulsively, descending from the hill I had worked so hard to reach. The landscape opened again, wide and golden, indifferent to my small administrative drama.</p>
@@ -508,12 +508,12 @@ var config = {
             image: '',
             layout: 'prose',
             description: `<h2>The Photograph from Behind</h2>
-<figure class="prose-full-bleed"><img src="images/2017-08-09/BBM1251.jpg"><figcaption class="prose-caption">📍 Via Cassia, Castiglione d'Orcia, Siena • 18:55</figcaption></figure>
+<figure class="prose-full-bleed"><img src="images/2017-08-09/BBM1251.jpg" loading="lazy"><figcaption class="prose-caption">📍 Via Cassia, Castiglione d'Orcia, Siena • 18:55</figcaption></figure>
 <p>Somewhere near Gallina, I saw a red car and someone with a serious camera. I had the sudden intuition that they had photographed me. So I turned back and asked.</p>
 <p>This is one of the quiet miracles of travel: sometimes you are seen by strangers at the very moment you feel most solitary. Andrea later sent the photograph. In it, I am small, placed near the edge of the frame, riding away from the camera into the immense dry countryside. My shadow stretches across the road.</p>
 <p>At first I wished the image had shown me from the front — heroic, perhaps, facing the unknown. Instead, it shows the opposite: a cyclist already passing, already leaving, almost absorbed by the landscape. But that is probably more truthful.</p>
 <p>Most of the time, we do not conquer the road in front of us. We are recorded from behind, after the decision has already been made, after the doubt has already happened, after the body has agreed to continue.</p>
-<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0323-3.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Via Cassia, Castiglione d'Orcia, Siena • 18:08</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0323-3.jpg" class="prose-inline-img lightbox-trigger" loading="lazy"><figcaption class="prose-caption">📍 Via Cassia, Castiglione d'Orcia, Siena • 18:08</figcaption></figure>
 <p>The Tuscan roads that day were not picturesque in the easy postcard sense. They were dry, exposed, patched, sloping, and bright. The bicycle leaned often against guardrails, as if the machine too needed moments of refusal. The fields were yellow and sparse. The sky gave no shade. Every stop became a small negotiation between beauty and depletion.</p>
 `,
             location: { center: [11.74132, 42.87066], zoom: 11, pitch: 20, bearing: 0 }

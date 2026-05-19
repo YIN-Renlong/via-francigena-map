@@ -31,7 +31,8 @@ const Layouts = {
 
     // 3. Floating Map Card (MAP SLIDER: Flush Left Drawer, Full-Bleed Photo)
     renderFloatingCard: function(chapter) {
-        const imgHtml = chapter.image ? `<img src="${chapter.image}" class="floating-square-img lightbox-trigger">` : '';
+        // PERFORMANCE FIX: Added loading="lazy" to the image tag
+        const imgHtml = chapter.image ? `<img src="${chapter.image}" class="floating-square-img lightbox-trigger" loading="lazy">` : '';
         return `
         <div class="step layout-floating-card" id="${chapter.id}">
             <div class="floating-card">
@@ -49,7 +50,8 @@ const Layouts = {
 
     // 4. Media Map Card (MAP SLIDER: The "Classic": 16:10 Photo First, Text Below)
     renderMediaCard: function(chapter) {
-        const imgHtml = chapter.image ? `<img src="${chapter.image}" class="media-standard-img">` : '';
+        // PERFORMANCE FIX: Added loading="lazy" to the image tag
+        const imgHtml = chapter.image ? `<img src="${chapter.image}" class="media-standard-img" loading="lazy">` : '';
         return `
         <div class="step layout-media-card" id="${chapter.id}">
             <div class="media-card">
