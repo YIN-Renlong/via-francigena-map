@@ -692,7 +692,7 @@ var config = {
             title: `Via Cassia, Castiglione d'Orcia, Siena`,
             image: 'images/2017-08-09/_MG_0331-2.jpg',
             layout: 'split',
-            description: `<p>Narrative missing.</p>`,
+            description: `<p>The name on my bicycle frame felt like a blunt instruction as I leaned the Trek against the roadside guardrail. It was after six, and the golden sweep of Castiglione d’Orcia stretched beyond a rusted pipe that separated the asphalt from harvested stubble. My silver sleeping mat and heavy panniers caught the late light, a small, loaded caravan paused in an ancient, baked landscape. The hills offered no shelter, but their quiet emptiness was slowly pulling the afternoon's anger out of me, pedal stroke by pedal stroke.</p>`,
             location: { center: [11.70479, 42.98109], zoom: 14, pitch: 60, bearing: 0 }
         },
         {
