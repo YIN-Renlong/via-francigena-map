@@ -458,7 +458,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, San Casciano dei Bagni, Siena`,
             image: 'images/2017-08-09/_MG_0240-2.jpg',
-            layout: 'media-card',
+            layout: 'immersive-left',
             description: `<p>The Via Cassia opened in front of me, stripped of traffic, edged by white lines, and emptied into heat. My touring bags turned the bicycle into a small animal of burden, faithful but heavy. I trusted the road because there was no alternative. Between San Casciano and the next climb, I felt both free and exposed, my body measured against a landscape too wide for complaint.</p>`,
             location: { center: [11.80559, 42.80367], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -532,7 +532,7 @@ var config = {
             date: '2017-08-09',
             title: `Strada Provinciale di Radicofani, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0259.jpg',
-            layout: 'floating-card',
+            layout: 'media-card',
             description: `<p>Posts and wires held the vines in order while I moved without such support. The hilltop building stood on the horizon, a fixed mark I could neither ignore nor quickly reach. My bike creaked under water, bags, and ambition. I remember envying the vineyard’s rootedness, then resenting it. The road made me temporary, but the land around Radicofani seemed built from centuries of staying.</p>`,
             location: { center: [11.76663, 42.88325], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -583,7 +583,7 @@ var config = {
             date: '2017-08-09',
             title: `Strada Provinciale di Radicofani, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0269.jpg',
-            layout: 'media-card',
+            layout: 'immersive-left',
             description: `<p>Dry grass dominated the slope, and the distant structure sat alone on the horizon like a verdict. I kept looking at it, believing arrival would solve hunger, tiredness, and irritation. My road imagination was naive: every summit promised relief, but each relief demanded another negotiation. The wall, the fields, the hilltop—everything ahead of me seemed still, while I was spending myself to reach it.</p>`,
             location: { center: [11.77188, 42.89225], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -592,7 +592,7 @@ var config = {
             date: '2017-08-09',
             title: `Strada Provinciale di Radicofani, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0279-2.jpg',
-            layout: 'floating-card',
+            layout: 'media-card',
             description: `<p>My helmet flashed blue and white against the golden roadside, a small shell placed in a landscape of heat. I must have stopped to breathe, or to prove to myself that I was still there. The dry vegetation pressed close to the shoulder. Behind me was the climb already earned; ahead of me, the town where fatigue would meet bureaucracy and turn into anger.</p>`,
             location: { center: [11.77188, 42.89225], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -601,7 +601,7 @@ var config = {
             date: '2017-08-09',
             title: `Strada Provinciale di Radicofani, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0284.jpg',
-            layout: 'split',
+            layout: 'floating-card',
             description: `<p>The road bent gently toward distant houses, handlebars blurred at the bottom of my vision. I remember this as the grammar of arrival: curve, slope, roofline, hope. The bike cockpit filled my foreground because everything else had to be reached through it. My world had narrowed to cables, bags, brakes, asphalt, and the stubborn belief that the next cluster of buildings might finally receive me.</p>`,
             location: { center: [11.77347, 42.89356], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -610,7 +610,7 @@ var config = {
             date: '2017-08-09',
             title: `Strada Provinciale di Radicofani, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0294.jpg',
-            layout: 'floating-card',
+            layout: 'split',
             description: `<p>A snow-chain sign appeared in August, blue and formal beside the priority-road diamond, and I laughed at the absurdity of cold imagined in that heat. My bicycle blurred below, heavy with summer. The landscape around Radicofani had already scorched me, yet the sign spoke of ice, obligation, winter. It reminded me that roads keep memories of other seasons, while travelers suffer only the present one.</p>`,
             location: { center: [11.77493, 42.89407], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -619,7 +619,7 @@ var config = {
             date: '2017-08-09',
             title: `Viale Luchini, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0298.jpg',
-            layout: 'split',
+            layout: 'floating-card',
             description: `<p>In Radicofani, my loaded bicycle leaned against dark stone and red brick bands, finally still after the climb. The facade looked older and tougher than my irritation, as if the town had absorbed centuries of exhausted arrivals. I thought rest would follow. Instead, rules, passports, and refusal waited for me nearby. The geography had brought me up; the institution would push me back down.</p>`,
             location: { center: [11.77102, 42.89602], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -628,7 +628,7 @@ var config = {
             date: '2017-08-09',
             title: `Strada Provinciale di Sarteano, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0309.jpg',
-            layout: 'floating-card',
+            layout: 'split',
             description: `<p>Leaving Radicofani, I entered an empty road with my anger riding beside me. The white reflector post marked the shoulder, but nothing marked the humiliation of being turned away after that climb. I descended toward another possibility, another phone call, another bed that might or might not accept me. The land opened again, and my body converted frustration into speed, hunger, and determination.</p>`,
             location: { center: [11.76438, 42.90563], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -646,7 +646,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, Castiglione d'Orcia, Siena`,
             image: 'images/2017-08-09/_MG_0317.jpg',
-            layout: 'split',
+            layout: 'floating-card',
             description: `<p>My bicycle stood loaded beside the Via Cassia, with the sky marked by faint spots and the landscape stretched dry behind it. I see the image now as a pause after anger, not peace. The road was broad, exposed, and indifferent. I had asked for shelter and received a rule; now my bike and I were again responsible for each other.</p>`,
             location: { center: [11.70768, 42.95153], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -655,7 +655,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, Castiglione d'Orcia, Siena`,
             image: 'images/2017-08-09/_MG_0318-2.jpg',
-            layout: 'media-card',
+            layout: 'split',
             description: `<p>The front wheel turned toward the shoulder, my bicycle leaning into the guardrail as if it too needed support. I remember the roadside vegetation, yellow-green and brittle, matching my mood after Radicofani. Stopping was dangerous because stillness invited doubt. Yet I photographed the machine, the ditch, the rail, the empty edge, and let the geography witness me before I pushed on toward San Quirico.</p>`,
             location: { center: [11.70768, 42.95153], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -682,7 +682,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, Castiglione d'Orcia, Siena`,
             image: 'images/2017-08-09/_MG_0326-2.jpg',
-            layout: 'split',
+            layout: 'media-card',
             description: `<p>The bicycle’s bags, bottle, and front clutter filled the foreground, while arid mounds and open fields stretched beyond. I remember feeling that my possessions had become my architecture: everything necessary attached to a frame, everything unstable held by straps. The road made a room of distance around me. After Radicofani, the landscape’s indifference felt kinder than human refusal, because it asked only that I keep moving.</p>`,
             location: { center: [11.70495, 42.98116], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -691,7 +691,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, Castiglione d'Orcia, Siena`,
             image: 'images/2017-08-09/_MG_0331-2.jpg',
-            layout: 'media-card',
+            layout: 'split',
             description: `<p>Narrative missing.</p>`,
             location: { center: [11.70479, 42.98109], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -700,7 +700,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, Castiglione d'Orcia, Siena`,
             image: 'images/2017-08-09/_MG_0339-2.jpg',
-            layout: 'immersive-left',
+            layout: 'media-card',
             description: `<p>The guardrail doubled itself in pale metal and rusted brown, running parallel to the road through dry fields. I stood there with my bike and felt the day split the same way: kindness and refusal, climb and descent, hunger and relief still deferred. The vegetation was burnt yellow, the horizon low, and my route pressed onward. Geography became a corridor for everything I could not say.</p>`,
             location: { center: [11.70483, 42.98107], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -709,7 +709,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, Gallina, Siena`,
             image: 'images/2017-08-09/_MG_0341-3.jpg',
-            layout: 'media-card',
+            layout: 'immersive-left',
             description: `<p>Near Gallina, the road narrowed past a stone building and a chevron sign, just before Andrea’s camera noticed me. I remember seeing the red car, the professional lens, and turning back to ask for the photograph. My Italian was imperfect but urgent. I wanted proof from outside my own camera that I had existed on that road, small against Tuscany, moving despite fatigue.</p>`,
             location: { center: [11.67879, 43.00301], zoom: 14, pitch: 60, bearing: 0 }
         },
