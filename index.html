@@ -381,6 +381,13 @@
                 marker.setLngLat(chapter.location.center);
                 miniMarker.setLngLat(chapter.location.center);
 
+                // Tell the little map's camera to follow the pin!
+                minimap.flyTo({ 
+                    center: chapter.location.center, 
+                    duration: 3000, /* Matches the speed of the big map */
+                    essential: true 
+                });
+
                 // Update chart scrubber & bottom stats
                 if (window.activeRouteData && window.activeRouteData.features[0]) {
                     var tLat = chapter.location.center[1]; var tLon = chapter.location.center[0];
