@@ -40,12 +40,17 @@ This is the core compiler. It parses the Markdown output and translates it into 
 
 ## 🧭 UX & UI Design: Interface and Content Integration
 
-The user interface is designed to clearly separate deep reading sections from interactive geographic exploration.
+To prevent visual fatigue during the geographic scrolling segments, the engine dynamically alternates between distinct spatial layouts. This establishes a structural rhythm and shifts the visual hierarchy between the textual narrative and the photographic evidence:
 
 *   **Layered Reading Layout:** To distinguish the text from the map background, the reading layout utilizes a CSS pseudo-element (`::before`) to create an asymmetric frame. The `#f9f6ed` reading layer sits within it, while keeping the 3D map visible and interactive in the screen margins.
 *   **Dynamic Image Deduplication:** A Python Regex parser tracks every photograph selected for the main essay. It appends these to a `used_images` array and removes them from the Map Slider queue, preventing redundant images from appearing twice in the user interface.
 *   **Context-Aware Telemetry Dashboard:** A bottom-anchored dashboard displays speed, elevation, and weather data. JavaScript event listeners automatically hide the dashboard during text-heavy prose sections to minimize reading distraction, and display it again when the user scrolls to the geographic map cards.
 *   **Day Transitions:** Full-screen cover images with typography (Georgia and Open Sans) signal the transition between days, visually breaking up the content for better pacing.
+*   **The Media Card (Image-Primary):** A classic editorial structure featuring an off-white background with a solid border. The photograph is placed at the top, preserving its original 16:10 aspect ratio, followed by the text and metadata.
+*   **The Floating Vignette (Text-Primary):** A translucent, flush-left panel. To provide structural contrast, the textual narrative appears first. The accompanying photograph is repositioned to the bottom and forced into a 1:1 square crop via CSS `object-fit`, acting as a visual anchor.
+*   **The Immersive Parallax (`immersive-left`):** Designed for high-impact visual breaks, this layout utilizes the photograph as a full-viewport `100vh` background with `background-attachment: fixed`. A dark-themed text panel scrolls vertically over the static image, creating a parallax effect before returning the user to the interactive map.
+*   **The Split Layout:** A 35/65 vertical division of the viewport, dedicating distinct, equalized zones to the narrative text and the photographic background.
+*   **Asymmetric Transitions:** Component widths are deliberately varied (e.g., setting floating cards to `42vw`) to create a cascading "staircase" overlap during scroll transitions. This prevents rigid vertical alignment and creates a more organic, dynamic visual flow as elements fade in and out of the viewport.
 
 ---
 
@@ -87,6 +92,7 @@ The pipeline is fully automated once the raw data is provided. To process and pu
 
 **2. Extract Telemetry & Visual Metadata**
 Run the processing script in your terminal:
+
 ```bash
 python3 process_day.py 2017-08-09
 ```
@@ -113,6 +119,25 @@ python3 build_website.py
 
 **5. View the Output**
 Open index.html in a web browser to view the updated interactive map.
+
+------
+
+### Phase 5: System Optimization and Edge-Case Resolution
+As the dataset expanded, several structural and performance bottlenecks were identified and resolved to ensure cross-device stability:
+
+1.  **Temporal Data Synchronization (GPS Snapping):** Discrepancies were identified where photograph EXIF timestamps occurred outside the active KML tracking window (e.g., morning preparations prior to GPS activation). A "snapping" algorithm was implemented in `process_day.py` to bind out-of-bounds media to the nearest valid chronological GPS coordinate (the daily start or end point). This ensures data integrity and prevents erratic camera movements during map rendering.
+2.  **DOM Observer Refinement:** An opacity "ghosting" bug occurred where tall `.layout-prose` elements prematurely lost their `.active` visibility class during scrolling. The JavaScript `onStepEnter` logic was updated to selectively exclude full-page prose and cover blocks from class removal, preserving their solid state until the user fully scrolls past them.
+3.  **Memory Management:** Initial testing utilized CSS hardware acceleration (`will-change`, `transform: translateZ(0)`) to optimize scrolling. However, rendering hundreds of accelerated DOM nodes caused VRAM memory exhaustion on mobile devices. These rules were reverted in favor of native HTML5 `loading="lazy"` attributes across all dynamically generated `<img>` tags, significantly reducing the initial payload and stabilizing mobile performance.
+4.  **Data Structure Refactoring:** The manual layout assignment logic in `build_website.py` was refactored to utilize a grouped dictionary (`override_map`). This streamlines the batch-assignment of layout types to specific image filenames. Additionally, robust string sanitization was implemented to escape backticks, preventing JavaScript compilation failures caused by apostrophes in Italian geographic names (e.g., *Castiglione d'Orcia*).
+5.  **Minimap Synchronization:** The secondary global minimap was updated with a `minimap.flyTo` function to synchronize its camera center with the primary map's coordinates, ensuring the location pin remains within the viewport during long-distance geographic shifts.
+
+### Phase 6: Cross-Origin Integration and Security
+To embed the application within a WordPress CMS environment (WPBakery) without suffering the performance penalties or UX friction typically associated with iframes, a seamless cross-origin handoff system was developed.
+
+1.  **IntersectionObserver and Viewport Locking:** The WordPress parent page utilizes an `IntersectionObserver` to detect when the documentary iframe occupies 95% of the viewport. Upon detection, the parent document's overflow is locked, and the iframe snaps into a fixed full-screen position. 
+2.  **The `postMessage` API Handoff:** To enable a seamless exit, the GitHub-hosted `index.html` file monitors scroll boundaries. When the user reaches the absolute top or bottom of the documentary, a `postMessage` signal (e.g., `scroll_down_out`) is broadcast to the parent WordPress window. The parent window receives the signal, unlocks the body scroll, and gently nudges the viewport, returning control to the standard CMS environment without requiring manual button clicks.
+3.  **Iframe Throttling Mitigation:** To bypass browser iframe throttling and prevent premature scroll interception by the mouse, an invisible CSS shield restricts pointer events until the iframe is perfectly aligned in the viewport.
+4.  **API Security and Vector Tiles:** The project utilizes Esri ArcGIS V2 vector basemaps ("Modern Antique"). To secure the requisite API keys within a public, client-side configuration file, strict HTTP Referrer URL restrictions were implemented (e.g., `https://*.yin.roma.it/*`). This restricts tile access exclusively to authorized development and production environments, neutralizing unauthorized usage.
 
 ------
 
