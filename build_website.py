@@ -88,6 +88,14 @@ journal_headers = {
     }
 }
 
+# MANUAL LAYOUT OVERRIDES
+# If a photo filename is listed here, it ignores the randomizer and forces this layout.
+manual_layouts = {
+    "_MG_0082-3.jpg": "immersive-left",   # Example: cover, article, floating-card, media-card, split, immersive-left, prose
+    "_MG_0119-2.jpg": "immersive-left",   # Example for Day 3
+    # You can add as many as you want here!
+}
+
 def get_photo_caption(day_folder, filename):
     """Helper to extract Location and Time from the photo's JSON"""
     json_path = os.path.join(OUTPUT_DIR, day_folder, f"{filename}.json")
@@ -285,12 +293,18 @@ def build():
                     # THE FIX 1: Sanitize the title to prevent any backtick crashes
                     title = r.get("location_name", filename).replace("`", "\\`")
                     
-                    valid_choices = ["floating-card"] * 4 + ["media-card"] * 4 + ["split"] * 2
-                    if prev_layout in ["split", "prose", "cover"]:
-                        valid_choices = ["floating-card", "media-card"]
-                        
-                    layout_type = random.choice(valid_choices)
-                    prev_layout = layout_type
+                    # MANUAL OVERRIDE CHECK
+                    if filename in manual_layouts:
+                        layout_type = manual_layouts[filename]
+                        prev_layout = layout_type
+                    else:
+                        # If not in the manual list, let the frozen random seed decide!
+                        valid_choices = ["floating-card"] * 3 + ["media-card"] * 3 + ["split"] * 2 + ["immersive-left"] * 2
+                        if prev_layout in ["split", "prose", "cover", "immersive-left"]:
+                            valid_choices = ["floating-card", "media-card"]
+                            
+                        layout_type = random.choice(valid_choices)
+                        prev_layout = layout_type
                     
                     # THE FIX 2: Use backticks (`) around {title} instead of single quotes (')
                     config_js += f"""        {{

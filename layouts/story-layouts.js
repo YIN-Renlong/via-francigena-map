@@ -29,26 +29,33 @@ const Layouts = {
         `;
     },
 
-    // 3. Floating Map Card
+    // 3. Floating Map Card (MAP SLIDER: Flush Left Drawer, Full-Bleed Photo)
     renderFloatingCard: function(chapter) {
+        const imgHtml = chapter.image ? `<img src="${chapter.image}" class="floating-square-img lightbox-trigger">` : '';
         return `
         <div class="step layout-floating-card" id="${chapter.id}">
             <div class="floating-card">
                 <h3>${chapter.title}</h3>
                 ${chapter.description}
+                
+                <!-- GPS Tag moved ABOVE the photo -->
                 <span class="gps-tag">Coordinate: ${chapter.location.center[1].toFixed(5)} N, ${chapter.location.center[0].toFixed(5)} E</span>
+                
+                ${imgHtml} 
             </div>
         </div>
         `;
     },
 
-    // 4. Media Map Card
+    // 4. Media Map Card (MAP SLIDER: The "Classic": 16:10 Photo First, Text Below)
     renderMediaCard: function(chapter) {
-        const imgHtml = chapter.image ? `<img src="${chapter.image}" alt="${chapter.title}">` : '';
+        const imgHtml = chapter.image ? `<img src="${chapter.image}" class="media-standard-img">` : '';
         return `
         <div class="step layout-media-card" id="${chapter.id}">
             <div class="media-card">
-                ${imgHtml}
+                
+                ${imgHtml} <!-- Photo sits above the text -->
+                
                 <h3>${chapter.title}</h3>
                 ${chapter.description}
                 <span class="gps-tag">Coordinate: ${chapter.location.center[1].toFixed(5)} N, ${chapter.location.center[0].toFixed(5)} E</span>
@@ -57,7 +64,7 @@ const Layouts = {
         `;
     },
 
-    // 5. Split Text & Photo
+    // 5. Split Text & Photo (MAP SLIDER)
     renderSplit: function(chapter) {
         return `
         <div class="step layout-split" id="${chapter.id}">
@@ -81,6 +88,19 @@ const Layouts = {
             </div>
         </div>
         `;
+    },
+
+    // 7. Immersive Left (MAP SLIDER: National Geographic Style Parallax)
+    renderImmersiveLeft: function(chapter) {
+        return `
+        <div class="step layout-immersive-left" id="${chapter.id}" style="background-image: url('${chapter.image}');">
+            <div class="immersive-text-box">
+                <h3>${chapter.title}</h3>
+                ${chapter.description}
+                <span class="gps-tag">Coordinate: ${chapter.location.center[1].toFixed(5)} N, ${chapter.location.center[0].toFixed(5)} E</span>
+            </div>
+        </div>
+        `;
     }
 };
 
@@ -92,7 +112,8 @@ function renderChapter(chapter) {
         case 'floating-card': return Layouts.renderFloatingCard(chapter);
         case 'media-card': return Layouts.renderMediaCard(chapter);
         case 'split': return Layouts.renderSplit(chapter);
-        case 'prose': return Layouts.renderProse(chapter); // <-- This routes your AI essay correctly
+        case 'prose': return Layouts.renderProse(chapter); 
+        case 'immersive-left': return Layouts.renderImmersiveLeft(chapter); // <-- ROUTES THE NEW SLIDER
         default: return Layouts.renderFloatingCard(chapter); 
     }
 }

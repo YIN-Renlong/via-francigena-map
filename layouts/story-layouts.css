@@ -119,38 +119,60 @@
     margin-bottom: 1.5rem;
 }
 
-/* 3. Floating Map Card */
+/* 3. Floating Map Card (Flush Left, Full Bleed Photo) */
 .layout-floating-card {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 5vw;
+    
+    /* THE FIX 1: Remove padding so it attaches flush to the left screen edge! */
+    padding: 0; 
     pointer-events: none; 
 }
+
 .floating-card {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.95); 
     backdrop-filter: blur(10px);
-    width: 35vw;
-    min-width: 300px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    width: 42vw;
+    min-width: 350px;
+    
+    /* 50px top/bottom padding, 40px left/right padding */
+    padding: 50px 40px; 
+    
+    /* THE FIX 2: Flat on the left wall, rounded gracefully on the right */
+    border-radius: 0 8px 8px 0; 
+    box-shadow: 15px 0 40px rgba(0,0,0,0.15); /* Shadow throws to the right over the map */
     pointer-events: auto; 
 }
+
 .floating-card h3 {
     font-size: 1.2rem;
-    font-weight: 700;
-    color: #4a5d85;
+    color: #1a1a1a;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 15px;
 }
-.floating-card p {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: #1a1a1a;
+
+/* THE FIX 3: The Full Bleed Photo */
+.floating-square-img {
+    /* Breaks out of the 40px text padding to touch the absolute edges of the card */
+    width: calc(100% + 80px); 
+    margin-left: -40px;
+    margin-right: -40px;
+    
+    /* Pushes it down below the GPS tag */
+    margin-top: 30px; 
+    margin-bottom: -50px; /* Pulls it flush to the absolute bottom of the white card */
+    
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+    
+    /* Rounds only the bottom-right corner to match the card */
+    border-radius: 0 0 8px 0; 
+    display: block;
 }
 
-/* 4. Media Card */
+/* 4. Media Map Card (The Classic Style) */
 .layout-media-card {
     display: flex;
     justify-content: flex-start;
@@ -159,30 +181,26 @@
     pointer-events: none;
 }
 .media-card {
-    background-color: #f9f6ed; 
+    background-color: #f9f6ed; /* Solid Warm Off-White */
     width: 38vw;
     min-width: 350px;
     padding: 30px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     pointer-events: auto;
-    border-left: 4px solid #1e3a2a; 
-}
-.media-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin-bottom: 20px;
+    border-left: 4px solid #1e3a2a; /* Dark Green edge line */
 }
 .media-card h3 {
     font-size: 1.8rem;
-    font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 15px;
 }
-.media-card p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #333;
+.media-standard-img {
+    width: 100%;
+    height: auto; /* Keeps your original 16:10 aspect ratio */
+    display: block;
+    margin-bottom: 20px; /* Adds space below the photo */
+    border-radius: 2px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 /* 5. Split Photo/Text */
@@ -237,6 +255,50 @@
 
 /* (Make sure you delete the old .prose-container::before block with the #3b2c2f background, 
    as we are no longer using the hovering dossier frame) */
+
+
+
+/* 7. MAP SLIDER: Immersive Left (National Geographic Style Parallax) */
+.layout-immersive-left {
+    /* 150vh makes the container extra tall so the text box has room to scroll OVER the photo */
+    min-height: 150vh; 
+    display: flex;
+    align-items: center; /* Vertically centers the dark box */
+    justify-content: flex-start;
+    padding: 0 5vw;
+    
+    /* The Parallax Magic */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Locks the photo in place while scrolling */
+    
+    position: relative;
+    z-index: 20; /* Ensures it completely covers the 3D map */
+    pointer-events: none;
+}
+
+.immersive-text-box {
+    background-color: #111111; /* Deep, rich black */
+    color: #f9f6ed; /* Off-white text */
+    width: 35vw;
+    min-width: 350px;
+    padding: 50px 40px;
+    box-shadow: 20px 20px 50px rgba(0,0,0,0.7); /* Heavy cinematic shadow */
+    pointer-events: auto;
+}
+
+.immersive-text-box h3 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+/* Adjust the GPS tag to look good on a dark background! */
+.immersive-text-box .gps-tag {
+    color: #aaaaaa;
+    border-top-color: #444444;
+}
 
 
 /* --- ADVANCED EDITORIAL LAYOUTS --- */
