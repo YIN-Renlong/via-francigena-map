@@ -295,7 +295,7 @@ var config = {
             date: '2017-08-08',
             title: `Strada Provinciale Ponte Rotto, Fontevivola`,
             image: 'images/2017-08-08/_MG_0155-3.jpg',
-            layout: 'floating-card',
+            layout: 'immersive-left',
             description: `<p>By 09:33 a tractor and orange trailer occupied the lane with rural confidence, while a thin tree trunk stood too near the road, a warning made vertical. I was learning that Cassia's safety was negotiated, not given. Advice from breakfast met engines, edges, and my loaded bicycle. Every vehicle seemed to ask whether I belonged here, and every answer had to be balanced through the handlebars all day long again.</p>`,
             location: { center: [12.22913, 42.24013], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -304,7 +304,7 @@ var config = {
             date: '2017-08-08',
             title: `Viale Raniero Capocci, La Quercia`,
             image: 'images/2017-08-08/_MG_0160-3.jpg',
-            layout: 'split',
+            layout: 'floating-card',
             description: `<p>By late afternoon in La Quercia, the handlebar blurred into the foreground like a tired pulse. Battlemented stone and a dome rose behind the wall, grand and unreachable after the supermarket lunch, the roadside rest, the humiliating search for a bar when milk turned inside me. History kept its silhouette; my body kept its emergency. Travel reduced the monumental to whatever could be survived until evening on two wheels alone.</p>`,
             location: { center: [12.11012, 42.41888], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -313,7 +313,7 @@ var config = {
             date: '2017-08-08',
             title: `Via Cassia, Zepponami`,
             image: 'images/2017-08-08/_MG_0170-2.jpg',
-            layout: 'media-card',
+            layout: 'split',
             description: `<p>The cropped Celleno sign arrived with grain, shade, and a bright sky that made the road feel scorched. Somewhere that day there was wildfire, or the rumor of it, smoke entering the ride as another uncertainty. I photographed a name partly cut off, as if arrival itself could not fit inside the frame. Towns appeared, vanished, and left only proof that I had passed through heat, hunger, doubt still moving.</p>`,
             location: { center: [12.04916, 42.51839], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -322,7 +322,7 @@ var config = {
             date: '2017-08-08',
             title: `Via Cassia, Zepponami`,
             image: 'images/2017-08-08/_MG_0173-2.jpg',
-            layout: 'floating-card',
+            layout: 'media-card',
             description: `<p>At 18:18, my loaded bicycle stood beneath the welcome sign, rear panniers and rolled gear announcing a life temporarily reduced to straps. The official logos promised municipality, order, belonging; I had only questions about where a foreign cyclist might sleep. I was edging toward Montefiascone with the cemetery already possible in my mind, rehearsing awkward requests, even imagining a Chinese restaurant as shelter for one vulnerable night outside alone nearby.</p>`,
             location: { center: [12.03855, 42.53648], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -331,7 +331,7 @@ var config = {
             date: '2017-08-08',
             title: `Corso Cavour, Le Coste`,
             image: 'images/2017-08-08/_MG_0183.jpg',
-            layout: 'media-card',
+            layout: 'floating-card',
             description: `<p>Against the doorway on Corso Cavour, the bicycle looked more household than vehicle: bottles, panniers, front roll, rear bundles, all waiting below a fanlight like a guest at the wrong door. I was still asking the town to recognize need without knowing its language well enough. Soon Marco and Paola would see me on the road, turning my search from private embarrassment into shared improvisation under the darkening sky there.</p>`,
             location: { center: [12.03207, 42.53905], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -378,21 +378,12 @@ var config = {
             date: '2017-08-09',
             title: `Via Dante Alighieri, Le Coste, Montefiascone`,
             image: 'images/2017-08-09/_MG_0201-2.jpg',
-            layout: 'floating-card',
+            layout: 'media-card',
             description: `<p>Morning began inside nylon and stale warmth, my sleeping pad pressed against me like proof that I had crossed another night. I woke before the road, before the lake brightened, before gratitude became departure. The tent wall caught a shard of light, and I remember thinking how fragile my shelter was against Italy’s August geography: canvas, dust, insects, breath, and a body trying to become brave.</p>`,
             location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
         },
         {
             id: 'chapter-36',
-            date: '2017-08-09',
-            title: `Via Dante Alighieri, Le Coste, Montefiascone`,
-            image: 'images/2017-08-09/_MG_0207.jpg',
-            layout: 'split',
-            description: `<p>At the lakeside, the yellow boat rested in rough grass, its little Italian flag bright against mud, weeds, and morning haze. I stood there with my bike waiting somewhere behind me, trying to delay the climb that would take me south. The uneven ground, bare soil, wildflowers, and water made the map feel physical again. My route was not a line; it was terrain resisting me.</p>`,
-            location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
-        },
-        {
-            id: 'chapter-37',
             date: '2017-08-09',
             title: '',
             image: '',
@@ -411,16 +402,34 @@ var config = {
             location: { center: [12.03260, 42.54085], zoom: 11, pitch: 20, bearing: 0 }
         },
         {
+            id: 'chapter-37',
+            date: '2017-08-09',
+            title: `Via Dante Alighieri, Le Coste, Montefiascone`,
+            image: 'images/2017-08-09/_MG_0207.jpg',
+            layout: 'floating-card',
+            description: `<p>At the lakeside, the yellow boat rested in rough grass, its little Italian flag bright against mud, weeds, and morning haze. I stood there with my bike waiting somewhere behind me, trying to delay the climb that would take me south. The uneven ground, bare soil, wildflowers, and water made the map feel physical again. My route was not a line; it was terrain resisting me.</p>`,
+            location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
+        },
+        {
             id: 'chapter-38',
             date: '2017-08-09',
             title: `Via Dante Alighieri, Le Coste, Montefiascone`,
             image: 'images/2017-08-09/_MG_0218-2.jpg',
-            layout: 'media-card',
+            layout: 'split',
             description: `<p>An orange boat, a bench, a grove, and the lake beyond: the morning offered me a small theater of stillness. I photographed it because I knew my body would soon become all movement, all heat, all calculation. The trees held shade like a promise I could not keep. Behind me were tents and borrowed friendship; before me, the road began widening into distance and doubt.</p>`,
             location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
         },
         {
             id: 'chapter-39',
+            date: '2017-08-09',
+            title: `Via Dante Alighieri, Le Coste, Montefiascone`,
+            image: 'images/2017-08-09/_MG_0219.jpg',
+            layout: 'floating-card',
+            description: `<p>The tents were pushed against foliage rather than placed in any orderly campground, and that suited my memory of the trip. I was always half inside permission, half outside it. Rough ground, dry stems, and small debris surrounded us, but the lake was close enough to soften everything. I packed my things slowly, knowing that once I left, hospitality would again become something I had to negotiate.</p>`,
+            location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
+        },
+        {
+            id: 'chapter-40',
             date: '2017-08-09',
             title: '',
             image: '',
@@ -436,20 +445,11 @@ var config = {
             location: { center: [12.03260, 42.54085], zoom: 11, pitch: 20, bearing: 0 }
         },
         {
-            id: 'chapter-40',
-            date: '2017-08-09',
-            title: `Via Dante Alighieri, Le Coste, Montefiascone`,
-            image: 'images/2017-08-09/_MG_0219.jpg',
-            layout: 'floating-card',
-            description: `<p>The tents were pushed against foliage rather than placed in any orderly campground, and that suited my memory of the trip. I was always half inside permission, half outside it. Rough ground, dry stems, and small debris surrounded us, but the lake was close enough to soften everything. I packed my things slowly, knowing that once I left, hospitality would again become something I had to negotiate.</p>`,
-            location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
-        },
-        {
             id: 'chapter-41',
             date: '2017-08-09',
             title: `Via Cassia, Acquapendente`,
             image: 'images/2017-08-09/_MG_0233 1.jpg',
-            layout: 'media-card',
+            layout: 'floating-card',
             description: `<p>The Cassia stretched ahead through Acquapendente, patched asphalt flickering under my wheel and dark spots floating in the sky like dirt on memory itself. I was learning that the road was never clean: not visually, not emotionally. Trucks, heat, repairs, and doubt stayed with me. Each blemish on the image feels accurate now, because my confidence was already scratched, but still rolling forward.</p>`,
             location: { center: [11.89788, 42.71112], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -458,7 +458,7 @@ var config = {
             date: '2017-08-09',
             title: `Via Cassia, San Casciano dei Bagni, Siena`,
             image: 'images/2017-08-09/_MG_0240-2.jpg',
-            layout: 'split',
+            layout: 'media-card',
             description: `<p>The Via Cassia opened in front of me, stripped of traffic, edged by white lines, and emptied into heat. My touring bags turned the bicycle into a small animal of burden, faithful but heavy. I trusted the road because there was no alternative. Between San Casciano and the next climb, I felt both free and exposed, my body measured against a landscape too wide for complaint.</p>`,
             location: { center: [11.80559, 42.80367], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -523,7 +523,7 @@ var config = {
             date: '2017-08-09',
             title: `Strada Provinciale di Radicofani, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0256.jpg',
-            layout: 'floating-card',
+            layout: 'media-card',
             description: `<p>Vineyard rows filled the foreground, disciplined and green against the exhausted hills. I saw the road angle upward and the distant tower on the ridge, and my mood tightened. Radicofani was visible enough to tempt me, far enough to punish me. The cultivated lines beside the asphalt made my wandering feel unruly. I was not planted here; I was passing through, dragging my life behind.</p>`,
             location: { center: [11.76663, 42.88325], zoom: 14, pitch: 60, bearing: 0 }
         },
@@ -532,7 +532,7 @@ var config = {
             date: '2017-08-09',
             title: `Strada Provinciale di Radicofani, Radicofani, Siena`,
             image: 'images/2017-08-09/_MG_0259.jpg',
-            layout: 'immersive-left',
+            layout: 'floating-card',
             description: `<p>Posts and wires held the vines in order while I moved without such support. The hilltop building stood on the horizon, a fixed mark I could neither ignore nor quickly reach. My bike creaked under water, bags, and ambition. I remember envying the vineyard’s rootedness, then resenting it. The road made me temporary, but the land around Radicofani seemed built from centuries of staying.</p>`,
             location: { center: [11.76663, 42.88325], zoom: 14, pitch: 60, bearing: 0 }
         },

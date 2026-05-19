@@ -93,6 +93,7 @@ journal_headers = {
 manual_layouts = {
     "_MG_0082-3.jpg": "immersive-left",   # Example: cover, article, floating-card, media-card, split, immersive-left, prose
     "_MG_0119-2.jpg": "immersive-left",   # Example for Day 3
+    "_MG_0155-3.jpg": "immersive-left",   # Example for Day 3
     # You can add as many as you want here!
 }
 
