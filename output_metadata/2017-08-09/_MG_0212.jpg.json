@@ -1,9 +1,9 @@
 {
-    "dc_description": "A lakeside scene at dusk or early evening with calm water reflecting a blue-pink sky. Several small motorboats are anchored offshore across the middle of the frame. Tall reeds and dark vegetation frame the lower left and right edges, with tree leaves silhouetted along the top. In the foreground there is a wooden railing or bench, and on the right side a vertical pole holds an Italian sign reading \"PIAZZOLA CARP-FISHING\" with a fishing period noted from July to May. Low hills or shoreline are visible in the distance.",
-    "novel_visual_observations": "The sign is positioned prominently against the sky and lake, while the boats form a loose horizontal line across the water. The image has visible film-like grain and low-light color tones, giving the scene a muted twilight appearance.",
+    "dc_description": "A lakeside scene at dusk or early evening with calm water reflecting a pink-blue sky. Several small motorboats are moored across the middle distance. Dark reeds frame the lower left and right edges, with a wooden railing or bench in the foreground. A tall signpost stands near the right side; the sign appears to reference the Comune di Montefiascone, Lago di Bolsena, and \u201cCARP-FISHING.\u201d Distant low hills and shoreline are visible on the horizon, and tree leaves hang from the top edge.",
+    "novel_visual_observations": "The sign includes Italian text and appears to state a fishing period from July to May. A single thin vertical post or stake rises from the water near the center foreground.",
     "filename": "_MG_0212.jpg",
     "time": "07:05",
-    "gps_coordinates": "[12.4922, 41.8902]",
-    "location_name": "Piazza del Colosseo, Municipio Roma I, Roma",
-    "rich_context": "Piazza del Colosseo, Celio, Municipio Roma I, Roma, Roma Capitale, Lazio, 00184, Italia"
+    "gps_coordinates": "[12.03260, 42.54085]",
+    "location_name": "Via Dante Alighieri, Le Coste, Montefiascone",
+    "rich_context": "Poste Italiane, 19, Via Dante Alighieri, Le Mosse, Le Coste, Montefiascone, Viterbo, Lazio, 01027, Italia"
 }

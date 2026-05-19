@@ -1,9 +1,9 @@
 {
-    "dc_description": "A quiet grove or orchard with many mature, gnarled trees with silvery-green foliage, likely olive trees. A narrow grassy dirt path runs through the center toward the background. On the left is a small raised shed or beehive-like box with a red roof and blue front panel, partly surrounded by branches and vegetation. On the right, an orange/yellow wooden boat-shaped object or small boat rests on supports beneath the trees. The ground is covered with tall grass, wildflowers, dry patches, and scattered leaf litter. The lighting is soft and natural, with a muted, slightly grainy image texture.",
-    "novel_visual_observations": "The orange boat on the right has faint writing along its side, and a simple wooden bench is visible deeper in the grove near the center-right background.",
+    "dc_description": "A landscape view of a quiet orchard or grove with rows of mature trees, likely olive trees, forming a grassy path through the center. The ground is uneven with dry grass, small wildflowers, and patches of bare soil. On the left is a small shed or box-like structure with a red roof and blue door, partly surrounded by branches and vegetation. On the right is a bright yellow boat or boat-shaped object resting on supports beneath the trees. A wooden bench is visible deeper in the grove near the center-right. The image has muted, slightly grainy colors with dense foliage filling most of the frame.",
+    "novel_visual_observations": "The yellow boat stands out as the most saturated object in an otherwise subdued green-gray orchard. Several tree trunks are twisted and gnarled, with silvery leaves creating a textured canopy across the upper half of the image.",
     "filename": "_MG_0218-2.jpg",
     "time": "07:09",
-    "gps_coordinates": "[12.4922, 41.8902]",
-    "location_name": "Piazza del Colosseo, Municipio Roma I, Roma",
-    "rich_context": "Piazza del Colosseo, Celio, Municipio Roma I, Roma, Roma Capitale, Lazio, 00184, Italia"
+    "gps_coordinates": "[12.03260, 42.54085]",
+    "location_name": "Via Dante Alighieri, Le Coste, Montefiascone",
+    "rich_context": "Poste Italiane, 19, Via Dante Alighieri, Le Mosse, Le Coste, Montefiascone, Viterbo, Lazio, 01027, Italia"
 }

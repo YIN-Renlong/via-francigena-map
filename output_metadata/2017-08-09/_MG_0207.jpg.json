@@ -1,12 +1,9 @@
 {
-    "dc_description": "A weathered yellow-and-gray metal rowboat rests on concrete blocks in a grassy orchard or garden area. The scene is filled with mature olive-like trees with silvery foliage, wild grass, and small white and blue flowers. A dark hedge runs along the background, with a blue gate visible on the right side. The lighting appears soft and subdued, suggesting late afternoon or shaded conditions.",
-    "novel_visual_observations": [
-        "The boat has visible lettering and a small Italian flag decal on its yellow side.",
-        "The ground vegetation is uneven, with patches of bare soil, tall grass, and scattered wildflowers."
-    ],
+    "dc_description": "A yellow and gray metal rowboat rests on concrete blocks in a grassy olive grove. The boat has printed lettering and an Italian flag decal on its side. The surrounding area contains mature olive trees with dense gray-green foliage, wild grass, small white and blue flowers, and a dark hedge in the background. A gate or fence is visible toward the rear right, partially obscured by trees. The image has a slightly grainy, cool-toned appearance.",
+    "novel_visual_observations": "The boat is elevated off the ground rather than floating or stored on a trailer. The ground is dotted with many small wildflowers, and the grove appears untended or naturalized.",
     "filename": "_MG_0207.jpg",
     "time": "06:58",
-    "gps_coordinates": "[12.4922, 41.8902]",
-    "location_name": "Piazza del Colosseo, Municipio Roma I, Roma",
-    "rich_context": "Piazza del Colosseo, Celio, Municipio Roma I, Roma, Roma Capitale, Lazio, 00184, Italia"
+    "gps_coordinates": "[12.03260, 42.54085]",
+    "location_name": "Via Dante Alighieri, Le Coste, Montefiascone",
+    "rich_context": "Poste Italiane, 19, Via Dante Alighieri, Le Mosse, Le Coste, Montefiascone, Viterbo, Lazio, 01027, Italia"
 }

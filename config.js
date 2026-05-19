@@ -376,29 +376,29 @@ var config = {
         {
             id: 'chapter-35',
             date: '2017-08-09',
-            title: `Piazza del Colosseo, Municipio Roma I, Roma`,
+            title: `Via Dante Alighieri, Le Coste, Montefiascone`,
             image: 'images/2017-08-09/_MG_0201-2.jpg',
             layout: 'floating-card',
             description: `<p>Morning began inside nylon and stale warmth, my sleeping pad pressed against me like proof that I had crossed another night. I woke before the road, before the lake brightened, before gratitude became departure. The tent wall caught a shard of light, and I remember thinking how fragile my shelter was against Italy’s August geography: canvas, dust, insects, breath, and a body trying to become brave.</p>`,
-            location: { center: [12.4922, 41.8902], zoom: 14, pitch: 60, bearing: 0 }
+            location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
         },
         {
             id: 'chapter-36',
             date: '2017-08-09',
-            title: `Piazza del Colosseo, Municipio Roma I, Roma`,
+            title: `Via Dante Alighieri, Le Coste, Montefiascone`,
             image: 'images/2017-08-09/_MG_0207.jpg',
             layout: 'media-card',
             description: `<p>At the lakeside, the yellow boat rested in rough grass, its little Italian flag bright against mud, weeds, and morning haze. I stood there with my bike waiting somewhere behind me, trying to delay the climb that would take me south. The uneven ground, bare soil, wildflowers, and water made the map feel physical again. My route was not a line; it was terrain resisting me.</p>`,
-            location: { center: [12.4922, 41.8902], zoom: 14, pitch: 60, bearing: 0 }
+            location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
         },
         {
             id: 'chapter-37',
             date: '2017-08-09',
-            title: `Piazza del Colosseo, Municipio Roma I, Roma`,
+            title: `Via Dante Alighieri, Le Coste, Montefiascone`,
             image: 'images/2017-08-09/_MG_0218-2.jpg',
             layout: 'floating-card',
             description: `<p>An orange boat, a bench, a grove, and the lake beyond: the morning offered me a small theater of stillness. I photographed it because I knew my body would soon become all movement, all heat, all calculation. The trees held shade like a promise I could not keep. Behind me were tents and borrowed friendship; before me, the road began widening into distance and doubt.</p>`,
-            location: { center: [12.4922, 41.8902], zoom: 14, pitch: 60, bearing: 0 }
+            location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
         },
         {
             id: 'chapter-38',
@@ -408,25 +408,25 @@ var config = {
             layout: 'prose',
             description: `<h2>Leaving the Lake, Leaving a Household</h2>
 <div class="prose-diptych">
-                        <figure><img src="images/2017-08-09/_MG_0203-2.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Piazza del Colosseo, Municipio Roma I, Roma • 06:45</figcaption></figure>
-                        <figure><img src="images/2017-08-09/_MG_0212.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Piazza del Colosseo, Municipio Roma I, Roma • 07:05</figcaption></figure>
+                        <figure><img src="images/2017-08-09/_MG_0203-2.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 06:45</figcaption></figure>
+                        <figure><img src="images/2017-08-09/_MG_0212.jpg" class="lightbox-trigger"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 07:05</figcaption></figure>
                     </div>
 <p>The day began not with departure, but with delay — the good kind, the kind that makes a journey less efficient and more human. Before I left Montefiascone, Marco and Paola took me toward the lake. There were tents among trees, boats resting near the shore, and that peculiar morning softness of central Italy in August: everything already warm, but not yet severe.</p>
 <p>A bicycle trip is often narrated as a line: from here to there, kilometer after kilometer, elevation after elevation. But in practice it is made of thresholds. A tent flap. A kitchen door. A lakeside path. A farewell said too casually because nobody wants to make it heavy.</p>
-<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0229-2.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Piazza del Colosseo, Municipio Roma I, Roma • 09:28</figcaption></figure>
+<figure class="prose-inline-container"><img src="images/2017-08-09/_MG_0229-2.jpg" class="prose-inline-img lightbox-trigger"><figcaption class="prose-caption">📍 Via Dante Alighieri, Le Coste, Montefiascone • 09:28</figcaption></figure>
 <p>Marco’s room, full of bicycles, bags, tools, and the accumulated improvisations of road life, felt like a small archive of motion. Not an archive in the official sense — no catalog, no institution, no polished display — but the kind that matters more to travelers: objects kept because they still have use, because they remember the hands that repaired them.</p>
 <p>I left later than a disciplined cyclist should have. By then the sun was no longer forgiving. But I also left carrying something that does not fit into panniers: the feeling that even temporary shelter changes the moral weight of a journey. To be hosted is to be reminded that endurance is never purely individual.</p>
 `,
-            location: { center: [12.4922, 41.8902], zoom: 11, pitch: 20, bearing: 0 }
+            location: { center: [12.03260, 42.54085], zoom: 11, pitch: 20, bearing: 0 }
         },
         {
             id: 'chapter-39',
             date: '2017-08-09',
-            title: `Piazza del Colosseo, Municipio Roma I, Roma`,
+            title: `Via Dante Alighieri, Le Coste, Montefiascone`,
             image: 'images/2017-08-09/_MG_0219.jpg',
             layout: 'floating-card',
             description: `<p>The tents were pushed against foliage rather than placed in any orderly campground, and that suited my memory of the trip. I was always half inside permission, half outside it. Rough ground, dry stems, and small debris surrounded us, but the lake was close enough to soften everything. I packed my things slowly, knowing that once I left, hospitality would again become something I had to negotiate.</p>`,
-            location: { center: [12.4922, 41.8902], zoom: 14, pitch: 60, bearing: 0 }
+            location: { center: [12.03260, 42.54085], zoom: 14, pitch: 60, bearing: 0 }
         },
         {
             id: 'chapter-40',

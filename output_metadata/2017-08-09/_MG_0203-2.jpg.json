@@ -1,9 +1,9 @@
 {
-    "dc_description": "A wooded campsite on uneven ground with two dome tents partially visible: a dark tent on the left and a gray tent on the right. The area is surrounded by trees and shrubs, with dry leaves and small items scattered on the ground between the tents. Through the trees in the background, a body of water is visible with several small boats near the shore.",
-    "novel_visual_observations": "The campsite appears elevated above the water, with the shoreline visible beyond dense vegetation. A small green cylindrical object and loose clothing or camping gear lie on the ground between the tents.",
+    "dc_description": "A wooded campsite on uneven ground with two dome tents in the foreground: a dark tent on the left and a gray-blue tent on the right. The area is surrounded by olive-like trees, shrubs, and dry leaf litter. Small camping items or clothing are scattered on the ground between the tents. In the background, water is visible through the trees, with a distant shoreline or low landmass across it.",
+    "novel_visual_observations": "The scene appears to be near a coastal or lakeside area, as boats or small dark shapes are visible on the water through the trees. The tents are pitched close to vegetation and there is no clearly defined campsite pad, suggesting an informal or rustic camping spot.",
     "filename": "_MG_0203-2.jpg",
     "time": "06:45",
-    "gps_coordinates": "[12.4922, 41.8902]",
-    "location_name": "Piazza del Colosseo, Municipio Roma I, Roma",
-    "rich_context": "Piazza del Colosseo, Celio, Municipio Roma I, Roma, Roma Capitale, Lazio, 00184, Italia"
+    "gps_coordinates": "[12.03260, 42.54085]",
+    "location_name": "Via Dante Alighieri, Le Coste, Montefiascone",
+    "rich_context": "Poste Italiane, 19, Via Dante Alighieri, Le Mosse, Le Coste, Montefiascone, Viterbo, Lazio, 01027, Italia"
 }

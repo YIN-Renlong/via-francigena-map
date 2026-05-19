@@ -1,12 +1,12 @@
 {
-    "dc_description": "Point-of-view image from inside a small tent, showing a person lying down with their feet extended toward the tent wall. The person is wearing light-colored ankle socks with small dark logos and tan pants. A silver-gray sleeping pad lies beneath their legs, with dark blue tent flooring around it. The tent wall is light-colored fabric with black trim and visible seams, zippers, and wrinkles. A dark bag or pouch is partially visible on the lower left side.",
+    "dc_description": "A first-person view from inside a tent shows a person lying down with their legs extended on a sleeping pad. The person is wearing light-colored socks with small dark logos and tan or pinkish pants. The tent interior has pale fabric walls with dark trim and a dark blue floor. A small bag or pouch is partially visible in the lower-left corner.",
     "novel_visual_observations": [
-        "The tent fabric has a bright reflective patch near the upper left-center, suggesting sunlight or a flashlight beam hitting the wall.",
-        "The sleeping pad has a textured, repeating patterned surface and occupies the lower center-right of the frame."
+        "The sleeping pad has a light gray patterned surface and occupies the lower center of the frame.",
+        "The tent doorway or wall seam is outlined by a thick black border, with zipper hardware visible along the right edge."
     ],
     "filename": "_MG_0201-2.jpg",
     "time": "06:36",
-    "gps_coordinates": "[12.4922, 41.8902]",
-    "location_name": "Piazza del Colosseo, Municipio Roma I, Roma",
-    "rich_context": "Piazza del Colosseo, Celio, Municipio Roma I, Roma, Roma Capitale, Lazio, 00184, Italia"
+    "gps_coordinates": "[12.03260, 42.54085]",
+    "location_name": "Via Dante Alighieri, Le Coste, Montefiascone",
+    "rich_context": "Poste Italiane, 19, Via Dante Alighieri, Le Mosse, Le Coste, Montefiascone, Viterbo, Lazio, 01027, Italia"
 }

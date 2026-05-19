@@ -1,12 +1,12 @@
 {
-    "dc_description": "A cluttered indoor room or workshop with a person seated on the left, their face obscured. The room contains multiple bicycles or bicycle parts in the foreground, including handlebars and a saddle bag. A workbench or table in the background is covered with equipment, bags, boxes, and small appliances or tools. A wall map hangs above the table, and a metal shelving unit with assorted bottles and containers is visible on the far left. Natural light enters from a window on the right.",
+    "dc_description": "A cluttered indoor room or workshop with a person seated on the left, their face blurred, wearing a light-colored shirt and holding a dark object. The space contains multiple bicycles or bicycle parts in the foreground, including handlebars, saddles, and bags. A wooden workbench or table across the back is crowded with equipment, bags, tools, and orange/black devices. A wall map hangs above the work area, and shelving with assorted containers and items is visible on the left. Bright daylight enters from a window on the right, creating strong contrast and glare.",
     "novel_visual_observations": [
-        "A large black-and-orange duffel bag and a rolled cylindrical item sit on the right side of the workbench.",
-        "Several bicycle-related items dominate the lower half of the image, including drop handlebars, a bike saddle, and attached storage bags."
+        "At least two bicycle saddles are visible in the foreground, suggesting multiple bikes stored very close together.",
+        "Several orange-and-black mechanical or electronic devices are lined up on the back table beneath a wall-mounted map."
     ],
     "filename": "_MG_0229-2.jpg",
     "time": "09:28",
-    "gps_coordinates": "[12.4922, 41.8902]",
-    "location_name": "Piazza del Colosseo, Municipio Roma I, Roma",
-    "rich_context": "Piazza del Colosseo, Celio, Municipio Roma I, Roma, Roma Capitale, Lazio, 00184, Italia"
+    "gps_coordinates": "[12.03260, 42.54085]",
+    "location_name": "Via Dante Alighieri, Le Coste, Montefiascone",
+    "rich_context": "Poste Italiane, 19, Via Dante Alighieri, Le Mosse, Le Coste, Montefiascone, Viterbo, Lazio, 01027, Italia"
 }

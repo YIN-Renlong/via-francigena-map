@@ -175,17 +175,24 @@ async def pass_1_visuals(client, filename, track_points):
     photo_time = get_photo_time(image_path)
     time_str = photo_time.strftime("%H:%M") if photo_time else "Unknown"
     
-    gps_coords = "[12.4922, 41.8902]" # Default
+    # Default fallback
+    gps_coords = "[12.4922, 41.8902]" 
     lat, lon = 41.8902, 12.4922
+    
     if photo_time and track_points:
+        # Find the absolute closest GPS point in time
         closest = min(track_points, key=lambda p: abs(p['time'] - photo_time))
-        if abs(closest['time'] - photo_time).total_seconds() <= 2700:
-            gps_coords = f"[{closest['lon']:.5f}, {closest['lat']:.5f}]"
-            lat, lon = closest['lat'], closest['lon']
+        
+        # SNAP LOGIC: We assign the photo to the nearest known location.
+        # If taken before the ride, it snaps to the start line.
+        # If taken after the ride, it snaps to the finish line.
+        gps_coords = f"[{closest['lon']:.5f}, {closest['lat']:.5f}]"
+        lat, lon = closest['lat'], closest['lon']
 
     if os.path.exists(json_path):
         with open(json_path, "r") as f: return json.load(f)
 
+    # Fetch the 3-level readable location name from OpenStreetMap
     short_title, rich_context = await get_location_data(client, lat, lon)
     print(f"🌍 Pass 1: Scanning {filename} at {short_title}...")
     
@@ -205,7 +212,9 @@ async def pass_1_visuals(client, filename, track_points):
         res.update({"filename": filename, "time": time_str, "gps_coordinates": gps_coords, "location_name": short_title, "rich_context": rich_context})
         with open(json_path, "w") as f: json.dump(res, f, indent=4)
         return res
-    except Exception as e: print(f"❌ Error: {e}"); return None
+    except Exception as e: 
+        print(f"❌ Error: {e}")
+        return None
 
 async def pass_2_narrative(client, all_data):
     cache_path = os.path.join(JSON_DIR, "global_narratives.json")
