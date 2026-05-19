@@ -139,16 +139,21 @@
 
 /* C. Split Layout */
 .layout-split {
-    background-color: #f9f6ed;
+    background-color: transparent; /* Changed from solid color so the map can be clicked */
     display: grid;
     grid-template-columns: 30% 70%;
     min-height: 80vh;
+    
+    pointer-events: none; /* THE FIX: Lets the mouse click through the empty spaces */
 }
 .split-text {
     padding: 10vh 5vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #f9f6ed; /* Keep the text box solid yellow */
+    
+    pointer-events: auto; /* Makes the text box clickable */
 }
 .split-text h2 {
     font-size: 2rem;
@@ -161,6 +166,8 @@
 .split-photo {
     background-size: cover;
     background-position: center;
+    
+    pointer-events: auto; /* Makes the photo clickable */
 }
 
 /* D. Immersive Left (National Geographic Style) */
