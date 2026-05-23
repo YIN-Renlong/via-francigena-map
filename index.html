@@ -360,7 +360,31 @@
         var elevationChart = new Chart(ctx, { 
             type: 'line', 
             data: { labels: [], datasets: [{ data: [], fill: true, backgroundColor: 'rgba(26, 26, 26, 0.05)', borderWidth: 2, pointRadius: 0, segment: { borderColor: ctx => { if(!window.activeSpeeds) return '#1a1a1a'; let spd = window.activeSpeeds[ctx.p0DataIndex] * 3.6; if (spd < 12) return '#3498db'; if (spd < 22) return '#f1c40f'; if (spd < 32) return '#e67e22'; return '#c0392b'; } } }] }, 
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false }, verticalLine: { x: undefined } }, scales: { x: { display: false }, y: { display: true, position: 'right', grid: { color: '#e0ddd1' }, ticks: { color: '#888' } } }, animation: { duration: 0 } }, 
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                plugins: { 
+                    legend: { display: false }, 
+                    tooltip: { enabled: false }, 
+                    verticalLine: { x: undefined } 
+                }, 
+                scales: { 
+                    x: { display: false }, 
+                    y: { 
+                        display: true, 
+                        position: 'right', 
+                        grid: { color: '#e0ddd1' }, 
+                        ticks: { 
+                            color: '#888',
+                            // NEW: Adds the "m" to the y-axis labels
+                            callback: function(value) {
+                                return value + 'm';
+                            }
+                        } 
+                    } 
+                }, 
+                animation: { duration: 0 } 
+            }, 
             plugins: [{ id: 'verticalLine', afterDraw: chart => { if (chart.config.options.plugins.verticalLine && chart.config.options.plugins.verticalLine.x !== undefined) { const x = chart.config.options.plugins.verticalLine.x; const c = chart.ctx; const yA = chart.scales.y; c.save(); c.beginPath(); c.moveTo(x, yA.top); c.lineTo(x, yA.bottom); c.lineWidth = 1; c.strokeStyle = '#1a1a1a'; c.stroke(); c.restore(); } } }] 
         });
 
