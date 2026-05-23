@@ -1,32 +1,49 @@
 <?php
 /**
  * Plugin Name: Via Francigena Map Updater
- * Description: 1-Click updater to pull the latest interactive map from GitHub to the /map directory.
- * Version: 1.1 (Upgraded with Cache Busting & Error Logging)
+ * Description: 1-Click updater to pull the latest interactive map from GitHub. Now features Normal and Force Rebuild modes.
+ * Version: 2.0 (Dual-Mode Architecture)
  * Author: YIN Renlong
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// Global variable to store detailed copy errors
 global $vfm_copy_errors;
 $vfm_copy_errors = array();
 
-// 1. Add the Button to the Top Admin Bar
+// 1. Add the Dropdown Menu to the Top Admin Bar
 add_action( 'admin_bar_menu', 'vfm_add_admin_bar_button', 100 );
 function vfm_add_admin_bar_button( $admin_bar ) {
     if ( ! current_user_can( 'manage_options' ) ) return; 
 
+    // Main Menu Item
     $admin_bar->add_node( array(
-        'id'    => 'vfm-update-map',
-        'title' => '🗺️ Update Francigena Map',
-        'href'  => wp_nonce_url( admin_url( 'admin-post.php?action=vfm_update_map' ), 'vfm_update_nonce' ),
-        'meta'  => array( 'title' => 'Pull latest version from GitHub' )
+        'id'    => 'vfm-map-menu',
+        'title' => '🗺️ Map Sync',
+        'meta'  => array( 'title' => 'Sync Map with GitHub' )
+    ));
+
+    // Sub-Item 1: Normal Update
+    $admin_bar->add_node( array(
+        'id'     => 'vfm-update-normal',
+        'parent' => 'vfm-map-menu',
+        'title'  => '🔵 Update Map (Normal)',
+        'href'   => wp_nonce_url( admin_url( 'admin-post.php?action=vfm_do_update&mode=normal' ), 'vfm_update_nonce' ),
+        'meta'   => array( 'title' => 'Overwrites files, but leaves old deleted files behind.' )
+    ));
+
+    // Sub-Item 2: Force Rebuild (The Nuke Option)
+    $admin_bar->add_node( array(
+        'id'     => 'vfm-update-force',
+        'parent' => 'vfm-map-menu',
+        'title'  => '🔴 Force Rebuild (Wipe & Sync)',
+        'href'   => wp_nonce_url( admin_url( 'admin-post.php?action=vfm_do_update&mode=force' ), 'vfm_update_nonce' ),
+        'meta'   => array( 'title' => 'DANGER: Deletes the entire /map folder first, then rebuilds from scratch.' )
     ));
 }
 
-// 2. Handle the Button Click
-add_action( 'admin_post_vfm_update_map', 'vfm_handle_update' );
+// 2. Handle the Button Clicks
+add_action( 'admin_post_vfm_do_update', 'vfm_handle_update' );
 function vfm_handle_update() {
     global $wp_filesystem, $vfm_copy_errors;
 
@@ -34,10 +51,11 @@ function vfm_handle_update() {
         wp_die( 'Security check failed.' );
     }
 
+    $mode = isset( $_GET['mode'] ) ? $_GET['mode'] : 'normal';
+
     require_once( ABSPATH . 'wp-admin/includes/file.php' );
     WP_Filesystem();
 
-    // CACHE BUSTER: Forces GitHub to give us the absolute newest ZIP file, not a cached one!
     $github_zip_url = 'https://github.com/YIN-Renlong/via-francigena-map/archive/refs/heads/main.zip?nocache=' . time();
     $target_dir = ABSPATH . 'map'; 
     $temp_dir = WP_CONTENT_DIR . '/vfm_temp_extract'; 
@@ -58,30 +76,41 @@ function vfm_handle_update() {
         exit;
     }
 
-    // Step C: Move files to /map
     $source_dir = $temp_dir . '/via-francigena-map-main';
-    
+
+    // ==========================================
+    // STEP C: THE FORCE WIPE LOGIC
+    // ==========================================
+    if ( $mode === 'force' ) {
+        // If Force Mode, we completely annihilate the /map folder and everything inside it!
+        if ( $wp_filesystem->exists( $target_dir ) ) {
+            $wp_filesystem->delete( $target_dir, true ); // true = recursive delete
+        }
+    }
+
+    // Ensure the target directory exists before copying
     if ( ! is_dir( $target_dir ) ) {
         wp_mkdir_p( $target_dir ); 
     }
 
+    // Step D: Copy fresh files over
     $copy_success = vfm_recursive_copy_and_filter( $source_dir, $target_dir );
 
-    // Step D: Cleanup temp files
+    // Step E: Cleanup temp folder
     $wp_filesystem->delete( $temp_dir, true );
 
-    // Step E: Redirect with success or detailed error message
+    // Step F: Redirect to show success message
     if ( $copy_success ) {
-        wp_redirect( admin_url( '?vfm_status=success' ) );
+        $status_code = ($mode === 'force') ? 'success_force' : 'success_normal';
+        wp_redirect( admin_url( '?vfm_status=' . $status_code ) );
     } else {
-        // Save the exact errors to a transient so we can display them on the next page load
         set_transient( 'vfm_copy_error_log', implode( '<br>', $vfm_copy_errors ), 60 );
         wp_redirect( admin_url( '?vfm_status=error_copy' ) );
     }
     exit;
 }
 
-// 3. Custom Copy Function with Error Logging
+// 3. Custom Copy Function
 function vfm_recursive_copy_and_filter( $src, $dst ) {
     global $vfm_copy_errors;
     $dir = opendir( $src );
@@ -91,24 +120,23 @@ function vfm_recursive_copy_and_filter( $src, $dst ) {
     while ( false !== ( $file = readdir( $dir ) ) ) {
         if ( ( $file != '.' ) && ( $file != '..' ) ) {
             
-            // Ignore Python files & backend data
+            // Ignore backend scripts
             $blacklist = array( 'kml_raw', '.github', '.gitignore', 'README.md' );
             if ( in_array( $file, $blacklist ) ) continue;
             if ( pathinfo( $file, PATHINFO_EXTENSION ) === 'py' ) continue;
 
-            if ( is_dir( $src . '/' . $file ) ) {
-                $res = vfm_recursive_copy_and_filter( $src . '/' . $file, $dst . '/' . $file );
+            $src_path = $src . '/' . $file;
+            $dst_path = $dst . '/' . $file;
+
+            if ( is_dir( $src_path ) ) {
+                $res = vfm_recursive_copy_and_filter( $src_path, $dst_path );
                 if ( !$res ) $success = false;
             } else {
-                // Try to delete the old file first to prevent overwrite permission errors
-                if ( file_exists( $dst . '/' . $file ) ) {
-                    @unlink( $dst . '/' . $file );
-                }
-                
-                $res = copy( $src . '/' . $file, $dst . '/' . $file );
+                // Copy the file
+                $res = copy( $src_path, $dst_path );
                 if ( !$res ) {
                     $success = false;
-                    $vfm_copy_errors[] = "Failed to copy: " . $dst . '/' . $file; // Log the exact file!
+                    $vfm_copy_errors[] = "Failed to copy: " . $dst_path; 
                 }
             }
         }
@@ -117,15 +145,17 @@ function vfm_recursive_copy_and_filter( $src, $dst ) {
     return $success;
 }
 
-// 4. Show the Notification Message on Screen
+// 4. Show the Notification Messages
 add_action( 'admin_notices', 'vfm_admin_notices' );
 function vfm_admin_notices() {
     if ( ! isset( $_GET['vfm_status'] ) ) return;
 
     $status = $_GET['vfm_status'];
     
-    if ( $status === 'success' ) {
-        echo '<div class="notice notice-success is-dismissible"><p>✅ <strong>Success!</strong> The Via Francigena map was successfully updated from GitHub. <a href="/map/" target="_blank">View Map</a></p></div>';
+    if ( $status === 'success_normal' ) {
+        echo '<div class="notice notice-success is-dismissible"><p>🔵 <strong>Normal Sync Complete!</strong> Files were overwritten successfully. <a href="/map/" target="_blank">View Map</a></p></div>';
+    } elseif ( $status === 'success_force' ) {
+        echo '<div class="notice notice-success is-dismissible" style="border-left-color: #c0392b;"><p>🔴 <strong>Force Rebuild Complete!</strong> The /map folder was completely wiped and rebuilt from scratch. No ghost files remain! <a href="/map/" target="_blank">View Map</a></p></div>';
     } elseif ( $status === 'error_download' ) {
         echo '<div class="notice notice-error is-dismissible"><p>❌ <strong>Error:</strong> Could not download the ZIP file from GitHub.</p></div>';
     } elseif ( $status === 'error_unzip' ) {
@@ -133,10 +163,8 @@ function vfm_admin_notices() {
     } elseif ( $status === 'error_copy' ) {
         $error_log = get_transient( 'vfm_copy_error_log' );
         echo '<div class="notice notice-error is-dismissible">';
-        echo '<p>⚠️ <strong>Warning:</strong> Some files could not be copied to the /map directory due to server write permissions.</p>';
-        if ( $error_log ) {
-            echo '<p><strong>Details:</strong><br>' . $error_log . '</p>';
-        }
+        echo '<p>⚠️ <strong>Warning:</strong> Some files could not be copied due to server permissions.</p>';
+        if ( $error_log ) { echo '<p><strong>Details:</strong><br>' . $error_log . '</p>'; }
         echo '</div>';
         delete_transient( 'vfm_copy_error_log' );
     }
