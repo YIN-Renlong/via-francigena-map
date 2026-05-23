@@ -414,91 +414,82 @@
         var marker = new maplibregl.Marker({ color: "#1e3a2a" }).setLngLat(config.chapters[0].location.center).addTo(map);
         var scroller = scrollama();
         
+        
+
         // Setup Chart.js
         var ctx = document.getElementById('elevationChart').getContext('2d');
         
-        // Custom Plugin 1: Adds an elegant drop shadow beneath the colored line
+        // -------------------------------------------------------------
+        // UPGRADED MODERN CHART PLUGINS & CONFIG (FLAT DESIGN)
+        // -------------------------------------------------------------
+
+        // Custom Plugin 1: Disabled the heavy shadow for a clean "Flat" look.
         const dropShadowPlugin = {
             id: 'dropShadow',
             beforeDatasetDraw: (chart, args) => {
-                // ONLY apply the shadow to Dataset 0 (The colored line)
-                if (args.index === 0) {
-                    const ctx = chart.ctx;
-                    ctx.save();
-                    ctx.shadowColor = 'rgba(0, 0, 0, 0.4)'; // Slightly darker shadow for better pop
-                    ctx.shadowBlur = 6;
-                    ctx.shadowOffsetX = 0;
-                    ctx.shadowOffsetY = 4;
-                }
-            },
-            afterDatasetDraw: (chart, args) => {
-                if (args.index === 0) {
-                    chart.ctx.restore();
-                }
+                // Left intentionally blank to remove the dated 3D shadow effect.
+                // The pure, flat colored line is much more modern.
             }
         };
 
-        // Custom Plugin 2: The Delicate Dashed Scrubber with Locator Ring
+        // Custom Plugin 2: Modernized Scrubber & High-Contrast Flat Tooltip
         const verticalScrubberPlugin = { 
             id: 'verticalLine', 
             afterDraw: chart => { 
                 if (chart.config.options.plugins.verticalLine && chart.config.options.plugins.verticalLine.x !== undefined) { 
                     const x = chart.config.options.plugins.verticalLine.x; 
-                    const y = chart.config.options.plugins.verticalLine.y; // Get the Y coordinate for the dot
+                    const y = chart.config.options.plugins.verticalLine.y; 
                     const c = chart.ctx; 
                     const yA = chart.scales.y; 
                     
                     c.save(); 
                     
-                    // 1. Draw the delicate dashed line
+                    // 1. Ultra-minimal dashed guide line
                     c.beginPath(); 
-                    c.setLineDash([4, 4]); // Creates a 4px dash, 4px gap pattern
+                    c.setLineDash([4, 4]); 
                     c.moveTo(x, yA.top); 
                     c.lineTo(x, yA.bottom); 
-                    c.lineWidth = 1; 
-                    c.strokeStyle = 'rgba(26, 26, 26, 0.3)'; // Softer, semi-transparent line
+                    c.lineWidth = 1.5; 
+                    c.strokeStyle = 'rgba(26, 26, 26, 0.15)'; // Very faint
                     c.stroke(); 
                     
-                    // 2. Draw the elegant locator ring at the intersection point
                     if (y !== undefined) {
+                        // 2. Clean Locator Ring
                         c.beginPath();
                         c.setLineDash([]);
                         c.arc(x, y, 4, 0, 2 * Math.PI);
-                        c.fillStyle = '#f9f6ed';
+                        c.fillStyle = '#ffffff';
                         c.fill();
-                        c.lineWidth = 2;
-                        c.strokeStyle = '#1a1a1a';
+                        c.lineWidth = 2.5;
+                        c.strokeStyle = '#1a1a1a'; // Crisp dark border
                         c.stroke();
                         
-                        // 3. Draw the Floating Altitude "Pill"
+                        // 3. Modern "Flat UI" Tooltip Pill (High Contrast)
                         const altText = chart.config.options.plugins.verticalLine.altText;
                         if (altText !== undefined) {
-                            const textX = x + 12; // Offset to the right
-                            const textY = y - 10; // Offset slightly up
+                            const textX = x + 12; 
+                            const textY = y - 10; 
                             
-                            c.font = 'bold 14px Karla, sans-serif';
+                            c.font = 'bold 13px Karla, sans-serif';
                             const textWidth = c.measureText(altText).width;
-                            const unitWidth = c.measureText('m').width; // Assuming 'm' is smaller, but we measure roughly
-                            const totalWidth = textWidth + 14; 
+                            const unitWidth = c.measureText('m').width; 
+                            const totalWidth = textWidth + unitWidth + 4; 
                             
-                            // Draw frosted glass background pill
-                            c.fillStyle = 'rgba(249, 246, 237, 0.85)'; 
+                            // Solid Dark Background (No border, pure flat)
+                            c.fillStyle = '#1a1a1a'; 
                             c.beginPath();
-                            c.roundRect(textX - 6, textY - 14, totalWidth + 12, 22, 4); // x, y, width, height, border-radius
+                            c.roundRect(textX - 8, textY - 14, totalWidth + 16, 24, 6); // Smoother radius
                             c.fill();
-                            c.strokeStyle = 'rgba(224, 221, 209, 0.8)';
-                            c.lineWidth = 1;
-                            c.stroke();
 
-                            // Draw Altitude Number
-                            c.fillStyle = '#1a1a1a';
-                            c.font = 'bold 14px Karla, sans-serif';
-                            c.fillText(altText, textX, textY + 2);
+                            // Crisp White Altitude Number
+                            c.fillStyle = '#ffffff';
+                            c.font = 'bold 13px Karla, sans-serif';
+                            c.fillText(altText, textX, textY + 3);
                             
-                            // Draw 'm' Unit
-                            c.fillStyle = '#888888';
+                            // Faded White 'm' Unit
+                            c.fillStyle = 'rgba(255, 255, 255, 0.6)';
                             c.font = 'normal 11px Karla, sans-serif';
-                            c.fillText('m', textX + textWidth + 1, textY + 2);
+                            c.fillText('m', textX + textWidth + 2, textY + 3);
                         }
                     }
                     c.restore();
@@ -512,10 +503,13 @@
                 labels: [], 
                 datasets: [
                     { 
-                        // DATASET 0: The Top Colored Line (No Fill)
+                        // DATASET 0: The Top Colored Line (Flat & Smooth)
                         data: [], 
                         fill: false, 
-                        borderWidth: 2.5, // Slightly thicker line looks more premium
+                        borderWidth: 3, // Slightly thicker for the flat aesthetic
+                        tension: 0.15, // NEW: Smooths out the jagged GPS points elegantly
+                        borderJoinStyle: 'round',
+                        borderCapStyle: 'round',
                         pointRadius: 0, 
                         segment: { 
                             borderColor: ctx => { 
@@ -529,10 +523,11 @@
                         } 
                     },
                     {
-                        // DATASET 1: The Bottom "Mist" Fill (No Line)
+                        // DATASET 1: The Bottom "Mist" (Ultra Subtle)
                         data: [],
                         fill: 'origin',
-                        borderWidth: 0, // No line drawn here
+                        borderWidth: 0, 
+                        tension: 0.15, // Must match the top line tension!
                         pointRadius: 0,
                         borderColor: 'transparent',
                         backgroundColor: (context) => {
@@ -540,8 +535,8 @@
                             const {ctx, chartArea} = chart;
                             if (!chartArea) return null;
                             const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-                            // Made the mist slightly more transparent so it feels ethereal
-                            gradient.addColorStop(0, 'rgba(26, 26, 26, 0.12)'); 
+                            // Vastly reduced opacity for a cleaner look
+                            gradient.addColorStop(0, 'rgba(26, 26, 26, 0.04)'); 
                             gradient.addColorStop(1, 'rgba(249, 246, 237, 0)');
                             return gradient;
                         }
@@ -554,23 +549,33 @@
                 plugins: { 
                     legend: { display: false }, 
                     tooltip: { enabled: false }, 
-                    verticalLine: { x: undefined, y: undefined } // Initialize Y as well
+                    verticalLine: { x: undefined, y: undefined } 
                 }, 
                 scales: { 
                     x: { display: false }, 
                     y: { 
                         display: true, 
                         position: 'right', 
-                        grid: { color: 'rgba(224, 221, 209, 0.3)' }, // Made the background grid lines extremely faint
+                        border: { 
+                            display: false, // 1. Removes the hard vertical edge line
+                            dash: [4, 4]    // 2. Makes the grid lines elegantly dashed
+                        }, 
+                        grid: { 
+                            display: true, // Bring the grid back
+                            color: 'rgba(26, 26, 26, 0.06)', // 3. Ultra-low opacity (6%) so it barely whispers
+                            tickLength: 0, // 4. Removes the ugly little notch marks next to the numbers
+                            drawTicks: false
+                        },
                         ticks: { 
-                            color: '#888',
+                            color: '#a0a0a0', 
+                            padding: 10, // Pushes numbers slightly away from the graph for breathing room
+                            font: { size: 10, family: "'Karla', sans-serif" },
                             callback: function(value) { return value + 'm'; }
                         } 
                     } 
-                }, 
+                },
                 animation: { duration: 0 } 
             }, 
-            // Load our two new custom design plugins
             plugins: [dropShadowPlugin, verticalScrubberPlugin] 
         });
 
