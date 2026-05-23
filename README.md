@@ -105,7 +105,7 @@ To embed the application within a WordPress CMS environment (WPBakery) without s
 3.  **Iframe Throttling Mitigation:** To bypass browser iframe throttling and prevent premature scroll interception by the mouse, an invisible CSS shield restricts pointer events until the iframe is perfectly aligned in the viewport.
 4.  **API Security and Vector Tiles:** The project utilizes Esri ArcGIS V2 vector basemaps ("Modern Antique"). To secure the requisite API keys within a public, client-side configuration file, strict HTTP Referrer URL restrictions were implemented (e.g., `https://*.yin.roma.it/*`). This restricts tile access exclusively to authorized development and production environments, neutralizing unauthorized usage.
 
-### Phase 7: Telemetry & Data Visualization Polish
+### Phase 7: Telemetry & Data Visualization Polish (23 May, 2026)
 
 To enhance the professional aesthetic of the data visualization and mimic high-end spatial tracking platforms (e.g., Strava, Garmin), several refinements were made to the dashboard interface:
 
@@ -140,6 +140,15 @@ To resolve this without sacrificing the rich visual feedback, a three-pronged op
 1. **Staggered Rendering and Event Debouncing:** To prevent the MapLibre flyTo animation and the Chart.js update method from fighting for CPU/GPU resources, a "staggered rendering" architecture was introduced. The system now allows the heavy 3D map flight to initiate first. A setTimeout delays the chart redraw and telemetry calculations by 350 milliseconds, allowing the dashboard to smoothly "catch up" to the map. Furthermore, a clearTimeout debounce was added to the scroll observer; if a user rapidly scrolls past multiple photos, the system actively cancels the chart calculations for the skipped waypoints, preserving massive amounts of processing power.
 2. **Eradicating DOM Thrashing:** The custom animateValue (odometer) engine initially utilized innerHTML to inject the dynamically formatted numbers (e.g., <span style="...">+12.4%</span>). Because this fired 60 times a second across three separate metrics, it forced the browser to destroy, re-parse, and rebuild HTML nodes 180 times per second, triggering heavy Layout Recalculation (Reflow). The engine was rewritten to cache the HTML structure once upon initialization and exclusively use textContent to swap the raw numerical strings, reducing CPU load by orders of magnitude.
 3. **Asynchronous Media Unpacking:** Because the archive utilizes high-resolution DSLR photographs, the browser's default behavior was pausing the main thread to mathematically decode the heavy JPEGs as they entered the viewport, exacerbating scroll lag. The HTML5 decoding="async" attribute was injected into the procedural layout generator, instructing the browser to unpack the imagery on a background thread without interrupting the interactive scrolling timeline.
+
+### Phase 11: Final Polish, Typography Unification, and Deployment Architecture (Post-Review Iteration)
+
+Following a final review session with academic advisors, several critical UI/UX adjustments were implemented to elevate the project from a functional archive to a museum-quality digital exhibition. 
+
+1. **Typography Unification:** To establish a seamless transition between the parent WordPress CMS and the interactive documentary iframe, the typography was unified. The legacy serif fonts (Georgia and Merriweather) were replaced with elegant, modern sans-serifs (**Karla** for body text and headers, matching the parent site). 
+2. **Mobile Scaling & "Breathing Room":** Media queries were refined to dynamically scale down font sizes and line heights on mobile devices (<800px), preventing text from overwhelming small viewports. Additionally, the negative margins on the `HANGING_LEFT` and `HANGING_RIGHT` image layouts were slightly reduced. This preserves the editorial "breaking the grid" aesthetic while providing the text column with more spatial breathing room for enhanced readability.
+3. **The 1-Click Deployment Pipeline (Cache-Busting):** To facilitate rapid iteration without relying on heavy CI/CD pipelines, a custom WordPress PHP plugin (`via-francigena-updater.php`) was developed. This plugin allows admins to pull the latest GitHub repository directly into the live server with one click. To defeat aggressive GitHub CDN and browser caching, query-string cache busters (`?nocache=time()` and `?v=2.0`) were engineered into both the PHP fetch logic and the HTML asset links, guaranteeing immediate live updates.
+4. **Micro-Branding & SEO:** A custom favicon and `apple-touch-icon` were integrated, and the browser `<title>` was expanded, cementing the archive's identity as a standalone, professional web application.
 
 ### Algorithmic Layout Distribution
 To ensure the various spatial components are utilized dynamically without overwhelming the interface, the `build_website.py` compiler assigns layouts using a procedural generation algorithm based on two core principles:
