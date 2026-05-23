@@ -231,6 +231,17 @@
             font-weight: 700;
         }
 
+
+        /* Ghost class for the Minimap */
+        .minimap-ghost {
+            opacity: 0.15 !important; /* Fades it into the shadows */
+            filter: grayscale(100%); /* Removes bright colors so it doesn't clash */
+        }
+        .minimap-ghost:hover {
+            opacity: 1 !important; /* Lights up when hovered */
+            filter: grayscale(0%);
+        }
+
     </style>
 </head>
 <body>
@@ -843,16 +854,19 @@
                 });
                 response.element.classList.add('active');
 
-                // --- SMART DASHBOARD AUTO-HIDE LOGIC ---
+                // --- NEW: SMART DASHBOARD & MINIMAP AUTO-HIDE LOGIC ---
                 const dashboard = document.getElementById('dashboard');
                 const dashToggle = document.getElementById('dash-toggle');
+                const minimapBox = document.getElementById('minimap-container'); // <-- Get the minimap
                 
                 if (chapter.layout === 'prose' || chapter.layout === 'cover' || chapter.layout === 'article-solid' || chapter.layout === 'immersive-left') {
                     dashboard.classList.add('dash-hidden');
                     dashToggle.innerHTML = '▲ Data';
+                    minimapBox.classList.add('minimap-ghost'); // <-- Turn into a Ghost
                 } else {
                     dashboard.classList.remove('dash-hidden');
                     dashToggle.innerHTML = '▼ Hide';
+                    minimapBox.classList.remove('minimap-ghost'); // <-- Return to normal
                 }
             });
         });
