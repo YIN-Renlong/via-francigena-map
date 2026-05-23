@@ -419,6 +419,15 @@ hr.wavy-divider {
 /* --------------------------------------------------------------------------
    5. MOBILE RESPONSIVE OVERRIDES
    -------------------------------------------------------------------------- */
+
+/* Fix for massive zoomed-in background photos on mobile */
+    .layout-cover, 
+    .layout-immersive-left,
+    .split-photo {
+        background-attachment: scroll !important; 
+        background-position: center center !important;
+    }
+   
 @media (max-width: 800px) {
     
     /* --- NEW: Mobile Typography Fixes --- */
