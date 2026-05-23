@@ -300,7 +300,7 @@
         
         <div id="stats-container">
             <div class="local-row"><div class="local-val accent" id="g-dist">0.0</div><div class="local-lbl">Distance (km)</div></div>
-            <div class="local-row"><div class="local-val" id="val-alt">0<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">m</span></div><div class="local-lbl">Altitude</div></div>
+            <div class="local-row"><div class="local-val" id="val-grad">0.0<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">%</span></div><div class="local-lbl">Gradient</div></div>
             <div class="local-row"><div class="local-val" id="val-spd">0.0</div><div class="local-lbl">Speed (km/h)</div></div>
         </div>
         </div>
@@ -312,8 +312,8 @@
         function formatDuration(s) { var h=Math.floor(s/3600); var m=Math.floor((s%3600)/60); return h+"h "+m+"m"; }
         function formatClock(d) { return d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); }
 
-        // --- NEW: NUMBER TWEENING ENGINE ---
-        function animateValue(obj, start, end, duration, decimals = 0, suffix = '') {
+        // --- UPGRADED NUMBER TWEENING ENGINE ---
+        function animateValue(obj, start, end, duration, decimals = 0, suffix = '', forcePlus = false) {
             // Cancel any currently running animation on this element to prevent flickering during fast scrolling
             if (obj.animationId) cancelAnimationFrame(obj.animationId);
 
@@ -325,13 +325,31 @@
                 // Ease-out-cubic formula for an elegant, realistic deceleration
                 const easeProgress = 1 - Math.pow(1 - progress, 3); 
                 
-                const currentVal = (start + (end - start) * easeProgress).toFixed(decimals);
-                obj.innerHTML = currentVal + suffix;
+                // Calculate the raw number first so we can check if it is positive or negative
+                let currentVal = start + (end - start) * easeProgress;
+                let formattedVal = currentVal.toFixed(decimals);
+                
+                // Add a '+' sign for positive gradients if requested (negatives get a '-' automatically)
+                let prefix = (forcePlus && currentVal > 0.05) ? '+' : ''; 
+                
+                // Inject the final string into the HTML
+                obj.innerHTML = prefix + formattedVal + suffix;
+
+                // Color code the gradient (Red for steep uphill, Blue for downhill)
+                if (forcePlus) {
+                    if (currentVal > 3) {
+                        obj.style.color = '#c0392b'; // Red for steep climb
+                    } else if (currentVal < -3) {
+                        obj.style.color = '#3498db'; // Blue for steep descent
+                    } else {
+                        obj.style.color = '#1a1a1a'; // Dark gray for flat-ish
+                    }
+                }
 
                 if (progress < 1) {
                     obj.animationId = window.requestAnimationFrame(step);
                 } else {
-                    // Animation complete: store the final exact value
+                    // Animation complete: store the final exact value for the next scroll event
                     obj.dataset.currentVal = end; 
                 }
             };
@@ -383,35 +401,162 @@
         
         // Setup Chart.js
         var ctx = document.getElementById('elevationChart').getContext('2d');
+        
+        // Custom Plugin 1: Adds an elegant drop shadow beneath the colored line
+        const dropShadowPlugin = {
+            id: 'dropShadow',
+            beforeDatasetDraw: (chart, args) => {
+                // ONLY apply the shadow to Dataset 0 (The colored line)
+                if (args.index === 0) {
+                    const ctx = chart.ctx;
+                    ctx.save();
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.4)'; // Slightly darker shadow for better pop
+                    ctx.shadowBlur = 6;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 4;
+                }
+            },
+            afterDatasetDraw: (chart, args) => {
+                if (args.index === 0) {
+                    chart.ctx.restore();
+                }
+            }
+        };
+
+        // Custom Plugin 2: The Delicate Dashed Scrubber with Locator Ring
+        const verticalScrubberPlugin = { 
+            id: 'verticalLine', 
+            afterDraw: chart => { 
+                if (chart.config.options.plugins.verticalLine && chart.config.options.plugins.verticalLine.x !== undefined) { 
+                    const x = chart.config.options.plugins.verticalLine.x; 
+                    const y = chart.config.options.plugins.verticalLine.y; // Get the Y coordinate for the dot
+                    const c = chart.ctx; 
+                    const yA = chart.scales.y; 
+                    
+                    c.save(); 
+                    
+                    // 1. Draw the delicate dashed line
+                    c.beginPath(); 
+                    c.setLineDash([4, 4]); // Creates a 4px dash, 4px gap pattern
+                    c.moveTo(x, yA.top); 
+                    c.lineTo(x, yA.bottom); 
+                    c.lineWidth = 1; 
+                    c.strokeStyle = 'rgba(26, 26, 26, 0.3)'; // Softer, semi-transparent line
+                    c.stroke(); 
+                    
+                    // 2. Draw the elegant locator ring at the intersection point
+                    if (y !== undefined) {
+                        c.beginPath();
+                        c.setLineDash([]);
+                        c.arc(x, y, 4, 0, 2 * Math.PI);
+                        c.fillStyle = '#f9f6ed';
+                        c.fill();
+                        c.lineWidth = 2;
+                        c.strokeStyle = '#1a1a1a';
+                        c.stroke();
+                        
+                        // 3. Draw the Floating Altitude "Pill"
+                        const altText = chart.config.options.plugins.verticalLine.altText;
+                        if (altText !== undefined) {
+                            const textX = x + 12; // Offset to the right
+                            const textY = y - 10; // Offset slightly up
+                            
+                            c.font = 'bold 14px Karla, sans-serif';
+                            const textWidth = c.measureText(altText).width;
+                            const unitWidth = c.measureText('m').width; // Assuming 'm' is smaller, but we measure roughly
+                            const totalWidth = textWidth + 14; 
+                            
+                            // Draw frosted glass background pill
+                            c.fillStyle = 'rgba(249, 246, 237, 0.85)'; 
+                            c.beginPath();
+                            c.roundRect(textX - 6, textY - 14, totalWidth + 12, 22, 4); // x, y, width, height, border-radius
+                            c.fill();
+                            c.strokeStyle = 'rgba(224, 221, 209, 0.8)';
+                            c.lineWidth = 1;
+                            c.stroke();
+
+                            // Draw Altitude Number
+                            c.fillStyle = '#1a1a1a';
+                            c.font = 'bold 14px Karla, sans-serif';
+                            c.fillText(altText, textX, textY + 2);
+                            
+                            // Draw 'm' Unit
+                            c.fillStyle = '#888888';
+                            c.font = 'normal 11px Karla, sans-serif';
+                            c.fillText('m', textX + textWidth + 1, textY + 2);
+                        }
+                    }
+                    c.restore();
+                } 
+            } 
+        };
+
         var elevationChart = new Chart(ctx, { 
             type: 'line', 
-            data: { labels: [], datasets: [{ data: [], fill: true, backgroundColor: 'rgba(26, 26, 26, 0.05)', borderWidth: 2, pointRadius: 0, segment: { borderColor: ctx => { if(!window.activeSpeeds) return '#1a1a1a'; let spd = window.activeSpeeds[ctx.p0DataIndex] * 3.6; if (spd < 12) return '#3498db'; if (spd < 22) return '#f1c40f'; if (spd < 32) return '#e67e22'; return '#c0392b'; } } }] }, 
+            data: { 
+                labels: [], 
+                datasets: [
+                    { 
+                        // DATASET 0: The Top Colored Line (No Fill)
+                        data: [], 
+                        fill: false, 
+                        borderWidth: 2.5, // Slightly thicker line looks more premium
+                        pointRadius: 0, 
+                        segment: { 
+                            borderColor: ctx => { 
+                                if(!window.activeSpeeds) return '#1a1a1a'; 
+                                let spd = window.activeSpeeds[ctx.p0DataIndex] * 3.6; 
+                                if (spd < 12) return '#3498db'; 
+                                if (spd < 22) return '#f1c40f'; 
+                                if (spd < 32) return '#e67e22'; 
+                                return '#c0392b'; 
+                            } 
+                        } 
+                    },
+                    {
+                        // DATASET 1: The Bottom "Mist" Fill (No Line)
+                        data: [],
+                        fill: 'origin',
+                        borderWidth: 0, // No line drawn here
+                        pointRadius: 0,
+                        borderColor: 'transparent',
+                        backgroundColor: (context) => {
+                            const chart = context.chart;
+                            const {ctx, chartArea} = chart;
+                            if (!chartArea) return null;
+                            const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                            // Made the mist slightly more transparent so it feels ethereal
+                            gradient.addColorStop(0, 'rgba(26, 26, 26, 0.12)'); 
+                            gradient.addColorStop(1, 'rgba(249, 246, 237, 0)');
+                            return gradient;
+                        }
+                    }
+                ] 
+            },
             options: { 
                 responsive: true, 
                 maintainAspectRatio: false, 
                 plugins: { 
                     legend: { display: false }, 
                     tooltip: { enabled: false }, 
-                    verticalLine: { x: undefined } 
+                    verticalLine: { x: undefined, y: undefined } // Initialize Y as well
                 }, 
                 scales: { 
                     x: { display: false }, 
                     y: { 
                         display: true, 
                         position: 'right', 
-                        grid: { color: '#e0ddd1' }, 
+                        grid: { color: 'rgba(224, 221, 209, 0.3)' }, // Made the background grid lines extremely faint
                         ticks: { 
                             color: '#888',
-                            // NEW: Adds the "m" to the y-axis labels
-                            callback: function(value) {
-                                return value + 'm';
-                            }
+                            callback: function(value) { return value + 'm'; }
                         } 
                     } 
                 }, 
                 animation: { duration: 0 } 
             }, 
-            plugins: [{ id: 'verticalLine', afterDraw: chart => { if (chart.config.options.plugins.verticalLine && chart.config.options.plugins.verticalLine.x !== undefined) { const x = chart.config.options.plugins.verticalLine.x; const c = chart.ctx; const yA = chart.scales.y; c.save(); c.beginPath(); c.moveTo(x, yA.top); c.lineTo(x, yA.bottom); c.lineWidth = 1; c.strokeStyle = '#1a1a1a'; c.stroke(); c.restore(); } } }] 
+            // Load our two new custom design plugins
+            plugins: [dropShadowPlugin, verticalScrubberPlugin] 
         });
 
         // --- PROGRESS BAR & MOBILE LOGO LOGIC ---
@@ -544,7 +689,8 @@
 
                 // 3. Update Chart
                 elevationChart.data.labels = props.distances.map(d => (d/1000).toFixed(1));
-                elevationChart.data.datasets[0].data = props.altitudes;
+                elevationChart.data.datasets[0].data = props.altitudes; // Feed the Line
+                elevationChart.data.datasets[1].data = props.altitudes; // Feed the Mist
                 elevationChart.update();
 
             } catch (err) {
@@ -622,12 +768,26 @@
                     animateValue(distEl, startDist, currentDist, 1500, 1, distSuffix); // 1500ms duration, 1 decimal place
                     distEl.dataset.currentVal = currentDist; // Save current value for the next scroll
 
-                    // 2. ANIMATE ALTITUDE
-                    let altEl = document.getElementById('val-alt');
-                    let startAlt = parseFloat(altEl.dataset.currentVal) || 0;
-                    let altSuffix = `<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">m</span>`;
-                    animateValue(altEl, startAlt, targetAlt, 1500, 0, altSuffix); // 0 decimal places for altitude
-                    altEl.dataset.currentVal = targetAlt;
+                    // 2. CALCULATE AND ANIMATE GRADIENT (Slope %)
+                    // We use a rolling window (+/- 5 points) to smooth out GPS jitter
+                    let distancesArray = window.activeRouteData.features[0].properties.distances;
+                    let altitudesArray = window.activeRouteData.features[0].properties.altitudes;
+                    
+                    let prevIdx = Math.max(0, bestIdx - 5);
+                    let nextIdx = Math.min(distancesArray.length - 1, bestIdx + 5);
+                    let dDist = distancesArray[nextIdx] - distancesArray[prevIdx]; // Distance covered (meters)
+                    let dAlt = altitudesArray[nextIdx] - altitudesArray[prevIdx];  // Elevation change (meters)
+                    
+                    // Gradient % = (Rise / Run) * 100
+                    let targetGradient = (dDist > 0) ? (dAlt / dDist) * 100 : 0;
+
+                    let gradEl = document.getElementById('val-grad');
+                    let startGrad = parseFloat(gradEl.dataset.currentVal) || 0;
+                    let gradSuffix = `<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">%</span>`;
+                    
+                    // Notice the "true" at the end: this tells our new function to force the "+" sign!
+                    animateValue(gradEl, startGrad, targetGradient, 1500, 1, gradSuffix, true); 
+                    gradEl.dataset.currentVal = targetGradient;
 
                     // Calculate Speed
                     let sSum = 0; let count = 0;
@@ -647,7 +807,15 @@
 
 
                     var meta = elevationChart.getDatasetMeta(0);
-                    if (meta.data[bestIdx]) { elevationChart.options.plugins.verticalLine.x = meta.data[bestIdx].x; elevationChart.update(); }
+                    if (meta.data[bestIdx]) { 
+                        elevationChart.options.plugins.verticalLine.x = meta.data[bestIdx].x; 
+                        elevationChart.options.plugins.verticalLine.y = meta.data[bestIdx].y; 
+                        
+                        // Pass the exact altitude number to the chart so it can draw the frosted pill!
+                        elevationChart.options.plugins.verticalLine.altText = targetAlt.toFixed(0); 
+                        
+                        elevationChart.update(); 
+                    }
                 }
 
                 // Handle fade in/out of layout components
