@@ -183,6 +183,50 @@
         /* Cursor hints for clickable images */
         .lightbox-trigger { cursor: zoom-in; }
         .prose-full-bleed img { cursor: default; } /* Prevent zooming on full bleeds */
+
+
+        /* =========================================
+           CHART OVERLAY LEGEND
+           ========================================= */
+        #chart-legend {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(249, 246, 237, 0.8); /* Matches your theme background */
+            backdrop-filter: blur(4px); /* Sleek frosted glass effect */
+            padding: 6px 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            pointer-events: none; /* Allows mouse to click through to the chart if needed */
+        }
+        .legend-title {
+            font-size: 9px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .speed-bar {
+            display: flex;
+            width: 100px;
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 2px;
+        }
+        .speed-bar div { flex: 1; }
+        .speed-labels {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            text-align: right;
+            width: 100px;
+            font-size: 8.5px;
+            color: #888;
+            font-weight: 700;
+        }
+
     </style>
 </head>
 <body>
@@ -236,12 +280,29 @@
             <div class="stat-group stat-span" style="margin-bottom: 15px;"><span class="stat-lbl">Recording Device</span><span class="stat-val" id="g-app" style="font-size: 13px; color: #555;">Unknown</span></div>
         </div>
         
-        <div id="chart-container"><canvas id="elevationChart"></canvas></div>
+            <div id="chart-container">
+            <!-- NEW: Top-Left Chart Overlay Legend -->
+            <div id="chart-legend">
+                <span class="legend-title">Speed (km/h)</span>
+                <div class="speed-bar">
+                    <div style="background-color: #3498db;"></div>
+                    <div style="background-color: #f1c40f;"></div>
+                    <div style="background-color: #e67e22;"></div>
+                    <div style="background-color: #c0392b;"></div>
+                </div>
+                <div class="speed-labels">
+                    <span>12</span><span>22</span><span>32</span><span>+</span>
+                </div>
+            </div>
+            
+            <canvas id="elevationChart"></canvas>
+        </div>
         
         <div id="stats-container">
             <div class="local-row"><div class="local-val accent" id="g-dist">0.0</div><div class="local-lbl">Total KM</div></div>
-            <div class="local-row"><div class="local-val" id="val-alt">0</div><div class="local-lbl">Altitude (m)</div></div>
+            <div class="local-row"><div class="local-val" id="val-alt">0<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">m</span></div><div class="local-lbl">Altitude</div></div>
             <div class="local-row"><div class="local-val" id="val-spd">0.0</div><div class="local-lbl">Speed (km/h)</div></div>
+        </div>
         </div>
     </div>
 
@@ -500,7 +561,8 @@
                     }
 
                     document.getElementById('g-dist').innerText = (window.activeRouteData.features[0].properties.distances[bestIdx] / 1000).toFixed(1);
-                    document.getElementById('val-alt').innerText = window.activeRouteData.features[0].properties.altitudes[bestIdx].toFixed(0);
+                    // This injects the altitude value AND the smaller 'm' unit
+                    document.getElementById('val-alt').innerHTML = window.activeRouteData.features[0].properties.altitudes[bestIdx].toFixed(0) + '<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">m</span>';
                     
                     let sSum = 0; let count = 0;
                     let speeds = window.activeSpeeds;
