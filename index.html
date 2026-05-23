@@ -834,18 +834,20 @@
                 // Handle fade in/out of layout components
                 document.querySelectorAll('.step').forEach(el => {
                     // Only fade out the small map cards. 
-                    // Once a Prose or Cover page fades in, let it stay solid!
-                    if (!el.classList.contains('layout-prose') && !el.classList.contains('layout-cover')) {
+                    // Once a Prose, Cover, or Immersive page fades in, let it stay solid!
+                    if (!el.classList.contains('layout-prose') && 
+                        !el.classList.contains('layout-cover') && 
+                        !el.classList.contains('layout-immersive-left')) {
                         el.classList.remove('active');
                     }
                 });
                 response.element.classList.add('active');
 
-                // --- NEW: SMART DASHBOARD AUTO-HIDE LOGIC ---
+                // --- SMART DASHBOARD AUTO-HIDE LOGIC ---
                 const dashboard = document.getElementById('dashboard');
                 const dashToggle = document.getElementById('dash-toggle');
                 
-                if (chapter.layout === 'prose' || chapter.layout === 'cover' || chapter.layout === 'article-solid') {
+                if (chapter.layout === 'prose' || chapter.layout === 'cover' || chapter.layout === 'article-solid' || chapter.layout === 'immersive-left') {
                     dashboard.classList.add('dash-hidden');
                     dashToggle.innerHTML = '▲ Data';
                 } else {
