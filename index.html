@@ -77,6 +77,62 @@
             box-shadow: 0 -2px 5px rgba(0,0,0,0.05); z-index: 31;
         }
 
+
+        /* =========================================
+           BRAND LOGO STYLES
+           ========================================= */
+        #brand-logo {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 9000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        #brand-logo img {
+            height: 60px; /* PC Size */
+            width: auto;
+            display: block;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15)); 
+        }
+
+        #brand-logo:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* Mobile Adjustments (Center + Background + Auto-Hide) */
+        @media (max-width: 800px) {
+            #brand-logo {
+                top: 15px;
+                left: 50%;
+                transform: translateX(-50%); /* Centers it horizontally */
+                background: rgba(249, 246, 237, 0.95); /* Matches your off-white theme */
+                backdrop-filter: blur(8px); /* Frosted glass effect */
+                padding: 8px 20px;
+                border-radius: 30px; /* Elegant Pill shape */
+                box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            }
+            
+            #brand-logo:hover {
+                transform: translateX(-50%); /* Disable scale hover on mobile */
+            }
+
+            #brand-logo img {
+                height: 35px; /* Scales down to fit inside the pill */
+                filter: none; /* Remove shadow since it now has a background */
+            }
+
+            /* The class JS will add to hide the logo when scrolling down */
+            #brand-logo.logo-hidden {
+                transform: translate(-50%, -150%); /* Slides up off screen */
+                opacity: 0;
+            }
+        }
+
         /* DASHBOARD */
         #dashboard { position: fixed; bottom: 0; left: 0; width: 100%; height: 20vh; background-color: #f9f6ed; color: #1a1a1a; z-index: 30; display: flex; border-top: 1px solid #e0ddd1; box-sizing: border-box; transition: transform 0.5s ease; }
         .dash-hidden { transform: translateY(100%); } 
@@ -130,6 +186,11 @@
     </style>
 </head>
 <body>
+    <!--Fixed Brand Logo -->
+    <a href="https://francigena.yin.roma.it/" id="brand-logo" aria-label="Via Francigena Home">
+        <img src="images/assets/logo.png" alt="Via Francigena">
+    </a>
+
     <!-- Lightbox Overlay -->
     <div id="lightbox" class="lightbox-hidden">
         <span id="lightbox-close">&times;</span>
@@ -242,12 +303,34 @@
             plugins: [{ id: 'verticalLine', afterDraw: chart => { if (chart.config.options.plugins.verticalLine && chart.config.options.plugins.verticalLine.x !== undefined) { const x = chart.config.options.plugins.verticalLine.x; const c = chart.ctx; const yA = chart.scales.y; c.save(); c.beginPath(); c.moveTo(x, yA.top); c.lineTo(x, yA.bottom); c.lineWidth = 1; c.strokeStyle = '#1a1a1a'; c.stroke(); c.restore(); } } }] 
         });
 
-        // --- NEW: PROGRESS BAR LOGIC ---
+        // --- PROGRESS BAR & MOBILE LOGO LOGIC ---
+        let lastScrollTop = 0;
+        const brandLogo = document.getElementById('brand-logo');
+
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            
+            // 1. Progress Bar Updates
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrollPercentage = (scrollTop / scrollHeight) * 100;
             document.getElementById('progress-bar').style.width = scrollPercentage + '%';
+
+            // 2. Mobile Logo Hide/Show Logic
+            if (window.innerWidth <= 800 && brandLogo) {
+                if (scrollTop > lastScrollTop && scrollTop > 50) {
+                    // User is scrolling DOWN (hide logo)
+                    brandLogo.classList.add('logo-hidden');
+                } else {
+                    // User is scrolling UP (show logo)
+                    brandLogo.classList.remove('logo-hidden');
+                }
+            } else if (brandLogo) {
+                // Ensure it stays visible on Desktop PC
+                brandLogo.classList.remove('logo-hidden');
+            }
+            
+            // Update last scroll position (prevents negative bouncing bugs on iPhone)
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
         });
 
         // --- NEW: DASHBOARD MANUAL TOGGLE LOGIC ---
