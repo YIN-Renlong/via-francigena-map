@@ -420,17 +420,7 @@ hr.wavy-divider {
    5. MOBILE RESPONSIVE OVERRIDES
    -------------------------------------------------------------------------- */
 
-/* Fix for massive zoomed-in background photos on mobile */
-/* Option 1: Show the full photo, do not crop */
-    .layout-cover, 
-    .layout-immersive-left,
-    .split-photo {
-        background-attachment: scroll !important; 
-        background-position: center top !important;
-        background-size: contain !important; /* <--- THIS IS THE MAGIC WORD */
-        background-repeat: no-repeat !important;
-    }
-   
+
 @media (max-width: 800px) {
     
     /* --- NEW: Mobile Typography Fixes --- */
@@ -479,4 +469,16 @@ hr.wavy-divider {
 
     /* Navbar */
     #top-nav { overflow-x: auto; white-space: nowrap; padding: 15px; gap: 15px; }
+
+
+    /* Fix for massive zoomed-in background photos on mobile */
+    /* Option 1: Show the full photo, do not crop */
+    .layout-cover, 
+    .layout-immersive-left,
+    .split-photo {
+        background-attachment: scroll !important; 
+        background-position: center top !important;
+        background-size: contain !important; /* <--- THIS IS THE MAGIC WORD to fix mobile photo uncut */
+        background-repeat: no-repeat !important;
+    }
 }
