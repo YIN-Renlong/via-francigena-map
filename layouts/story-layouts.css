@@ -478,7 +478,8 @@ hr.wavy-divider {
     .split-photo {
         background-attachment: scroll !important; 
         background-position: center top !important;
-        background-size: contain !important; /* <--- THIS IS THE MAGIC WORD to fix mobile photo uncut */
+        background-size: contain !important; 
         background-repeat: no-repeat !important;
+        background-color: #111111 !important; /* <--- Fixes the empty gap! */
     }
 }
