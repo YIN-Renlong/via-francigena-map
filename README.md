@@ -105,6 +105,22 @@ To embed the application within a WordPress CMS environment (WPBakery) without s
 3.  **Iframe Throttling Mitigation:** To bypass browser iframe throttling and prevent premature scroll interception by the mouse, an invisible CSS shield restricts pointer events until the iframe is perfectly aligned in the viewport.
 4.  **API Security and Vector Tiles:** The project utilizes Esri ArcGIS V2 vector basemaps ("Modern Antique"). To secure the requisite API keys within a public, client-side configuration file, strict HTTP Referrer URL restrictions were implemented (e.g., `https://*.yin.roma.it/*`). This restricts tile access exclusively to authorized development and production environments, neutralizing unauthorized usage.
 
+### Phase 7: Telemetry & Data Visualization Polish
+
+To enhance the professional aesthetic of the data visualization and mimic high-end spatial tracking platforms (e.g., Strava, Garmin), several refinements were made to the dashboard interface:
+
+1.  **Contextual Distance Tracking:** The static distance metric was refactored into a progressive `Current / Total` display (e.g., `45.2 / 80.5`). This is calculated dynamically during the `onStepEnter` scroll event. To maintain a clean UI, JavaScript `innerHTML` injection is used to apply a strict typographic hierarchy, keeping the current distance bold and prominent while fading the daily total into a smaller, secondary font weight.
+2.  **In-Chart Legend Overlay:** The speed-zone color legend was transitioned from a standard DOM element into an absolute overlay within the Chart.js canvas container. Utilizing CSS `backdrop-filter: blur` (a frosted-glass effect), the legend remains perfectly legible even when the dynamic elevation line intersects behind it. This optimizes dashboard whitespace and adheres to modern data-visualization standards.
+3.  **Dynamic Unit Injection:** To reduce label redundancy, unit markers were integrated directly into the numerical values. The Chart.js `callback` API was utilized to dynamically append "m" (meters) to the Y-axis tick generation. Similarly, the live altitude tracker utilizes inline CSS to append an elegantly scaled "m" to the live data stream, preventing the text UI from feeling overly bulky as values reach into the thousands.
+
+### Phase 8: Mobile Gestures & Smart Branding
+
+In the final polishing phase, critical adjustments were made to the mobile user experience and overall site branding to ensure cross-device stability:
+
+1.  **Mobile Scroll Conflict Resolution:** A frustrating UX bug was identified on mobile devices where the "Ghost Layer" (`pointer-events: none` on the text container) allowed user touch swipes to fall through to the MapLibre canvas. The map intercepted these touches as drag events, completely blocking the browser's vertical scrolling. This was resolved via a dual-layered approach: enabling `cooperativeGestures` in MapLibre (requiring two fingers to pan, freeing one finger for scrolling) and forcing `pointer-events: auto` on mobile CSS breakpoints to safely shield the map from accidental thumb swipes.
+2.  **Adaptive "Frosted Glass" Branding:** To solidify the documentary's visual identity, a custom brand logo was anchored to the viewport. Because the background shifts unpredictably between bright maps and dark, immersive parallax photographs, a dynamic contrast solution was required. Instead of complex JavaScript image-swapping, the logo was encased in a CSS "Frosted Glass" container (`backdrop-filter: blur` with an 85% opaque `#f9f6ed` background). This guarantees absolute text legibility while retaining an elegant, translucent editorial aesthetic.
+3.  **Smart Auto-Hide Header:** To maximize reading space on restricted mobile viewports, the logo shifts to a top-center "pill" shape on screens under 800px. A custom JavaScript scroll-direction listener dynamically injects a `.logo-hidden` class. When the user scrolls down to read, the logo glides off-screen. The moment they swipe up, it reappears, providing seamless navigation without obstructing the spatial narrative.
+
 ### Algorithmic Layout Distribution
 To ensure the various spatial components are utilized dynamically without overwhelming the interface, the `build_website.py` compiler assigns layouts using a procedural generation algorithm based on two core principles:
 
