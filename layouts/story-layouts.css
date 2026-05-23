@@ -421,11 +421,14 @@ hr.wavy-divider {
    -------------------------------------------------------------------------- */
 
 /* Fix for massive zoomed-in background photos on mobile */
+/* Option 1: Show the full photo, do not crop */
     .layout-cover, 
     .layout-immersive-left,
     .split-photo {
         background-attachment: scroll !important; 
-        background-position: center center !important;
+        background-position: center top !important;
+        background-size: contain !important; /* <--- THIS IS THE MAGIC WORD */
+        background-repeat: no-repeat !important;
     }
    
 @media (max-width: 800px) {
