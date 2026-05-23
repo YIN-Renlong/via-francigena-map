@@ -299,7 +299,7 @@
         </div>
         
         <div id="stats-container">
-            <div class="local-row"><div class="local-val accent" id="g-dist">0.0</div><div class="local-lbl">Total KM</div></div>
+            <div class="local-row"><div class="local-val accent" id="g-dist">0.0</div><div class="local-lbl">Distance (km)</div></div>
             <div class="local-row"><div class="local-val" id="val-alt">0<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">m</span></div><div class="local-lbl">Altitude</div></div>
             <div class="local-row"><div class="local-val" id="val-spd">0.0</div><div class="local-lbl">Speed (km/h)</div></div>
         </div>
@@ -584,7 +584,13 @@
                         if(diff < minDiff) { minDiff = diff; bestIdx = i; } 
                     }
 
-                    document.getElementById('g-dist').innerText = (window.activeRouteData.features[0].properties.distances[bestIdx] / 1000).toFixed(1);
+                    // Calculate current distance and total distance
+                    let currentDist = (window.activeRouteData.features[0].properties.distances[bestIdx] / 1000).toFixed(1);
+                    let totalDist = window.activeRouteData.features[0].properties.summary.distance_km.toFixed(1);
+
+                    // Inject them beautifully: Large Current / Smaller Total
+                    document.getElementById('g-dist').innerHTML = currentDist + '<span style="font-size: 19px; color: #888; font-weight: 400; margin-left: 4px;">/ ' + totalDist + '</span>';
+
                     // This injects the altitude value AND the smaller 'm' unit
                     document.getElementById('val-alt').innerHTML = window.activeRouteData.features[0].properties.altitudes[bestIdx].toFixed(0) + '<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">m</span>';
                     
