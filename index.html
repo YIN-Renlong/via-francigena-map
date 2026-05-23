@@ -196,7 +196,7 @@
         window.activeSpeeds = [];
 
         var map = new maplibregl.Map({
-            container: 'map', style: config.style, center: config.chapters[0].location.center, zoom: config.chapters[0].location.zoom, pitch: 65, bearing: config.chapters[0].location.bearing, scrollZoom: false 
+            container: 'map', style: config.style, center: config.chapters[0].location.center, zoom: config.chapters[0].location.zoom, pitch: 65, bearing: config.chapters[0].location.bearing, scrollZoom: false, cooperativeGestures: true // Fixed a bug where mobile devices could not scroll.
         });
 
         // NEW: Adds the Compass and Zoom buttons to the top right of the screen!
