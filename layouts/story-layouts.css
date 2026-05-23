@@ -7,7 +7,7 @@
    BASE TYPOGRAPHY
    -------------------------------------------------------------------------- */
 .step h1, .step h2, .step h3 {
-    font-family: 'Georgia', serif;
+    font-family: 'Karla', sans-serif;
     margin: 0;
 }
 .step p {
@@ -54,7 +54,7 @@
     text-shadow: 0 4px 15px rgba(0,0,0,0.6);
 }
 .layout-cover .cover-subtitle {
-    font-family: 'Georgia', serif;
+    font-family: 'Karla', sans-serif;
     font-size: 1.6rem;
     font-style: italic;
     font-weight: 300;
@@ -228,8 +228,8 @@
     position: relative;
 }
 .prose-container h2 {
-    font-family: 'Merriweather', serif; /* Or Georgia */
-    font-size: 3rem;
+    font-family: 'Karla', sans-serif;
+    font-size: 2.5rem; /* Slightly reduced for elegance */
     font-weight: 700;
     color: #1a1a1a;
     text-align: center;
@@ -238,8 +238,8 @@
     padding-bottom: 1rem;
 }
 .prose-container h3 {
-    font-family: 'Merriweather', serif;
-    font-size: 1.8rem;
+    font-family: 'Karla', sans-serif;
+    font-size: 1.6rem;
     color: #1e3a2a;
     margin-top: 3rem;
     margin-bottom: 1rem;
@@ -349,13 +349,13 @@ hr.wavy-divider {
 }
 .prose-hanging-left {
     float: left;
-    margin-left: -80px;
-    margin-right: 40px;
+    margin-left: -60px; /* Reduced to pull away from edge */
+    margin-right: 55px; /* Increased to give text more breathing room */
 }
 .prose-hanging-right {
     float: right;
-    margin-right: -210px;
-    margin-left: 40px;
+    margin-right: -150px; /* Reduced so it doesn't push too far right */
+    margin-left: 55px; /* Increased to protect the text */
 }
 .prose-hanging-left img, 
 .prose-hanging-right img {
@@ -420,9 +420,25 @@ hr.wavy-divider {
    5. MOBILE RESPONSIVE OVERRIDES
    -------------------------------------------------------------------------- */
 @media (max-width: 800px) {
+    
+    /* --- NEW: Mobile Typography Fixes --- */
+    .prose-container p { 
+        font-size: 1.05rem; /* Shrinks the body text slightly */
+        line-height: 1.55; 
+    }
+    .prose-container h2 { 
+        font-size: 1.8rem; /* Shrinks the massive prose titles */
+    }
+    .split-text p {
+        font-size: 1rem;
+    }
+    .split-text h2 {
+        font-size: 1.6rem;
+    }
+
     /* Cover */
-    .layout-cover h1 { font-size: 2.5rem; }
-    .layout-cover .cover-subtitle { font-size: 1.2rem; }
+    .layout-cover h1 { font-size: 2.2rem; } /* Shrunk from 2.5 */
+    .layout-cover .cover-subtitle { font-size: 1.1rem; }
     
     /* Map Sliders */
     .layout-floating-card, .layout-media-card { justify-content: center; padding: 0 20px; }
