@@ -312,6 +312,32 @@
         function formatDuration(s) { var h=Math.floor(s/3600); var m=Math.floor((s%3600)/60); return h+"h "+m+"m"; }
         function formatClock(d) { return d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); }
 
+        // --- NEW: NUMBER TWEENING ENGINE ---
+        function animateValue(obj, start, end, duration, decimals = 0, suffix = '') {
+            // Cancel any currently running animation on this element to prevent flickering during fast scrolling
+            if (obj.animationId) cancelAnimationFrame(obj.animationId);
+
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                
+                // Ease-out-cubic formula for an elegant, realistic deceleration
+                const easeProgress = 1 - Math.pow(1 - progress, 3); 
+                
+                const currentVal = (start + (end - start) * easeProgress).toFixed(decimals);
+                obj.innerHTML = currentVal + suffix;
+
+                if (progress < 1) {
+                    obj.animationId = window.requestAnimationFrame(step);
+                } else {
+                    // Animation complete: store the final exact value
+                    obj.dataset.currentVal = end; 
+                }
+            };
+            obj.animationId = window.requestAnimationFrame(step);
+        }
+
         // --- STATE MANAGEMENT VARIABLES ---
         window.activeDate = null;
         window.activeRouteData = null;
@@ -584,24 +610,41 @@
                         if(diff < minDiff) { minDiff = diff; bestIdx = i; } 
                     }
 
-                    // Calculate current distance and total distance
-                    let currentDist = (window.activeRouteData.features[0].properties.distances[bestIdx] / 1000).toFixed(1);
+                    // Calculate current and total distance
+                    let currentDist = window.activeRouteData.features[0].properties.distances[bestIdx] / 1000;
                     let totalDist = window.activeRouteData.features[0].properties.summary.distance_km.toFixed(1);
+                    let targetAlt = window.activeRouteData.features[0].properties.altitudes[bestIdx];
 
-                    // Inject them beautifully: Large Current / Smaller Total
-                    document.getElementById('g-dist').innerHTML = currentDist + '<span style="font-size: 19px; color: #888; font-weight: 400; margin-left: 4px;">/ ' + totalDist + '</span>';
+                    // 1. ANIMATE DISTANCE
+                    let distEl = document.getElementById('g-dist');
+                    let startDist = parseFloat(distEl.dataset.currentVal) || 0; // Get previous value, default to 0
+                    let distSuffix = `<span style="font-size: 19px; color: #888; font-weight: 400; margin-left: 4px;">/ ${totalDist}</span>`;
+                    animateValue(distEl, startDist, currentDist, 1500, 1, distSuffix); // 1500ms duration, 1 decimal place
+                    distEl.dataset.currentVal = currentDist; // Save current value for the next scroll
 
-                    // This injects the altitude value AND the smaller 'm' unit
-                    document.getElementById('val-alt').innerHTML = window.activeRouteData.features[0].properties.altitudes[bestIdx].toFixed(0) + '<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">m</span>';
-                    
+                    // 2. ANIMATE ALTITUDE
+                    let altEl = document.getElementById('val-alt');
+                    let startAlt = parseFloat(altEl.dataset.currentVal) || 0;
+                    let altSuffix = `<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">m</span>`;
+                    animateValue(altEl, startAlt, targetAlt, 1500, 0, altSuffix); // 0 decimal places for altitude
+                    altEl.dataset.currentVal = targetAlt;
+
+                    // Calculate Speed
                     let sSum = 0; let count = 0;
                     let speeds = window.activeSpeeds;
                     for(let j = Math.max(0, bestIdx - 45); j < Math.min(speeds.length, bestIdx + 45); j++) { if(speeds[j] > 1.0) { sSum += speeds[j]; count++; } }
                     let zAvg = count > 0 ? (sSum / count) * 3.6 : 0;
                     
+                    // 3. ANIMATE SPEED
                     let spdEl = document.getElementById('val-spd');
-                    spdEl.innerText = zAvg.toFixed(1);
+                    let startSpd = parseFloat(spdEl.dataset.currentVal) || 0;
+                    animateValue(spdEl, startSpd, zAvg, 1000, 1, ''); // Slightly faster animation (1000ms) for speed
+                    spdEl.dataset.currentVal = zAvg;
+                    
+                    // Keep your original speed color logic!
                     spdEl.style.color = zAvg < 12 ? '#3498db' : (zAvg < 22 ? '#f1c40f' : (zAvg < 32 ? '#e67e22' : '#c0392b'));
+
+
 
                     var meta = elevationChart.getDatasetMeta(0);
                     if (meta.data[bestIdx]) { elevationChart.options.plugins.verticalLine.x = meta.data[bestIdx].x; elevationChart.update(); }
