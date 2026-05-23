@@ -312,44 +312,45 @@
         function formatDuration(s) { var h=Math.floor(s/3600); var m=Math.floor((s%3600)/60); return h+"h "+m+"m"; }
         function formatClock(d) { return d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); }
 
-        // --- UPGRADED NUMBER TWEENING ENGINE ---
-        function animateValue(obj, start, end, duration, decimals = 0, suffix = '', forcePlus = false) {
-            // Cancel any currently running animation on this element to prevent flickering during fast scrolling
+        // --- UPGRADED NUMBER TWEENING ENGINE (NO DOM THRASHING) ---
+        function animateValue(obj, start, end, duration, decimals = 0, suffixHtml = '', forcePlus = false) {
+            // Cancel any currently running animation
             if (obj.animationId) cancelAnimationFrame(obj.animationId);
+
+            // 1. Setup the HTML structure ONLY ONCE before the animation starts
+            if (!obj.querySelector('.anim-val')) {
+                // We wrap the changing number in a span, and leave the suffix HTML alone
+                obj.innerHTML = `<span class="anim-val">${start.toFixed(decimals)}</span>${suffixHtml}`;
+            }
+            
+            // Grab a reference to just the text node we want to change
+            const valSpan = obj.querySelector('.anim-val');
 
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                 
-                // Ease-out-cubic formula for an elegant, realistic deceleration
+                // Ease-out-cubic formula
                 const easeProgress = 1 - Math.pow(1 - progress, 3); 
                 
-                // Calculate the raw number first so we can check if it is positive or negative
                 let currentVal = start + (end - start) * easeProgress;
                 let formattedVal = currentVal.toFixed(decimals);
-                
-                // Add a '+' sign for positive gradients if requested (negatives get a '-' automatically)
                 let prefix = (forcePlus && currentVal > 0.05) ? '+' : ''; 
                 
-                // Inject the final string into the HTML
-                obj.innerHTML = prefix + formattedVal + suffix;
+                // 2. ONLY update the text inside the span (Lightning fast!)
+                valSpan.textContent = prefix + formattedVal;
 
-                // Color code the gradient (Red for steep uphill, Blue for downhill)
+                // Color code the gradient
                 if (forcePlus) {
-                    if (currentVal > 3) {
-                        obj.style.color = '#c0392b'; // Red for steep climb
-                    } else if (currentVal < -3) {
-                        obj.style.color = '#3498db'; // Blue for steep descent
-                    } else {
-                        obj.style.color = '#1a1a1a'; // Dark gray for flat-ish
-                    }
+                    if (currentVal > 3) obj.style.color = '#c0392b'; 
+                    else if (currentVal < -3) obj.style.color = '#3498db'; 
+                    else obj.style.color = '#1a1a1a'; 
                 }
 
                 if (progress < 1) {
                     obj.animationId = window.requestAnimationFrame(step);
                 } else {
-                    // Animation complete: store the final exact value for the next scroll event
                     obj.dataset.currentVal = end; 
                 }
             };
@@ -756,8 +757,11 @@
                     essential: true 
                 });
 
-                // Update chart scrubber & bottom stats
+                
+                // Update chart scrubber & bottom stats (STAGGERED FOR PERFORMANCE)
                 if (window.activeRouteData && window.activeRouteData.features[0]) {
+                    
+                    // 1. Do the math immediately (Math is instant and doesn't cause lag)
                     var tLat = chapter.location.center[1]; var tLon = chapter.location.center[0];
                     var coords = window.activeRouteData.features[0].geometry.coordinates; 
                     var minDiff = 9999; var bestIdx = 0;
@@ -766,67 +770,57 @@
                         if(diff < minDiff) { minDiff = diff; bestIdx = i; } 
                     }
 
-                    // Calculate current and total distance
                     let currentDist = window.activeRouteData.features[0].properties.distances[bestIdx] / 1000;
                     let totalDist = window.activeRouteData.features[0].properties.summary.distance_km.toFixed(1);
                     let targetAlt = window.activeRouteData.features[0].properties.altitudes[bestIdx];
 
-                    // 1. ANIMATE DISTANCE
-                    let distEl = document.getElementById('g-dist');
-                    let startDist = parseFloat(distEl.dataset.currentVal) || 0; // Get previous value, default to 0
-                    let distSuffix = `<span style="font-size: 19px; color: #888; font-weight: 400; margin-left: 4px;">/ ${totalDist}</span>`;
-                    animateValue(distEl, startDist, currentDist, 1500, 1, distSuffix); // 1500ms duration, 1 decimal place
-                    distEl.dataset.currentVal = currentDist; // Save current value for the next scroll
-
-                    // 2. CALCULATE AND ANIMATE GRADIENT (Slope %)
-                    // We use a rolling window (+/- 5 points) to smooth out GPS jitter
                     let distancesArray = window.activeRouteData.features[0].properties.distances;
                     let altitudesArray = window.activeRouteData.features[0].properties.altitudes;
-                    
                     let prevIdx = Math.max(0, bestIdx - 5);
                     let nextIdx = Math.min(distancesArray.length - 1, bestIdx + 5);
-                    let dDist = distancesArray[nextIdx] - distancesArray[prevIdx]; // Distance covered (meters)
-                    let dAlt = altitudesArray[nextIdx] - altitudesArray[prevIdx];  // Elevation change (meters)
-                    
-                    // Gradient % = (Rise / Run) * 100
+                    let dDist = distancesArray[nextIdx] - distancesArray[prevIdx]; 
+                    let dAlt = altitudesArray[nextIdx] - altitudesArray[prevIdx];  
                     let targetGradient = (dDist > 0) ? (dAlt / dDist) * 100 : 0;
 
-                    let gradEl = document.getElementById('val-grad');
-                    let startGrad = parseFloat(gradEl.dataset.currentVal) || 0;
-                    let gradSuffix = `<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">%</span>`;
-                    
-                    // Notice the "true" at the end: this tells our new function to force the "+" sign!
-                    animateValue(gradEl, startGrad, targetGradient, 1500, 1, gradSuffix, true); 
-                    gradEl.dataset.currentVal = targetGradient;
-
-                    // Calculate Speed
                     let sSum = 0; let count = 0;
                     let speeds = window.activeSpeeds;
                     for(let j = Math.max(0, bestIdx - 45); j < Math.min(speeds.length, bestIdx + 45); j++) { if(speeds[j] > 1.0) { sSum += speeds[j]; count++; } }
                     let zAvg = count > 0 ? (sSum / count) * 3.6 : 0;
-                    
-                    // 3. ANIMATE SPEED
-                    let spdEl = document.getElementById('val-spd');
-                    let startSpd = parseFloat(spdEl.dataset.currentVal) || 0;
-                    animateValue(spdEl, startSpd, zAvg, 1000, 1, ''); // Slightly faster animation (1000ms) for speed
-                    spdEl.dataset.currentVal = zAvg;
-                    
-                    // Keep your original speed color logic!
-                    spdEl.style.color = zAvg < 12 ? '#3498db' : (zAvg < 22 ? '#f1c40f' : (zAvg < 32 ? '#e67e22' : '#c0392b'));
 
-
-
-                    var meta = elevationChart.getDatasetMeta(0);
-                    if (meta.data[bestIdx]) { 
-                        elevationChart.options.plugins.verticalLine.x = meta.data[bestIdx].x; 
-                        elevationChart.options.plugins.verticalLine.y = meta.data[bestIdx].y; 
+                    // 2. DELAY the heavy drawing so the map can fly smoothly first
+                    clearTimeout(window.dashboardUpdateTimer); // Cancel if user is scrolling fast
+                    window.dashboardUpdateTimer = setTimeout(() => {
                         
-                        // Pass the exact altitude number to the chart so it can draw the frosted pill!
-                        elevationChart.options.plugins.verticalLine.altText = targetAlt.toFixed(0); 
-                        
-                        elevationChart.update(); 
-                    }
-                }
+                        // Animate Distance
+                        let distEl = document.getElementById('g-dist');
+                        let startDist = parseFloat(distEl.dataset.currentVal) || 0; 
+                        let distSuffix = `<span style="font-size: 19px; color: #888; font-weight: 400; margin-left: 4px;">/ ${totalDist}</span>`;
+                        animateValue(distEl, startDist, currentDist, 1500, 1, distSuffix); 
+
+                        // Animate Gradient
+                        let gradEl = document.getElementById('val-grad');
+                        let startGrad = parseFloat(gradEl.dataset.currentVal) || 0;
+                        let gradSuffix = `<span style="font-size: 16px; color: #888; font-weight: 400; margin-left: 2px;">%</span>`;
+                        animateValue(gradEl, startGrad, targetGradient, 1500, 1, gradSuffix, true); 
+
+                        // Animate Speed
+                        let spdEl = document.getElementById('val-spd');
+                        let startSpd = parseFloat(spdEl.dataset.currentVal) || 0;
+                        animateValue(spdEl, startSpd, zAvg, 1000, 1, ''); 
+                        spdEl.style.color = zAvg < 12 ? '#3498db' : (zAvg < 22 ? '#f1c40f' : (zAvg < 32 ? '#e67e22' : '#c0392b'));
+
+                        // Redraw Heavy Chart
+                        var meta = elevationChart.getDatasetMeta(0);
+                        if (meta.data[bestIdx]) { 
+                            elevationChart.options.plugins.verticalLine.x = meta.data[bestIdx].x; 
+                            elevationChart.options.plugins.verticalLine.y = meta.data[bestIdx].y; 
+                            elevationChart.options.plugins.verticalLine.altText = targetAlt.toFixed(0); 
+                            
+                            // Using mode 'none' drops the heavy fade-in animation of the chart itself
+                            elevationChart.update('none'); 
+                        }
+                    }, 350); // <-- 350 MILLISECOND DELAY 
+                } 
 
                 // Handle fade in/out of layout components
                 document.querySelectorAll('.step').forEach(el => {
